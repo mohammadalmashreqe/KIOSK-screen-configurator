@@ -1,0 +1,2 @@
+1- create github account 
+2- upload the project on github 
