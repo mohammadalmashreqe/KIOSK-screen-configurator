@@ -1,4 +1,13 @@
+
+12/2/2019
+
+
 1- create github account 
 2- upload the project on github 
 3- start analysing  the problem and divide it into group of sub problems .
 4- starting draw class diagrams and ER- diagram to detrmine the relations between entity .
+5- build data access layer 
+6- build  classes 
+7-build database 
+
+-----------------------------------------------------------------------------
