@@ -21,5 +21,25 @@ namespace KIOSKScreenConfigurator
         {
             
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (!e.Row.IsNewRow)
+            {
+                DialogResult response = MessageBox.Show("Are you sure?", "Delete row?",
+                                  MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question,
+                                  MessageBoxDefaultButton.Button2);
+
+                if (response == DialogResult.No)
+                    e.Cancel = true;
+            }
+
+        }
     }
 }
