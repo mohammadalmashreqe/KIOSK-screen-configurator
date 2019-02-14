@@ -130,8 +130,8 @@ namespace KIOSKScreenConfigurator
         private void button2_Click(object sender, EventArgs e)
         {
             
-            int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-            AddButton frm = new AddButton(val2);
+            
+            AddButton frm = new AddButton();
             frm.ShowDialog();
 
             // this code will be execute when addButton frm closed .

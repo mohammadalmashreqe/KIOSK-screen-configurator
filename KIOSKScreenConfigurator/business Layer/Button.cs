@@ -12,10 +12,12 @@ namespace KIOSKScreenConfigurator
         string buttonName;
 
         int order;
+        string text; 
         List<Activity> myactivity = new List<Activity>();
 
         public string ButtonName { get => buttonName; set => buttonName = value; }
         public int Order { get => order; set => order = value; }
+        public string Text { get => text; set => text = value; }
 
         public bool addActivity (Activity ac)
         {
@@ -26,6 +28,11 @@ namespace KIOSKScreenConfigurator
                 myactivity.Add(ac);
                 return true; 
             }
+
+        }
+        public int getactivityCount()
+        {
+            return myactivity.Count;
 
         }
     }
