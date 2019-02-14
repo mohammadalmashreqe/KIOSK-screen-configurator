@@ -6,19 +6,30 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace KIOSKScreenConfigurator.DAL
-{
+{    // I AM USING SINGILTON DESIGN PATTERN TO HAVE 1 INSTANCE OF DATACCESSLAYER DURING RUNTIME 
     class DataAccessLayer
     {
+        DataAccessLayer Instance;
         SqlConnection sqlConnection;
 
         // constructer to establish the connection 
-        public DataAccessLayer(String conString)
+        private DataAccessLayer(String conString)
         {
             sqlConnection = new SqlConnection(conString);
         }
 
+        
+        public DataAccessLayer getconinstance ()
+        {
+            if (sqlConnection == null)
+                Instance = new DataAccessLayer(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+           
+                return Instance;
+            
+        }
 
         // method to open the connection 
 
