@@ -173,7 +173,10 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
             dal.myExcute("AddButton", p);
 
+            DataTable dt = dal.SelectData("GetId", p);
+            int bt_id=int.Parse( dt.Rows[0][0].ToString());
 
+            // انا هوووون 
 
 
         }
