@@ -61,8 +61,12 @@ namespace KIOSKScreenConfigurator.DAL
         public DataTable SelectData(string stored_proc, SqlParameter[] param)
         {
             SqlCommand sqlCommand = new SqlCommand();
+
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = stored_proc;
+              sqlCommand.CommandText = stored_proc;
+            sqlCommand.Connection = sqlConnection;
+
+
             if (param != null)
             {
                 for (int i = 0; i < param.Length; i++)
@@ -83,6 +87,7 @@ namespace KIOSKScreenConfigurator.DAL
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.CommandText = stored_proc;
+            sqlCommand.Connection = sqlConnection;
             if (param != null)
             {
                 for (int i = 0; i < param.Length; i++)

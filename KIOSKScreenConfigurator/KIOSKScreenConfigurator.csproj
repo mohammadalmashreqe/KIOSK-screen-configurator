@@ -51,6 +51,17 @@
     <Compile Include="business Layer\Button.cs" />
     <Compile Include="Confirmation_activity.cs" />
     <Compile Include="Data access layer\DataAccessLayer.cs" />
+    <Compile Include="KIOSK_screen_configuratorDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KIOSK_screen_configuratorDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="presentation layer\AddButton.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="presentation layer\AddButton.Designer.cs">
+      <DependentUpon>AddButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="presentation layer\mainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +72,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="business Layer\Request_identification.cs" />
+    <EmbeddedResource Include="presentation layer\AddButton.resx">
+      <DependentUpon>AddButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="presentation layer\mainFrm.resx">
       <DependentUpon>mainFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +87,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="KIOSK_screen_configuratorDataSet.xsc">
+      <DependentUpon>KIOSK_screen_configuratorDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="KIOSK_screen_configuratorDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>KIOSK_screen_configuratorDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="KIOSK_screen_configuratorDataSet.xss">
+      <DependentUpon>KIOSK_screen_configuratorDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
