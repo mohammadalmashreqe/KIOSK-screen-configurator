@@ -12,9 +12,40 @@ namespace KIOSKScreenConfigurator.presentation_layer
 {
     public partial class AddButton : Form
     {
-        public AddButton()
+        int id; 
+        public AddButton( int id )
         {
             InitializeComponent();
+            this.id = id; 
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBox_type.SelectedIndex==0)
+            {
+
+            }
+            else 
+                if(comboBox_type.SelectedIndex==1)
+
+            {
+
+            }
+            else
+            {
+
+            }
+
+        }
+
+        private void AddButton_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

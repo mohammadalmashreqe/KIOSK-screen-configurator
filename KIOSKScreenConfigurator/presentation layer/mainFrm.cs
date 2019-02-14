@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KIOSKScreenConfigurator.DAL;
 using System.Data.SqlClient;
+using KIOSKScreenConfigurator.presentation_layer;
 
 namespace KIOSKScreenConfigurator
 {
@@ -28,16 +29,18 @@ namespace KIOSKScreenConfigurator
 
             dataGridView_buttonList.DataSource = null; 
             dataGridView_buttonList.DataSource = dt;
+            if (dataGridView_buttonList.SelectedCells.Count > 0)
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                p[0] = new SqlParameter("@_id", val);
 
-            SqlParameter[] p = new SqlParameter[1];
-            int val =int .Parse( dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-            p[0] = new SqlParameter("@_id", val);
+                dt = dal.SelectData("getActivity", p);
 
-            dt = dal.SelectData("getActivity", p);
+                dataGridView_activity.DataSource = null;
 
-            dataGridView_activity.DataSource = null;
-
-            dataGridView_activity.DataSource = dt;
+                dataGridView_activity.DataSource = dt;
+            }
 
 
         }
@@ -98,12 +101,56 @@ namespace KIOSKScreenConfigurator
                 int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
                 p[0] = new SqlParameter("@_id", val);
                 dal.myExcute("deleteButton", p);
+
                 DataTable dt = dal.SelectData("getButtons", null);
                 dataGridView_buttonList.DataSource = null;
 
                 dataGridView_buttonList.DataSource = dt;
+                dataGridView_buttonList.Refresh();
+                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                {
+                    SqlParameter[] p2 = new SqlParameter[1];
+                    int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    p2[0] = new SqlParameter("@_id", val2);
+                    DataTable dt2 = dal.SelectData("getActivity", p2);
+
+                    dataGridView_activity.DataSource = null;
+
+                    dataGridView_activity.DataSource = dt2;
+                }
+                
+
+                if(dataGridView_buttonList.SelectedCells.Count==0)
+
+                    dataGridView_activity.DataSource = null;
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+            AddButton frm = new AddButton(val2);
+            frm.ShowDialog();
+
+            // this code will be execute when addButton frm closed .
+
+
+            DataTable dt = dal.SelectData("getButtons", null);
+
+            dataGridView_buttonList.DataSource = null;
+            dataGridView_buttonList.DataSource = dt;
+
+            SqlParameter[] p = new SqlParameter[1];
+            int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+            p[0] = new SqlParameter("@_id", val);
+
+            dt = dal.SelectData("getActivity", p);
+
+            dataGridView_activity.DataSource = null;
+
+            dataGridView_activity.DataSource = dt;
         }
     }
 }
