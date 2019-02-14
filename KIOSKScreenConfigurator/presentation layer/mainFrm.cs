@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KIOSKScreenConfigurator.DAL;
 
 namespace KIOSKScreenConfigurator
 {
@@ -19,7 +20,16 @@ namespace KIOSKScreenConfigurator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            DataAccessLayer dal = DataAccessLayer.getConInstance();
+
+           DataTable dt= dal.SelectData("getButtons",null);
+
+            dataGridView_buttonList.DataSource = null; 
+            dataGridView_buttonList.DataSource = dt;
             
+
+
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

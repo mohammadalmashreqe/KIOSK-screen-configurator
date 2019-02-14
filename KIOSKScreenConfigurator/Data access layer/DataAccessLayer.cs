@@ -12,8 +12,8 @@ namespace KIOSKScreenConfigurator.DAL
 {    // I AM USING SINGILTON DESIGN PATTERN TO HAVE 1 INSTANCE OF DATACCESSLAYER DURING RUNTIME 
     class DataAccessLayer
     {
-        DataAccessLayer Instance;
-        SqlConnection sqlConnection;
+        static DataAccessLayer Instance;
+        static SqlConnection sqlConnection;
 
         // constructer to establish the connection 
         private DataAccessLayer(String conString)
@@ -22,7 +22,7 @@ namespace KIOSKScreenConfigurator.DAL
         }
 
         
-        public DataAccessLayer getconinstance ()
+        public static DataAccessLayer getConInstance ()
         {
             if (sqlConnection == null)
                 Instance = new DataAccessLayer(ConfigurationManager.ConnectionStrings["mycon"].ToString());
