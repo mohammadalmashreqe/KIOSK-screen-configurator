@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KIOSKScreenConfigurator.DAL;
+using System.Data.SqlClient;
 
 
 namespace KIOSKScreenConfigurator.presentation_layer
@@ -157,6 +159,22 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 MessageBox.Show("yo can not add more than 5 activity for button ");
             }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataAccessLayer dal = DataAccessLayer.getConInstance();
+         
+            SqlParameter[] p = new SqlParameter[3];
+            p[0] = new SqlParameter("@_name", b.ButtonName);
+            p[1] = new SqlParameter("@_text", b.Text);
+            p[2] = new SqlParameter("@_order", b.Order);
+
+            dal.myExcute("AddButton", p);
+
+
+
 
         }
     }
