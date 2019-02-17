@@ -35,6 +35,7 @@ namespace KIOSKScreenConfigurator
         {
             try
             {
+                dal.Open();
                 DataTable dt = dal.SelectData("getButtons", null);
 
                 dataGridView_buttonList.DataSource = null;
@@ -56,10 +57,11 @@ namespace KIOSKScreenConfigurator
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -113,10 +115,11 @@ namespace KIOSKScreenConfigurator
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -170,11 +173,13 @@ namespace KIOSKScreenConfigurator
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
+
 
             }
 
@@ -210,10 +215,11 @@ namespace KIOSKScreenConfigurator
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 

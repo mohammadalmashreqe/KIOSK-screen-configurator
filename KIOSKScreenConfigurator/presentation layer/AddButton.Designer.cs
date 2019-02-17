@@ -93,6 +93,7 @@
             this.button5.TabIndex = 10;
             this.button5.Text = "cancle";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -150,9 +151,9 @@
             // 
             // button_addactivity
             // 
-            this.button_addactivity.Location = new System.Drawing.Point(124, 210);
+            this.button_addactivity.Location = new System.Drawing.Point(102, 210);
             this.button_addactivity.Name = "button_addactivity";
-            this.button_addactivity.Size = new System.Drawing.Size(117, 23);
+            this.button_addactivity.Size = new System.Drawing.Size(139, 23);
             this.button_addactivity.TabIndex = 15;
             this.button_addactivity.Text = "Add activity ";
             this.button_addactivity.UseVisualStyleBackColor = true;

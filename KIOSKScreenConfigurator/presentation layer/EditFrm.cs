@@ -49,7 +49,12 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 p[3] = new SqlParameter("@_order", textBox_order.Text);
 
-                dal.myExcute("EditButton", p);
+                if (dal.myExcute("EditButton", p))
+                {
+                    MessageBox.Show("button updated ", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("no row effected","wraning",MessageBoxButtons.OK,MessageBoxIcon.Warning); 
                 dal.Close();
 
             }
@@ -57,10 +62,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 

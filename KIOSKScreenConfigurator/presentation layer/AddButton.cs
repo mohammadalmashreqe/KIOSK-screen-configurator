@@ -20,7 +20,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
         public AddButton()
         {
             InitializeComponent();
-
+            button_addactivity.Enabled = false; 
         }
 
         private void AddButton_Load(object sender, EventArgs e)
@@ -60,16 +60,18 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     b.Order = int.Parse(textBox_but_order.Text);
                     b.ButtonName = textBox_but_name.Text;
                     MessageBox.Show("button added ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    button_addactivity.Enabled = true; 
                 }
             }
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -108,10 +110,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -135,15 +138,18 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     if (MessageBox.Show("please enter 1 activity in minimum or press ok to exit without save  ", "wrong", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                         this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
+
+
             }
         }
 
@@ -169,10 +175,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -190,60 +197,104 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 }
                 else
                     if (comboBox_type.SelectedIndex == 2)
-
+                {
                     if (textBox_Info_msg.Text == "" || textBox_time_out.Text == "")
                     {
                         MessageBox.Show("please enter all data field ", "wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
+                }
 
-
+                List<Activity> temp = b.getList();
                 if (b.getactivityCount() <= 5)
                 {
 
-                    Identification_type ty;
-
-                    if (comboBox_type.SelectedIndex == 0)
+                    if (temp.Count >0 && temp[temp.Count-1].getType()==activityType.print_ticket_type )
 
                     {
-                        string m = textBox_Info_msg.Text;
-                        int n = (int)numericUpDown1.Value;
-                        Activity a = new Print_ticket_type(m, n);
+                        MessageBox.Show("yo can not add  activity after print teckits ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
-                        if (comboBox_type.SelectedIndex == 1)
                     {
-                        string m = textBox_Info_msg.Text;
-                        if (comboBox_idtype.SelectedIndex == 0)
-                            ty = Identification_type.card;
+                        Identification_type ty;
+
+                        if (comboBox_type.SelectedIndex == 0)
+
+                        {
+                            string m = textBox_Info_msg.Text;
+                            int n = (int)numericUpDown1.Value;
+                            Activity a = new Print_ticket_type(m, n);
+                            if (b.addActivity(a))
+                            {
+                                button_addactivity.Text = "add activity" + " ( " + b.getactivityCount() + " /5 )";
+                                MessageBox.Show("activity added ");
+                            }
+                            else
+                                MessageBox.Show("activity not added ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         else
-                            ty = Identification_type.mobile;
+                            if (comboBox_type.SelectedIndex == 1)
+                        {
+                            string m = textBox_Info_msg.Text;
+                            if (comboBox_idtype.SelectedIndex == 0)
+                                ty = Identification_type.card;
+                            else
+                                ty = Identification_type.mobile;
 
-                        bool ismand;
-                        if (radioButton_no.Checked)
-                            ismand = false;
+                            bool ismand;
+                            if (radioButton_no.Checked)
+                                ismand = false;
 
-                        else
-                            ismand = true;
+                            else
+                                ismand = true;
 
-                        Activity a = new Request_identification(m, ty, ismand);
-                        b.addActivity(a);
-                        button_addactivity.Text = "add activity" + " ( " + b.getactivityCount() + " /5 )";
+                            Activity a = new Request_identification(m, ty, ismand);
+                            if (b.addActivity(a))
+                            {
+                                button_addactivity.Text = "add activity" + " ( " + b.getactivityCount() + " /5 )";
+                                MessageBox.Show("activity added ");
+                            }
+                            else
+                                MessageBox.Show("activity not added ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                        }
+                        else 
+                            if(comboBox_type.SelectedIndex == 2)
+                        {
+                            string m = textBox_Info_msg.Text;
+                            int n = int .Parse(textBox_time_out.Text);
+                            Activity a = new Confirmation_activity(m, n);
+                            if (b.addActivity(a))
+                            {
+                                button_addactivity.Text = "add activity" + " ( " + b.getactivityCount() + " /5 )";
+                                MessageBox.Show("activity added ");
+                            }
+                            else
+                                MessageBox.Show("activity not added ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+
+
+
+
+
                     }
                 }
                 else
                 {
-                    MessageBox.Show("yo can not add more than 5 activity for button ");
+                    MessageBox.Show("yo can not add more than 5 activity for button ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n"+ex.Message);
-                sw.WriteLine("stack trace : \n"+ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-                
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
@@ -256,7 +307,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
                 DataAccessLayer dal = DataAccessLayer.getConInstance();
-
+                dal.Open();
                 SqlParameter[] p = new SqlParameter[3];
                 p[0] = new SqlParameter("@_name", b.ButtonName);
                 p[1] = new SqlParameter("@_text", b.Text);
@@ -279,7 +330,13 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p2[1] = new SqlParameter("@_type", "print_ticket_type");
                         p2[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
                         p2[3] = new SqlParameter("@_numofprintedTick", temp[i].getnumberOfprintedTick());
-                        dal.myExcute("AddPrint_ticket_type", p2);
+                        if (dal.myExcute("AddPrint_ticket_type", p2))
+                        {
+                            MessageBox.Show("activity num " + i + " is saved to database");
+
+                        }
+                        else
+                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                         if (temp[i].getType() == activityType.Confirmation_activity)
@@ -288,7 +345,12 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p2[1] = new SqlParameter("@_type", "Confirmation_activity");
                         p2[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
                         p2[3] = new SqlParameter("@_timeOutInSec", temp[i].getTimeOutInSecond());
-                        dal.myExcute("addConfirmationactivity", p2);
+                        if(dal.myExcute("addConfirmationactivity", p2))
+                        MessageBox.Show("activity num " + i + " is saved to database");
+                        else
+                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
 
                     }
                     else
@@ -301,25 +363,35 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p3[3] = new SqlParameter("@_IdentificationType", temp[i].getIdentificationType());
 
                         p3[4] = new SqlParameter("@_ismandatory", temp[i].getIsmandatory());
-                        dal.myExcute("Request_identification", p3);
+                        if(dal.myExcute("Request_identification", p3))
+                            MessageBox.Show("activity num " + i + " is saved to database");
+                        else
+                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 
                     }
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
                 sw.Close();
 
 
             }
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
