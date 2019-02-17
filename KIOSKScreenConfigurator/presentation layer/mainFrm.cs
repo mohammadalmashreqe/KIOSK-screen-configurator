@@ -55,7 +55,11 @@ namespace KIOSKScreenConfigurator
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -108,7 +112,11 @@ namespace KIOSKScreenConfigurator
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -161,9 +169,12 @@ namespace KIOSKScreenConfigurator
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
-                sw.Close();
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
 
+
+                sw.Close();
 
             }
 
@@ -198,11 +209,32 @@ namespace KIOSKScreenConfigurator
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            Button b = new Button();
+            b.ButtonName =dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString();
+            b.Order=int .Parse( dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString());
+            b.ID1= int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+            b.Text = dataGridView_buttonList.CurrentRow.Cells["text"].Value.ToString();
+            EditFrm frm = new EditFrm(b);
+            frm.ShowDialog();
+            DataTable dt = dal.SelectData("getButtons", null);
+
+            dataGridView_buttonList.DataSource = null;
+            dataGridView_buttonList.DataSource = dt;
+
         }
     }
 }

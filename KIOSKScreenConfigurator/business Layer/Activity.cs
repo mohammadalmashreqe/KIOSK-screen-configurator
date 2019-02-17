@@ -8,7 +8,7 @@ namespace KIOSKScreenConfigurator
 { 
     public enum activityType { print_ticket_type, Request_identification, Confirmation_activity }
 
-    abstract class Activity
+    public abstract class Activity
     {
 
         string _Information_message;

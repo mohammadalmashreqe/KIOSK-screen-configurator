@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox_but_name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,8 +58,6 @@
             this.textBox_but_order = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_confirm.SuspendLayout();
@@ -84,6 +84,25 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Add Button";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(311, 509);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "cancle";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(167, 509);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "save ";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -361,25 +380,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(167, 509);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "save ";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(311, 509);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "cancle";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // AddButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,6 +389,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Name = "AddButton";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddButton";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddButton_FormClosed);
             this.Load += new System.EventHandler(this.AddButton_Load);

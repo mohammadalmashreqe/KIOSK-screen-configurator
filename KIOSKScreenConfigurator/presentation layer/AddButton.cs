@@ -36,7 +36,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -61,7 +65,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -99,7 +107,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -126,7 +138,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch(Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
             }
         }
@@ -152,7 +168,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
 
 
@@ -219,7 +239,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n"+ex.Message);
+                sw.WriteLine("stack trace : \n"+ex.StackTrace);
+
+                
                 sw.Close();
 
 
@@ -243,7 +267,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 DataTable dt = dal.SelectData("GetId", p);
                 int bt_id = int.Parse(dt.Rows[0][0].ToString());
 
-                // انا هوووون 
                 List<Activity> temp = b.getList();
                 SqlParameter[] p2 = new SqlParameter[4];
 
@@ -286,10 +309,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch(Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt",true);
-                sw.WriteLine(ex.StackTrace);
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n" + ex.Message);
+                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+
+
                 sw.Close();
-                
+
 
             }
 

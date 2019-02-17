@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace KIOSKScreenConfigurator
 {
-    class Button
+   public  class Button
     {
 
         string buttonName;
-
+        int ID;
         int order;
         string text; 
         List<Activity> myactivity = new List<Activity>();
@@ -18,6 +18,7 @@ namespace KIOSKScreenConfigurator
         public string ButtonName { get => buttonName; set => buttonName = value; }
         public int Order { get => order; set => order = value; }
         public string Text { get => text; set => text = value; }
+        public int ID1 { get => ID; set => ID = value; }
 
         public bool addActivity (Activity ac)
         {
