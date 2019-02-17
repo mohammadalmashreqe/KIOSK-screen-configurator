@@ -11,3 +11,13 @@
 7-build database 
 
 -----------------------------------------------------------------------------
+
+14/2/2019 
+1- start design user interface 
+2- build stored procedure 
+3- insert and retriave data from database 
+4- test some functionality 
+
+
+upcoming activity : 
+testing and finshing to delivered its 
