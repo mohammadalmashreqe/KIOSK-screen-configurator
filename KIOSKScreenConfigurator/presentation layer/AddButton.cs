@@ -20,6 +20,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
         public AddButton()
         {
             InitializeComponent();
+
         }
 
         private void AddButton_Load(object sender, EventArgs e)
