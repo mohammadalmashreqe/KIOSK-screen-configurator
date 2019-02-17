@@ -135,8 +135,12 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
                 if (b.getactivityCount() == 0)
+                {
                     if (MessageBox.Show("please enter 1 activity in minimum or press ok to exit without save  ", "wrong", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                         this.Close();
+                }
+                else
+                    this.Close();
             }
             catch (Exception ex)
             {
@@ -322,8 +326,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 DataTable dt = dal.SelectData("GetId", p5);
                 int bt_id = dt.Rows[0].Field<int>(0);
                
-                if (dt.Rows.Count > 0)
-                    MessageBox.Show("yeeeeeeeeeeeeeeeeeeeeeeees");
+                
 
                 List<Activity> temp = b.getList();
                 SqlParameter[] p2 = new SqlParameter[4];
@@ -337,13 +340,9 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p2[1] = new SqlParameter("@_type", "print_ticket_type");
                         p2[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
                         p2[3] = new SqlParameter("@_numofprintedTick", temp[i].getnumberOfprintedTick());
-                        if (dal.myExcute("AddPrint_ticket_type", p2))
-                        {
-                            MessageBox.Show("activity num " + i + " is saved to database");
-
-                        }
-                        else
-                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dal.myExcute("AddPrint_ticket_type", p2);
+                        
+                       
                     }
                     else
                         if (temp[i].getType() == activityType.Confirmation_activity)
@@ -352,10 +351,8 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p4[1] = new SqlParameter("@_type", "Confirmation_activity");
                         p4[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
                         p4[3] = new SqlParameter("@_timeOutInSec", temp[i].getTimeOutInSecond());
-                        if(dal.myExcute("addConfirmationactivity", p4))
-                        MessageBox.Show("activity num " + i + " is saved to database");
-                        else
-                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dal.myExcute("addConfirmationactivity", p4);
+                        
 
 
 
@@ -370,10 +367,8 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         p3[3] = new SqlParameter("@_IdentificationType", temp[i].getIdentificationType());
 
                         p3[4] = new SqlParameter("@_ismandatory", temp[i].getIsmandatory());
-                        if(dal.myExcute("Request_identification", p3))
-                            MessageBox.Show("activity num " + i + " is saved to database");
-                        else
-                            MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dal.myExcute("Request_identification", p3);
+                            
 
 
                     }
