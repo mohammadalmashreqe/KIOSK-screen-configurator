@@ -313,14 +313,21 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 p[1] = new SqlParameter("@_text", b.Text);
                 p[2] = new SqlParameter("@_order", b.Order);
 
-                dal.myExcute("AddButton", p);
-
-                DataTable dt = dal.SelectData("GetId", p);
-                int bt_id = int.Parse(dt.Rows[0][0].ToString());
+                if (dal.myExcute("AddButton", p))
+                    MessageBox.Show("button saved to database");
+          SqlParameter[] p5 = new SqlParameter[3];
+                p5[0] = new SqlParameter("@_name", b.ButtonName);
+                p5[1] = new SqlParameter("@_text", b.Text);
+                p5[2] = new SqlParameter("@_order", b.Order);
+                DataTable dt = dal.SelectData("GetId", p5);
+                int bt_id = dt.Rows[0].Field<int>(0);
+               
+                if (dt.Rows.Count > 0)
+                    MessageBox.Show("yeeeeeeeeeeeeeeeeeeeeeeees");
 
                 List<Activity> temp = b.getList();
                 SqlParameter[] p2 = new SqlParameter[4];
-
+                SqlParameter[] p4 = new SqlParameter[4];
 
                 for (int i = 0; i < temp.Count; i++)
                 {
@@ -341,11 +348,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     else
                         if (temp[i].getType() == activityType.Confirmation_activity)
                     {
-                        p2[0] = new SqlParameter("@_but_id", bt_id);
-                        p2[1] = new SqlParameter("@_type", "Confirmation_activity");
-                        p2[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
-                        p2[3] = new SqlParameter("@_timeOutInSec", temp[i].getTimeOutInSecond());
-                        if(dal.myExcute("addConfirmationactivity", p2))
+                        p4[0] = new SqlParameter("@_but_id", bt_id);
+                        p4[1] = new SqlParameter("@_type", "Confirmation_activity");
+                        p4[2] = new SqlParameter("@_info_msg", temp[i].Information_message);
+                        p4[3] = new SqlParameter("@_timeOutInSec", temp[i].getTimeOutInSecond());
+                        if(dal.myExcute("addConfirmationactivity", p4))
                         MessageBox.Show("activity num " + i + " is saved to database");
                         else
                             MessageBox.Show("activity not saved ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
