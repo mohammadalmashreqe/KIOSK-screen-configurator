@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using KIOSKScreenConfigurator.DAL;
 using System.Data.SqlClient;
 using KIOSKScreenConfigurator.presentation_layer;
+using System.IO;
 
 namespace KIOSKScreenConfigurator
 {
@@ -18,28 +19,46 @@ namespace KIOSKScreenConfigurator
         DataAccessLayer dal = DataAccessLayer.getConInstance();
         public Form1()
         {
-            InitializeComponent();
+            if (!File.Exists(Directory.GetCurrentDirectory() + @"\LogFile.txt"))
+            {
+
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt",true);
+                sw.Write("");
+                sw.Close();
+
+              
+            }
+           InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dal.Open();
-
-           DataTable dt= dal.SelectData("getButtons",null);
-
-            dataGridView_buttonList.DataSource = null; 
-            dataGridView_buttonList.DataSource = dt;
-            if (dataGridView_buttonList.SelectedCells.Count > 0)
+            try
             {
-                SqlParameter[] p = new SqlParameter[1];
-                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                p[0] = new SqlParameter("@_id", val);
+                DataTable dt = dal.SelectData("getButtons", null);
 
-                dt = dal.SelectData("getActivity", p);
+                dataGridView_buttonList.DataSource = null;
+                dataGridView_buttonList.DataSource = dt;
+                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                {
+                    SqlParameter[] p = new SqlParameter[1];
+                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    p[0] = new SqlParameter("@_id", val);
 
-                dataGridView_activity.DataSource = null;
+                    dt = dal.SelectData("getActivity", p);
 
-                dataGridView_activity.DataSource = dt;
+                    dataGridView_activity.DataSource = null;
+
+                    dataGridView_activity.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(ex.StackTrace);
+                sw.Close();
+
+
             }
 
 
@@ -68,18 +87,29 @@ namespace KIOSKScreenConfigurator
 
         private void dataGridView_buttonList_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView_buttonList.SelectedCells.Count > 0)
+            try
             {
+                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                {
 
 
-                SqlParameter[] p = new SqlParameter[1];
-                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                p[0] = new SqlParameter("@_id", val);
-                DataTable dt = dal.SelectData("getActivity", p);
+                    SqlParameter[] p = new SqlParameter[1];
+                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    p[0] = new SqlParameter("@_id", val);
+                    DataTable dt = dal.SelectData("getActivity", p);
 
-                dataGridView_activity.DataSource = null;
+                    dataGridView_activity.DataSource = null;
 
-                dataGridView_activity.DataSource = dt;
+                    dataGridView_activity.DataSource = dt;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(ex.StackTrace);
+                sw.Close();
 
 
             }
@@ -87,70 +117,92 @@ namespace KIOSKScreenConfigurator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult response = MessageBox.Show("Are you sure?", "Delete row?",
-                                 MessageBoxButtons.YesNo,
-                                 MessageBoxIcon.Question,
-                                 MessageBoxDefaultButton.Button2);
-
-            if (response != DialogResult.No)
-               
-            
+            try
             {
 
-                SqlParameter[] p = new SqlParameter[1];
-                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                p[0] = new SqlParameter("@_id", val);
-                dal.myExcute("deleteButton", p);
+                DialogResult response = MessageBox.Show("Are you sure?", "Delete row?",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Question,
+                                     MessageBoxDefaultButton.Button2);
 
-                DataTable dt = dal.SelectData("getButtons", null);
-                dataGridView_buttonList.DataSource = null;
+                if (response != DialogResult.No)
 
-                dataGridView_buttonList.DataSource = dt;
-                dataGridView_buttonList.Refresh();
-                if (dataGridView_buttonList.SelectedCells.Count > 0)
+
                 {
-                    SqlParameter[] p2 = new SqlParameter[1];
-                    int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    p2[0] = new SqlParameter("@_id", val2);
-                    DataTable dt2 = dal.SelectData("getActivity", p2);
 
-                    dataGridView_activity.DataSource = null;
+                    SqlParameter[] p = new SqlParameter[1];
+                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    p[0] = new SqlParameter("@_id", val);
+                    dal.myExcute("deleteButton", p);
 
-                    dataGridView_activity.DataSource = dt2;
+                    DataTable dt = dal.SelectData("getButtons", null);
+                    dataGridView_buttonList.DataSource = null;
+
+                    dataGridView_buttonList.DataSource = dt;
+                    dataGridView_buttonList.Refresh();
+                    if (dataGridView_buttonList.SelectedCells.Count > 0)
+                    {
+                        SqlParameter[] p2 = new SqlParameter[1];
+                        int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                        p2[0] = new SqlParameter("@_id", val2);
+                        DataTable dt2 = dal.SelectData("getActivity", p2);
+
+                        dataGridView_activity.DataSource = null;
+
+                        dataGridView_activity.DataSource = dt2;
+                    }
+
+
+                    if (dataGridView_buttonList.SelectedCells.Count == 0)
+
+                        dataGridView_activity.DataSource = null;
                 }
-                
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(ex.StackTrace);
+                sw.Close();
 
-                if(dataGridView_buttonList.SelectedCells.Count==0)
 
-                    dataGridView_activity.DataSource = null;
             }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            
-            AddButton frm = new AddButton();
-            frm.ShowDialog();
+            try
+            {
 
-            // this code will be execute when addButton frm closed .
+                AddButton frm = new AddButton();
+                frm.ShowDialog();
+
+                // this code will be execute when addButton frm closed .
 
 
-            DataTable dt = dal.SelectData("getButtons", null);
+                DataTable dt = dal.SelectData("getButtons", null);
 
-            dataGridView_buttonList.DataSource = null;
-            dataGridView_buttonList.DataSource = dt;
+                dataGridView_buttonList.DataSource = null;
+                dataGridView_buttonList.DataSource = dt;
 
-            SqlParameter[] p = new SqlParameter[1];
-            int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-            p[0] = new SqlParameter("@_id", val);
+                SqlParameter[] p = new SqlParameter[1];
+                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                p[0] = new SqlParameter("@_id", val);
 
-            dt = dal.SelectData("getActivity", p);
+                dt = dal.SelectData("getActivity", p);
 
-            dataGridView_activity.DataSource = null;
+                dataGridView_activity.DataSource = null;
 
-            dataGridView_activity.DataSource = dt;
+                dataGridView_activity.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(ex.StackTrace);
+                sw.Close();
+
+
+            }
         }
     }
 }

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace KIOSKScreenConfigurator
-{
-    class Activity
+{ 
+    public enum activityType { print_ticket_type, Request_identification, Confirmation_activity }
+
+    abstract class Activity
     {
 
         string _Information_message;
@@ -27,5 +29,13 @@ namespace KIOSKScreenConfigurator
             }
 
         }
+      abstract   public activityType getType();
+        abstract public int  getnumberOfprintedTick();
+        abstract public string getIdentificationType();
+        abstract public bool getIsmandatory();
+        abstract public int getTimeOutInSecond();
+
+
+
     }
 }

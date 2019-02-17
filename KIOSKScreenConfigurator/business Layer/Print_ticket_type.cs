@@ -29,5 +29,29 @@ namespace KIOSKScreenConfigurator
 
             }
 
+        public override string getIdentificationType()
+        {
+            return null;
+        }
+
+        public override bool getIsmandatory()
+        {
+            return false; 
+        }
+
+        public override int getnumberOfprintedTick()
+        {
+            return _Num_of_printed_tickets;
+        }
+
+        public override int getTimeOutInSecond()
+        {
+            return 0;
+        }
+
+        public override activityType getType()
+        {
+            return activityType.print_ticket_type;
+        }
     }
 }

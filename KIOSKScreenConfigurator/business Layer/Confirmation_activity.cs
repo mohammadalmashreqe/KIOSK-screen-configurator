@@ -29,5 +29,30 @@ namespace KIOSKScreenConfigurator
                 return _Timeout; ; 
             }
         }
+
+        public override string getIdentificationType()
+        {
+            return null; 
+        }
+
+        public override bool getIsmandatory()
+        {
+            return false; 
+        }
+
+        public override int getnumberOfprintedTick()
+        {
+            return 0; 
+        }
+
+        public override int getTimeOutInSecond()
+        {
+            return Timeout;
+        }
+
+        public override activityType getType()
+        {
+            return activityType.Confirmation_activity;
+        }
     }
 }

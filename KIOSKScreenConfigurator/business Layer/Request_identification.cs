@@ -46,5 +46,32 @@ namespace KIOSKScreenConfigurator
             }
         }
 
+        public override string getIdentificationType()
+        {
+            if (_type == Identification_type.card)
+                return "card";
+            else
+                return "mobile";
+        }
+
+        public override bool getIsmandatory()
+        {
+            return is_mandatory;
+        }
+
+        public override int getnumberOfprintedTick()
+        {
+            return 0; 
+        }
+
+        public override int getTimeOutInSecond()
+        {
+            return 0; 
+        }
+
+        public override activityType getType()
+        {
+            return activityType.Request_identification; 
+        }
     }
 }

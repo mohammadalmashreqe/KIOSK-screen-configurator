@@ -35,5 +35,9 @@ namespace KIOSKScreenConfigurator
             return myactivity.Count;
 
         }
+        public List<Activity> getList ()
+        {
+            return myactivity;
+        }
     }
 }
