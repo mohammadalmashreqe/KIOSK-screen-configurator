@@ -191,11 +191,16 @@ namespace KIOSKScreenConfigurator.DAL
         {
             try
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
-                config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
-                config.Save(ConfigurationSaveMode.Modified);
-                return true; 
+                if (TestCon(value))
+                {
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
+                    config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
+                    config.Save(ConfigurationSaveMode.Modified);
+                    return true;
+                }
+                else
+                    return false; 
             }
 
             catch (Exception ex)

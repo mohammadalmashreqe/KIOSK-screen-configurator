@@ -29,15 +29,18 @@ namespace KIOSKScreenConfigurator
 
             string content = sr.ReadLine();
             sr.Close();
-            if (content=="T")
+            if (content == "T")
             {
-               
+
 
                 Application.Run(new KIOSKScreenConfigurator.presentation_layer.Config());
 
             }
-            else 
-                                                       Application.Run(new Form1());
+            else
+            {
+                DAL.DataAccessLayer.getConInstance();
+                Application.Run(new Form1());
+            }
         }
         public static bool firstime = true;
     }

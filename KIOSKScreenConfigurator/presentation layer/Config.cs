@@ -70,7 +70,8 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     this.Hide();
                     Form1 frm = new Form1();
                     frm.Show();
-
+                    DAL.DataAccessLayer.getConInstance();
+                       
                 }
 
             }
