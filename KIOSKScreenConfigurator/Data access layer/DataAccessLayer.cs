@@ -182,7 +182,7 @@ namespace KIOSKScreenConfigurator.DAL
                 sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
                 sw.Close();
-                return false;
+                MessageBox.Show(ex.Message);
                 throw ex;
 
 
@@ -198,6 +198,7 @@ namespace KIOSKScreenConfigurator.DAL
                 if (TestCon(value))
                 {
                     Properties.Settings.Default["mycon"] = value;
+                    Properties.Settings.Default.Save();
                     //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                     //config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
                     //config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
