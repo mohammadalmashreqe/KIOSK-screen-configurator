@@ -33,3 +33,8 @@ testing and finshing to delivered its
 upcoming activity : 
 start document code and retest it again and again 
 
+
+18/2/2019
+- 1- document the project 
+2- add cinfig form to configure the database connection 
+3- delievred and wating feedback 
