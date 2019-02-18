@@ -19,14 +19,32 @@ namespace KIOSKScreenConfigurator.DAL
         // constructer to establish the connection 
         private DataAccessLayer(String conString)
         {
-            sqlConnection = new SqlConnection(conString);
+            try
+            {
+                sqlConnection = new SqlConnection(conString);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                sw.Close();
+
+
+            }
         }
 
         
         public static DataAccessLayer getConInstance ()
         {
             if (sqlConnection == null)
+                if(ConfigurationManager.ConnectionStrings["mycon"].ToString()!="x")
                 Instance = new DataAccessLayer(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+            
             
                 return Instance;
             
@@ -169,7 +187,7 @@ namespace KIOSKScreenConfigurator.DAL
 
         }
 
-        public bool  changeConnectioString (string value)
+        public static bool  changeConnectioString (string value)
         {
             try
             {

@@ -31,9 +31,7 @@ namespace KIOSKScreenConfigurator
             sr.Close();
             if (content=="T")
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
-                sw.Write("F");
-                sw.Close();
+               
 
                 Application.Run(new KIOSKScreenConfigurator.presentation_layer.Config());
 

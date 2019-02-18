@@ -61,9 +61,15 @@ namespace KIOSKScreenConfigurator.presentation_layer
             string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
             try
             {
-                if (DAL.DataAccessLayer.TestCon(con))
+                if (DAL.DataAccessLayer.changeConnectioString(con))
                 {
                     MessageBox.Show(" test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
+                    sw.Write("F");
+                    sw.Close();
+                    this.Hide();
+                    Form1 frm = new Form1();
+                    frm.Show();
 
                 }
 
