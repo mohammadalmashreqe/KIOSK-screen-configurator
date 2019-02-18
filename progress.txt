@@ -21,3 +21,15 @@
 
 upcoming activity : 
 testing and finshing to delivered its 
+
+
+17/2/2019
+
+1-end of all functional requirments 
+2- test all functional requirments
+3- create logfile and formating it 
+4- exception handling 
+
+upcoming activity : 
+start document code and retest it again and again 
+
