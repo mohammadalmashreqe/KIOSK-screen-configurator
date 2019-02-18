@@ -67,6 +67,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
                     sw.Write("F");
                     sw.Close();
+                    
                     this.Hide();
                     Form1 frm = new Form1();
                     frm.Show();

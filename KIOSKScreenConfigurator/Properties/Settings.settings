@@ -11,7 +11,7 @@
       <Value Profile="(Default)">Data Source=M-ALMESHERQE\SQLEXPRESS;Initial Catalog="KIOSK screen configurator";Integrated Security=True</Value>
     </Setting>
     <Setting Name="mycon" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">x</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

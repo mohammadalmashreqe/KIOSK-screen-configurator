@@ -29,6 +29,7 @@ namespace KIOSKScreenConfigurator
 
             string content = sr.ReadLine();
             sr.Close();
+          
             if (content == "T")
             {
 

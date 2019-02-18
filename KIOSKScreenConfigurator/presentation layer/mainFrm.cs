@@ -16,18 +16,20 @@ namespace KIOSKScreenConfigurator
 {
     public partial class Form1 : Form
     {
-        DataAccessLayer dal = DataAccessLayer.getConInstance();
+      DataAccessLayer dal;
         public Form1()
         {
+            
             if (!File.Exists(Directory.GetCurrentDirectory() + @"\LogFile.txt"))
             {
-
+               
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt",true);
                 sw.Write("");
                 sw.Close();
 
               
             }
+             dal = DataAccessLayer.getConInstance();
            InitializeComponent();
         }
 

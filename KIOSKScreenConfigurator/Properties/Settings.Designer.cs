@@ -36,7 +36,7 @@ namespace KIOSKScreenConfigurator.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("x")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string mycon {
             get {
                 return ((string)(this["mycon"]));

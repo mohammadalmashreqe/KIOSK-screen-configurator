@@ -42,8 +42,14 @@ namespace KIOSKScreenConfigurator.DAL
         public static DataAccessLayer getConInstance ()
         {
             if (sqlConnection == null)
-                if(Properties.Settings.Default["mycon"].ToString()!="x")
-                   Instance = new DataAccessLayer(Properties.Settings.Default["mycon"].ToString());
+                if(File.Exists(Directory.GetCurrentDirectory() + @"\constring.txt"))
+            {
+                    StreamReader sw2 = new StreamReader(Directory.GetCurrentDirectory() + @"\constring.txt");
+                 
+
+                    Instance = new DataAccessLayer(sw2.ReadLine());
+                    sw2.Close();
+            }
             
             
                 return Instance;
@@ -196,14 +202,20 @@ namespace KIOSKScreenConfigurator.DAL
             try
             {
                 if (TestCon(value))
+                //{
+                //    Properties.Settings.Default["mycon"] = value;
+                //    Properties.Settings.Default.Save();
+                //    Properties.Settings.Default.Upgrade();
+                //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
+                //config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
+                //config.Save(ConfigurationSaveMode.Modified);
+
                 {
-                    Properties.Settings.Default["mycon"] = value;
-                    Properties.Settings.Default.Save();
-                    //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    //config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
-                    //config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
-                    //config.Save(ConfigurationSaveMode.Modified);
-                    return true;
+                    StreamWriter sw2 = new StreamWriter(Directory.GetCurrentDirectory() + @"\constring.txt");
+                   sw2.Write(value);
+                    sw2.Close();
+                return true;
                 }
                 else
                     return false; 
