@@ -113,6 +113,7 @@
             this.ClientSize = new System.Drawing.Size(470, 382);
             this.Controls.Add(this.groupBox1);
             this.Name = "Config";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Config";
             this.Load += new System.EventHandler(this.Config_Load);
             this.groupBox1.ResumeLayout(false);
