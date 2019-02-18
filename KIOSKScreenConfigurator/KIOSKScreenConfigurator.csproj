@@ -57,6 +57,12 @@
     <Compile Include="presentation layer\AddButton.Designer.cs">
       <DependentUpon>AddButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="presentation layer\Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="presentation layer\Config.Designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
     <Compile Include="presentation layer\EditFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="business Layer\Request_identification.cs" />
     <EmbeddedResource Include="presentation layer\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="presentation layer\Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="presentation layer\EditFrm.resx">
       <DependentUpon>EditFrm.cs</DependentUpon>

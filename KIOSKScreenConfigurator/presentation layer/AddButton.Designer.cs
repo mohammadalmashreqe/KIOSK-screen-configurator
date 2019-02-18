@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddButton));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -58,6 +60,7 @@
             this.textBox_but_order = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_confirm.SuspendLayout();
@@ -87,9 +90,12 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(311, 509);
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.ImageIndex = 0;
+            this.button5.ImageList = this.imageList1;
+            this.button5.Location = new System.Drawing.Point(284, 509);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(132, 23);
             this.button5.TabIndex = 10;
             this.button5.Text = "cancle";
             this.button5.UseVisualStyleBackColor = true;
@@ -97,9 +103,12 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(167, 509);
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.ImageIndex = 4;
+            this.button4.ImageList = this.imageList1;
+            this.button4.Location = new System.Drawing.Point(119, 509);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(123, 23);
             this.button4.TabIndex = 9;
             this.button4.Text = "save ";
             this.button4.UseVisualStyleBackColor = true;
@@ -107,9 +116,12 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(203, 189);
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.ImageIndex = 2;
+            this.button3.ImageList = this.imageList1;
+            this.button3.Location = new System.Drawing.Point(203, 200);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(135, 23);
             this.button3.TabIndex = 8;
             this.button3.Text = "Add button ";
             this.button3.UseVisualStyleBackColor = true;
@@ -142,18 +154,24 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(279, 209);
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.ImageIndex = 1;
+            this.button2.ImageList = this.imageList1;
+            this.button2.Location = new System.Drawing.Point(264, 210);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(135, 23);
             this.button2.TabIndex = 16;
             this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button_addactivity
             // 
+            this.button_addactivity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_addactivity.ImageIndex = 3;
+            this.button_addactivity.ImageList = this.imageList1;
             this.button_addactivity.Location = new System.Drawing.Point(102, 210);
             this.button_addactivity.Name = "button_addactivity";
-            this.button_addactivity.Size = new System.Drawing.Size(139, 23);
+            this.button_addactivity.Size = new System.Drawing.Size(135, 23);
             this.button_addactivity.TabIndex = 15;
             this.button_addactivity.Text = "Add activity ";
             this.button_addactivity.UseVisualStyleBackColor = true;
@@ -163,9 +181,9 @@
             // 
             this.groupBox_confirm.Controls.Add(this.textBox_time_out);
             this.groupBox_confirm.Controls.Add(this.label10);
-            this.groupBox_confirm.Location = new System.Drawing.Point(25, 140);
+            this.groupBox_confirm.Location = new System.Drawing.Point(255, 19);
             this.groupBox_confirm.Name = "groupBox_confirm";
-            this.groupBox_confirm.Size = new System.Drawing.Size(200, 51);
+            this.groupBox_confirm.Size = new System.Drawing.Size(276, 93);
             this.groupBox_confirm.TabIndex = 14;
             this.groupBox_confirm.TabStop = false;
             // 
@@ -192,7 +210,7 @@
             this.groupBox_requestident.Controls.Add(this.radioButton_yes);
             this.groupBox_requestident.Controls.Add(this.comboBox_idtype);
             this.groupBox_requestident.Controls.Add(this.label8);
-            this.groupBox_requestident.Location = new System.Drawing.Point(255, 98);
+            this.groupBox_requestident.Location = new System.Drawing.Point(255, 19);
             this.groupBox_requestident.Name = "groupBox_requestident";
             this.groupBox_requestident.Size = new System.Drawing.Size(276, 93);
             this.groupBox_requestident.TabIndex = 4;
@@ -373,13 +391,27 @@
             // 
             // button1
             // 
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.ImageIndex = 5;
+            this.button1.ImageList = this.imageList1;
             this.button1.Location = new System.Drawing.Point(286, 589);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(132, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-delete-document-30.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-erase-30.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-plus-30.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-plus-math-480.png");
+            this.imageList1.Images.SetKeyName(4, "icons8-save-30.png");
+            this.imageList1.Images.SetKeyName(5, "icons8-close-button-30.png");
             // 
             // AddButton
             // 
@@ -441,5 +473,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

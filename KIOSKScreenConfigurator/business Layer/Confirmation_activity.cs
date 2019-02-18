@@ -38,7 +38,7 @@ namespace KIOSKScreenConfigurator
         public override bool getIsmandatory()
         {
             return false; 
-        }
+        } 
 
         public override int getnumberOfprintedTick()
         {

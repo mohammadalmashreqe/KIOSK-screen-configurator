@@ -49,9 +49,12 @@ namespace KIOSKScreenConfigurator.presentation_layer
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {    //Author :mohammad almashreqe 
+             // desc : when the user click first i am validate the data then put the data in button object 
+
+            #region AddButton 
             try
-            {
+            { 
                 if (textBox_but_name.Text == "" || textBox_but_order.Text == "" || textBox_but_txt.Text == "")
                     MessageBox.Show("please enter all data field ", "wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
@@ -77,10 +80,18 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
             }
 
+            #endregion
+
         }
+
+        
+
 
         private void comboBox_type_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Author :mohammad almashreqe 
+            // desc : when the user change the selected item from comcoBox Type of activity i am showing the right control element for it's 
+            #region check selected item 
             try
             {
                 if (comboBox_type.SelectedIndex == 0)
@@ -119,6 +130,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
             }
+            #endregion
 
         }
 

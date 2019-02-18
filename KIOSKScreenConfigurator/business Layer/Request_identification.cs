@@ -5,8 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace KIOSKScreenConfigurator
-{ 
+{    //Author :mohammad almashreqe 
+    // desc : enum for determine the type of identification for user . 
     enum Identification_type { card, mobile };
+
+    //Author :mohammad almashreqe 
+    // desc : class  Request_identification is a sub class from class Activity and i am override some behavior to achiave the polymorphism  . 
+
+    #region class  Request_identification definition  
     class Request_identification : Activity
     {
         Identification_type _type;
@@ -74,4 +80,5 @@ namespace KIOSKScreenConfigurator
             return activityType.Request_identification; 
         }
     }
+    #endregion
 }

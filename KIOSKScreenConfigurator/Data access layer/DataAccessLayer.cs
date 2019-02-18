@@ -27,7 +27,7 @@ namespace KIOSKScreenConfigurator.DAL
         {
             if (sqlConnection == null)
                 Instance = new DataAccessLayer(ConfigurationManager.ConnectionStrings["mycon"].ToString());
-           
+            
                 return Instance;
             
         }
@@ -141,5 +141,60 @@ namespace KIOSKScreenConfigurator.DAL
 
         }
 
-}
+        public static  bool TestCon ( string constring)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(constring);
+                con.Open();
+                if (con.State == ConnectionState.Connecting || con.State == ConnectionState.Open)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+
+                sw.Close();
+                throw ex;
+
+
+            }
+
+
+        }
+
+        public bool  changeConnectioString (string value)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
+                config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
+                config.Save(ConfigurationSaveMode.Modified);
+                return true; 
+            }
+
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : \n\n" + ex.Message);
+                sw.WriteLine("------------------------------------\n\n");
+                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+
+                sw.Close();
+
+                throw ex; 
+
+            }
+
+        }
+
+    }
 }

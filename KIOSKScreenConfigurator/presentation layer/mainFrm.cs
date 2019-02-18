@@ -242,5 +242,16 @@ namespace KIOSKScreenConfigurator
             dataGridView_buttonList.DataSource = dt;
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void changeConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Config frm = new Config();
+            frm.Show();
+        }
     }
 }
