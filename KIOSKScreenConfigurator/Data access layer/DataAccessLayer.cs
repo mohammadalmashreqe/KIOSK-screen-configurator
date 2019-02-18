@@ -42,8 +42,8 @@ namespace KIOSKScreenConfigurator.DAL
         public static DataAccessLayer getConInstance ()
         {
             if (sqlConnection == null)
-                if(ConfigurationManager.ConnectionStrings["mycon"].ToString()!="x")
-                Instance = new DataAccessLayer(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                if(Properties.Settings.Default["mycon"].ToString()!="x")
+                   Instance = new DataAccessLayer(Properties.Settings.Default["mycon"].ToString());
             
             
                 return Instance;
@@ -165,7 +165,10 @@ namespace KIOSKScreenConfigurator.DAL
             {
                 SqlConnection con = new SqlConnection(constring);
                 con.Open();
-                if (con.State == ConnectionState.Connecting || con.State == ConnectionState.Open)
+                
+
+                
+                if (con.State == ConnectionState. Open || con.State == ConnectionState.Open)
                     return true;
                 else
                     return false;
@@ -179,6 +182,7 @@ namespace KIOSKScreenConfigurator.DAL
                 sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
 
                 sw.Close();
+                return false;
                 throw ex;
 
 
@@ -193,10 +197,11 @@ namespace KIOSKScreenConfigurator.DAL
             {
                 if (TestCon(value))
                 {
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
-                    config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
-                    config.Save(ConfigurationSaveMode.Modified);
+                    Properties.Settings.Default["mycon"] = value;
+                    //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    //config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
+                    //config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
+                    //config.Save(ConfigurationSaveMode.Modified);
                     return true;
                 }
                 else

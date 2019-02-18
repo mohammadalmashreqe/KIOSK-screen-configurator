@@ -33,5 +33,14 @@ namespace KIOSKScreenConfigurator.Properties {
                 return ((string)(this["KIOSK_screen_configuratorConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("x")]
+        public string mycon {
+            get {
+                return ((string)(this["mycon"]));
+            }
+        }
     }
 }
