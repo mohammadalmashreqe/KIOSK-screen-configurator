@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView_buttonList = new System.Windows.Forms.DataGridView();
             this.dataGridView_activity = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.kIOSKscreenconfiguratorDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +66,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Button ";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button3
+            // 
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.button3.ImageIndex = 1;
+            this.button3.ImageList = this.imageList1;
+            this.button3.Location = new System.Drawing.Point(110, 270);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Edit ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-plus-math-480.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-edit-30.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-close-window-30.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-close-button-30.png");
             // 
             // button2
             // 
@@ -131,19 +153,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Activity ";
             // 
-            // button3
-            // 
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button3.ImageIndex = 1;
-            this.button3.ImageList = this.imageList1;
-            this.button3.Location = new System.Drawing.Point(110, 270);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Edit ";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // button4
             // 
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,15 +165,6 @@
             this.button4.Text = "close ";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-plus-math-480.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-edit-30.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-close-window-30.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-close-button-30.png");
             // 
             // menuStrip1
             // 
@@ -190,6 +190,7 @@
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeToolStripMenuItem.Text = "close ";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // configToolStripMenuItem
             // 
@@ -202,7 +203,7 @@
             // changeConfigToolStripMenuItem
             // 
             this.changeConfigToolStripMenuItem.Name = "changeConfigToolStripMenuItem";
-            this.changeConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeConfigToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.changeConfigToolStripMenuItem.Text = "changeConfig";
             this.changeConfigToolStripMenuItem.Click += new System.EventHandler(this.changeConfigToolStripMenuItem_Click);
             // 

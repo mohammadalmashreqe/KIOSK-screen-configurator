@@ -407,5 +407,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            comboBox_type.SelectedIndex = 0;
+            textBox_Info_msg.Text = "";
+            textBox_time_out.Text = "";
+            comboBox_idtype.SelectedIndex = 0;
+            numericUpDown1.Value = 0;
+        }
     }
 }

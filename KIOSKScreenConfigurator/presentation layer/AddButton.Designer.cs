@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddButton));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox_but_name = new System.Windows.Forms.TextBox();
@@ -60,7 +61,6 @@
             this.textBox_but_order = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_confirm.SuspendLayout();
@@ -100,6 +100,17 @@
             this.button5.Text = "cancle";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-delete-document-30.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-erase-30.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-plus-30.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-plus-math-480.png");
+            this.imageList1.Images.SetKeyName(4, "icons8-save-30.png");
+            this.imageList1.Images.SetKeyName(5, "icons8-close-button-30.png");
             // 
             // button4
             // 
@@ -163,6 +174,7 @@
             this.button2.TabIndex = 16;
             this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button_addactivity
             // 
@@ -401,17 +413,6 @@
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-delete-document-30.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-erase-30.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-plus-30.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-plus-math-480.png");
-            this.imageList1.Images.SetKeyName(4, "icons8-save-30.png");
-            this.imageList1.Images.SetKeyName(5, "icons8-close-button-30.png");
             // 
             // AddButton
             // 

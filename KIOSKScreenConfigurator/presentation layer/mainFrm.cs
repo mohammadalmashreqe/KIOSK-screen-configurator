@@ -253,5 +253,10 @@ namespace KIOSKScreenConfigurator
             Config frm = new Config();
             frm.Show();
         }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
