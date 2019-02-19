@@ -18,6 +18,8 @@ namespace KIOSKScreenConfigurator
         static void Main()
         {   Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            #region check first run 
             if (!File.Exists(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt"))
             {
 
@@ -42,7 +44,9 @@ namespace KIOSKScreenConfigurator
                 DAL.DataAccessLayer.getConInstance();
                 Application.Run(new Form1());
             }
+
+            #endregion
         }
-        public static bool firstime = true;
+
     }
 }

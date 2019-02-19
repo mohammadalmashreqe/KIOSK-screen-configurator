@@ -22,7 +22,9 @@ namespace KIOSKScreenConfigurator.presentation_layer
             InitializeComponent();
             button_addactivity.Enabled = false; 
         }
-
+        /// <summary>
+        /// choose defualt value and prepare form 
+        /// </summary>
         private void AddButton_Load(object sender, EventArgs e)
         {
             try
@@ -35,22 +37,36 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n" + ex.Message);
-                sw.WriteLine("stack trace : \n" + ex.StackTrace);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-
+                #endregion
 
             }
 
         }
-
+        /// <summary>
+        ///  AddButton as a object to save it later in database 
+        /// </summary>
         private void button3_Click(object sender, EventArgs e)
-        {    //Author :mohammad almashreqe 
-             // desc : when the user click first i am validate the data then put the data in button object 
+        {    
 
             #region AddButton 
             try
@@ -62,20 +78,33 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     b.Text = textBox_but_txt.Text;
                     b.Order = int.Parse(textBox_but_order.Text);
                     b.ButtonName = textBox_but_name.Text;
-                    MessageBox.Show("button added ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("button added click save to save it in database   ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     button_addactivity.Enabled = true; 
                 }
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -84,13 +113,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
         }
 
-        
 
 
+        /// <summary>
+        ///  check selected item 
+        /// </summary>
         private void comboBox_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Author :mohammad almashreqe 
-            // desc : when the user change the selected item from comcoBox Type of activity i am showing the right control element for it's 
+           
             #region check selected item 
             try
             {
@@ -119,14 +149,27 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -141,6 +184,9 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 
 
         }
+        /// <summary>
+        ///  closed from form and check the number of activity 
+        /// </summary>
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -156,14 +202,27 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -173,9 +232,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
           
         }
+        /// <summary>
+        ///  validate the entered order value 
+        /// </summary>
 
         private void textBox_but_order_Leave(object sender, EventArgs e)
         {
+            #region input (order text box ) valiadtion 
+
             try
             {
                 int x;
@@ -189,27 +253,50 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
+            #endregion
         }
+
+        /// <summary>
+        ///  save activities  
+        /// </summary>
 
         private void button_addactivity_Click(object sender, EventArgs e)
         {  try
             {
+                #region validation 
                 if (comboBox_type.SelectedIndex == 0 || comboBox_type.SelectedIndex == 1)
                 {
 
                     if (textBox_Info_msg.Text == "")
+                    {
                         MessageBox.Show("please enter all data field ", "wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBox_Info_msg.Focus();
+                        return;
+                    }
                 }
                 else
                     if (comboBox_type.SelectedIndex == 2)
@@ -218,9 +305,16 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     {
                         MessageBox.Show("please enter all data field ", "wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                        textBox_Info_msg.Focus();
+                        return;
                     }
                 }
 
+                #endregion
+
+
+
+                #region add activities 
                 List<Activity> temp = b.getList();
                 if (b.getactivityCount() <= 5)
                 {
@@ -304,34 +398,61 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
+            #endregion
 
         }
-
+        /// <summary>
+        ///  save all work to the database   
+        /// </summary>
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
+                #region open database 
                 DataAccessLayer dal = DataAccessLayer.getConInstance();
                 dal.Open();
+                #endregion
+                #region put the stored procedure paramters 
                 SqlParameter[] p = new SqlParameter[3];
                 p[0] = new SqlParameter("@_name", b.ButtonName);
                 p[1] = new SqlParameter("@_text", b.Text);
                 p[2] = new SqlParameter("@_order", b.Order);
+                #endregion
+
+                #region add button to database 
 
                 if (dal.myExcute("AddButton", p))
                     MessageBox.Show("button saved to database");
-          SqlParameter[] p5 = new SqlParameter[3];
+
+                #endregion
+
+                #region Get id for current button to add activity to it 
+
+                SqlParameter[] p5 = new SqlParameter[3];
                 p5[0] = new SqlParameter("@_name", b.ButtonName);
                 p5[1] = new SqlParameter("@_text", b.Text);
                 p5[2] = new SqlParameter("@_order", b.Order);
@@ -386,35 +507,54 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     }
 
                 }
+                #endregion
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
 
         }
+        /// <summary>
+        ///  close the form 
+        /// </summary>
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        ///  return choices to th default "clear" 
+        /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
             comboBox_type.SelectedIndex = 0;
             textBox_Info_msg.Text = "";
             textBox_time_out.Text = "";
             comboBox_idtype.SelectedIndex = 0;
-            numericUpDown1.Value = 0;
+            numericUpDown1.Value = 1;
         }
     }
 }

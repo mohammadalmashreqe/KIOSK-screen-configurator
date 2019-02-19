@@ -57,15 +57,27 @@ namespace KIOSKScreenConfigurator
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-
+                #endregion
 
             }
 
@@ -115,14 +127,27 @@ namespace KIOSKScreenConfigurator
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -173,28 +198,45 @@ namespace KIOSKScreenConfigurator
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-
+                #endregion
 
             }
 
         }
-
+        /// <summary>
+        ///  open add button form 
+        /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
+            #region open form 
             try
             {
 
                 AddButton frm = new AddButton();
                 frm.ShowDialog();
+                #endregion
 
+                #region updae List in main form 
                 // this code will be execute when addButton frm closed .
 
 
@@ -215,47 +257,105 @@ namespace KIOSKScreenConfigurator
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
+            #endregion
         }
 
+        /// <summary>
+        ///  open Edit button form  and passed the selected button to the form constructer as a parameter 
+        /// </summary>
         private void button3_Click(object sender, EventArgs e)
         {
+            try
+            {
+                #region create a selected button 
+                Button b = new Button();
+                b.ButtonName = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString();
+                b.Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString());
+                b.ID1 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                b.Text = dataGridView_buttonList.CurrentRow.Cells["text"].Value.ToString();
+                #endregion
 
-            Button b = new Button();
-            b.ButtonName =dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString();
-            b.Order=int .Parse( dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString());
-            b.ID1= int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-            b.Text = dataGridView_buttonList.CurrentRow.Cells["text"].Value.ToString();
-            EditFrm frm = new EditFrm(b);
-            frm.ShowDialog();
-            DataTable dt = dal.SelectData("getButtons", null);
+                #region create object from form Edit form , display it and passed selected obejct as a paramter  
+                EditFrm frm = new EditFrm(b);
+                frm.ShowDialog();
+                #endregion
 
-            dataGridView_buttonList.DataSource = null;
-            dataGridView_buttonList.DataSource = dt;
+                #region update list in main Form 
+                DataTable dt = dal.SelectData("getButtons", null);
+
+                dataGridView_buttonList.DataSource = null;
+                dataGridView_buttonList.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
+            #endregion
 
         }
-
+        /// <summary>
+        ///  close all forms and end all proccess 
+        /// </summary>
         private void button4_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// display configration form to modfiy connection string ana test connection 
+        /// </summary>
         private void changeConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             Config frm = new Config();
             frm.Show();
         }
-
+        /// <summary>
+        /// close all forms and end all proccess 
+        /// </summary>
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();

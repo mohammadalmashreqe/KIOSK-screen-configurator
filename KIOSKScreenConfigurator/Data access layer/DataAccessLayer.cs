@@ -15,8 +15,11 @@ namespace KIOSKScreenConfigurator.DAL
     {
         static DataAccessLayer Instance;
         static SqlConnection sqlConnection;
+        
+        /// <summary>
+        /// constructer to establish the connection
+        /// </summary>
 
-        // constructer to establish the connection 
         private DataAccessLayer(String conString)
         {
             try
@@ -56,8 +59,10 @@ namespace KIOSKScreenConfigurator.DAL
             
         }
 
-        // method to open the connection 
-
+        /// <summary>
+        /// method to open the connection 
+        /// </summary>
+      
         public bool Open()
         {
             if (sqlConnection.State != ConnectionState.Open)
@@ -69,7 +74,10 @@ namespace KIOSKScreenConfigurator.DAL
                 return false;
         }
 
-        // method to close the connection 
+        
+        /// <summary>
+        /// method to close the connection 
+        /// </summary>
         public bool Close()
         {
             if (sqlConnection.State != ConnectionState.Closed)
@@ -81,7 +89,10 @@ namespace KIOSKScreenConfigurator.DAL
                 return false;
         }
 
-        //method to read data from database 
+
+        /// <summary>
+        //method to read data from database
+        /// </summary>
 
         public DataTable SelectData(string stored_proc, SqlParameter[] param)
         {
@@ -106,14 +117,27 @@ namespace KIOSKScreenConfigurator.DAL
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace +"\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -122,7 +146,10 @@ namespace KIOSKScreenConfigurator.DAL
         }
 
 
-        //method to delete insert update to database 
+        /// <summary>
+        ///method to delete insert update to database 
+        /// </summary>
+
 
         public bool  myExcute(string stored_proc, SqlParameter[] param)
         {
@@ -144,14 +171,27 @@ namespace KIOSKScreenConfigurator.DAL
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
+                #endregion
 
 
             }
@@ -165,6 +205,10 @@ namespace KIOSKScreenConfigurator.DAL
 
         }
 
+
+        /// <summary>
+        ///method to test connection 
+        /// </summary>
         public static  bool TestCon ( string constring)
         {
             try
@@ -181,14 +225,27 @@ namespace KIOSKScreenConfigurator.DAL
             }
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
                 sw.Close();
-                MessageBox.Show(ex.Message);
+                #endregion
+
                 throw ex;
 
 
@@ -197,19 +254,15 @@ namespace KIOSKScreenConfigurator.DAL
 
         }
 
+        /// <summary>
+        ///method to change  connection string 
+        /// </summary>
         public static bool  changeConnectioString (string value)
         {
             try
             {
                 if (TestCon(value))
-                //{
-                //    Properties.Settings.Default["mycon"] = value;
-                //    Properties.Settings.Default.Save();
-                //    Properties.Settings.Default.Upgrade();
-                //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                //config.ConnectionStrings.ConnectionStrings["mycon"].ConnectionString = value;
-                //config.ConnectionStrings.ConnectionStrings["mycon"].ProviderName = "System.Data.SqlClient";
-                //config.Save(ConfigurationSaveMode.Modified);
+                
 
                 {
                     StreamWriter sw2 = new StreamWriter(Directory.GetCurrentDirectory() + @"\constring.txt");
@@ -223,13 +276,26 @@ namespace KIOSKScreenConfigurator.DAL
 
             catch (Exception ex)
             {
+                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
                 sw.Close();
+                #endregion
 
                 throw ex; 
 
