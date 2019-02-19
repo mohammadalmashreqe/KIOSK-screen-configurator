@@ -247,7 +247,7 @@ namespace KIOSKScreenConfigurator
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void changeConfigToolStripMenuItem_Click(object sender, EventArgs e)
@@ -258,7 +258,7 @@ namespace KIOSKScreenConfigurator
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
     }
 }
