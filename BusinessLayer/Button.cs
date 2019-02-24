@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIOSKScreenConfigurator.DAL;
+using DAL;
 
-namespace KIOSKScreenConfigurator
+namespace BusinessLayer
 {
-   public  class Button
+    public class Button
     {
 
         string buttonName;
         int ID;
         int order;
-        string text; 
+        string text;
         List<Activity> myactivity = new List<Activity>();
 
         public string ButtonName { get => buttonName; set => buttonName = value; }
@@ -25,14 +25,14 @@ namespace KIOSKScreenConfigurator
         public string Text { get => text; set => text = value; }
         public int ID1 { get => ID; set => ID = value; }
 
-        public bool addActivity (Activity ac)
+        public bool addActivity(Activity ac)
         {
             if (myactivity.Count >= 5)
                 return false;
             else
             {
                 myactivity.Add(ac);
-                return true; 
+                return true;
             }
 
         }
@@ -41,18 +41,18 @@ namespace KIOSKScreenConfigurator
             return myactivity.Count;
 
         }
-        public List<Activity> getList ()
+        public List<Activity> getList()
         {
             return myactivity;
         }
-        public static DataTable getButtons ()
+        public static DataTable getButtons()
         {
             DataAccessLayer dal = DataAccessLayer.getConInstance();
             dal.Open();
             DataTable dt = dal.SelectData("getButtons", null);
             return dt;
         }
-        public bool DeleteButton ()
+        public bool DeleteButton()
         {
             DataAccessLayer dal = DataAccessLayer.getConInstance();
             dal.Open();
@@ -61,11 +61,11 @@ namespace KIOSKScreenConfigurator
             if (dal.myExcute("deleteButton", p))
                 return true;
             else
-                return false; 
+                return false;
 
-           
+
         }
-        public bool AddButton ()
+        public bool AddButton()
         {
             SqlParameter[] p = new SqlParameter[3];
             p[0] = new SqlParameter("@_name", ButtonName);
@@ -76,11 +76,11 @@ namespace KIOSKScreenConfigurator
             if (dal.myExcute("AddButton", p))
                 return true;
             else
-                return false; 
+                return false;
 
         }
 
-        public int GetId ()
+        public int GetId()
         {
             DataAccessLayer dal = DataAccessLayer.getConInstance();
             dal.Open();
@@ -94,7 +94,7 @@ namespace KIOSKScreenConfigurator
             return bt_id;
         }
 
-        public bool updatButton ()
+        public bool updatButton()
         {
             try
             {
@@ -109,8 +109,8 @@ namespace KIOSKScreenConfigurator
                 p[3] = new SqlParameter("@_order", Order);
 
                 return dal.myExcute("EditButton", p);
-               
-               
+
+
 
             }
             catch (Exception ex)
@@ -137,12 +137,12 @@ namespace KIOSKScreenConfigurator
                 sw.Close();
                 #endregion
 
-                return false; 
+                return false;
 
             }
 
 
-     
+
         }
 
 

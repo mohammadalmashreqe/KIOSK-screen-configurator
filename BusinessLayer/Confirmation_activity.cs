@@ -5,48 +5,48 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KIOSKScreenConfigurator.DAL;
-namespace KIOSKScreenConfigurator
+using DAL;
+namespace BusinessLayer
 {
-    class Confirmation_activity:Activity
+  public   class Confirmation_activity : Activity
     {
 
 
         int _Timeout;
 
-        public Confirmation_activity (string m , int s ):base (m )
+        public Confirmation_activity(string m, int s) : base(m)
         {
-            _Timeout = s; 
+            _Timeout = s;
         }
 
         public int Timeout
         {
             set
             {
-                _Timeout = value; 
-               
+                _Timeout = value;
+
             }
             get
             {
-                return _Timeout; ; 
+                return _Timeout; ;
             }
         }
 
-       
+
 
         public override string getIdentificationType()
         {
-            return null; 
+            return null;
         }
 
         public override bool getIsmandatory()
         {
-            return false; 
-        } 
+            return false;
+        }
 
         public override int getnumberOfprintedTick()
         {
-            return 0; 
+            return 0;
         }
 
         public override int getTimeOutInSecond()
@@ -59,7 +59,7 @@ namespace KIOSKScreenConfigurator
             return activityType.Confirmation_activity;
         }
 
-        public static DataTable getConActivity(int val )
+        public static DataTable getConActivity(int val)
         {
             SqlParameter[] p = new SqlParameter[1];
             p[0] = new SqlParameter("@_butId", val);
@@ -69,7 +69,7 @@ namespace KIOSKScreenConfigurator
             return dal.SelectData("getConActivity", p);
         }
 
-        public bool AddconActivity (int bt_id)
+        public bool AddconActivity(int bt_id)
         {
             SqlParameter[] p4 = new SqlParameter[4];
             DataAccessLayer dal = DataAccessLayer.getConInstance();
@@ -81,7 +81,7 @@ namespace KIOSKScreenConfigurator
             if (dal.myExcute("Add_activity_Confirm", p4))
                 return true;
             else
-                return false; 
+                return false;
 
         }
 
@@ -100,6 +100,6 @@ namespace KIOSKScreenConfigurator
 
 
         }
-        
+
     }
 }

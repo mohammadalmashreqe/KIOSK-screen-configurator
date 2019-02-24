@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIOSKScreenConfigurator
-{ 
+namespace BusinessLayer
+{
     public enum activityType { print_ticket_type, Request_identification, Confirmation_activity }
 
     public abstract class Activity
@@ -13,15 +13,15 @@ namespace KIOSKScreenConfigurator
 
         string _Information_message;
 
-        public Activity (string i )
+        public Activity(string i)
         {
-            _Information_message = i; 
+            _Information_message = i;
         }
         public string Information_message
         {
             set
             {
-                _Information_message = value; 
+                _Information_message = value;
             }
             get
             {
@@ -29,13 +29,13 @@ namespace KIOSKScreenConfigurator
             }
 
         }
-        abstract   public activityType getType();
-        abstract public int  getnumberOfprintedTick();
+        abstract public activityType getType();
+        abstract public int getnumberOfprintedTick();
         abstract public string getIdentificationType();
         abstract public bool getIsmandatory();
         abstract public int getTimeOutInSecond();
 
-        
+
 
 
 

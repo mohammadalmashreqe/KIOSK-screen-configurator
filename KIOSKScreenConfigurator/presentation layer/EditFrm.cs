@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIOSKScreenConfigurator.DAL;
+using DAL;
 using System.Data.SqlClient;
 using System.IO;
+using BusinessLayer;
 
 namespace KIOSKScreenConfigurator.presentation_layer
 {
     public partial class EditFrm : Form
     {
-        Button current;
+        BusinessLayer.Button current;
        
         
      
-        public EditFrm(Button b)
+        public EditFrm(BusinessLayer.Button b)
         {
              current =b;
 

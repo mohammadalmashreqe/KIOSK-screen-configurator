@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIOSKScreenConfigurator.DAL;
+using DAL;
 using System.Data.SqlClient;
 using System.IO;
-
+using BusinessLayer;
 
 namespace KIOSKScreenConfigurator.presentation_layer
 {
     public partial class AddButton : Form
     {
-        Button b  = new Button();
+        BusinessLayer.Button b  = new BusinessLayer.Button();
         List<Print_ticket_type> myListPrint = new List<Print_ticket_type>();
         List<Confirmation_activity> myListConfirm = new List<Confirmation_activity>();
         List<Request_identification> myListrequest = new List<Request_identification>();
@@ -403,7 +403,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
                 #region AddButton 
-                Button b1 = new Button();
+                BusinessLayer.Button b1 = new BusinessLayer.Button();
                 
 
                 if (textBox_but_name.Text == "" || textBox_but_order.Text == "" || textBox_but_txt.Text == "")

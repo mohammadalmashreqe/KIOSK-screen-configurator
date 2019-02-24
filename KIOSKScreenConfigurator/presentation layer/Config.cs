@@ -1,4 +1,4 @@
-﻿using KIOSKScreenConfigurator.business_Layer;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLayer;
 
 namespace KIOSKScreenConfigurator.presentation_layer
 {

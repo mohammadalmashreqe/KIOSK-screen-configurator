@@ -1,4 +1,4 @@
-﻿using KIOSKScreenConfigurator.DAL;
+﻿using DAL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,18 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KIOSKScreenConfigurator
+namespace BusinessLayer
 {
-    class Print_ticket_type :Activity
+   public class Print_ticket_type : Activity
     {
         //from 1 to 5
         int _Num_of_printed_tickets;
-       public  Print_ticket_type (string i , int n ):base(i)
+        public Print_ticket_type(string i, int n) : base(i)
         {
-            Num_of_printed_tickets1 = n; 
+            Num_of_printed_tickets1 = n;
         }
-        public int  Num_of_printed_tickets 
-            {
+        public int Num_of_printed_tickets
+        {
             set
             {
                 if (value > 0 && value < 6)
@@ -30,7 +30,7 @@ namespace KIOSKScreenConfigurator
             }
 
 
-            }
+        }
 
         public int Num_of_printed_tickets1 { get => _Num_of_printed_tickets; set => _Num_of_printed_tickets = value; }
 
@@ -41,7 +41,7 @@ namespace KIOSKScreenConfigurator
 
         public override bool getIsmandatory()
         {
-            return false; 
+            return false;
         }
 
         public override int getnumberOfprintedTick()
@@ -77,7 +77,7 @@ namespace KIOSKScreenConfigurator
             p2[1] = new SqlParameter("@_type", "print_ticket_type");
             p2[2] = new SqlParameter("@_info_msg", Information_message);
             p2[3] = new SqlParameter("@_num_Of_tick", getnumberOfprintedTick());
-     
+
             if (dal.myExcute("Add_activity_print", p2))
                 return true;
             else
@@ -85,7 +85,7 @@ namespace KIOSKScreenConfigurator
 
         }
 
-        public static  bool deleteActivity ( string id)
+        public static bool deleteActivity(string id)
         {
 
             DAL.DataAccessLayer dal = DataAccessLayer.getConInstance();
@@ -95,11 +95,11 @@ namespace KIOSKScreenConfigurator
             SqlParameter[] p = new SqlParameter[1];
             p[0] = new SqlParameter("@_activity_id", id);
 
-                return dal.myExcute("deletePrintActivity", p);
+            return dal.myExcute("deletePrintActivity", p);
 
- 
+
 
         }
-       
+
     }
 }

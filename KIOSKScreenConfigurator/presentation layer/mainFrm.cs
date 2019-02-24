@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIOSKScreenConfigurator.DAL;
+
 using System.Data.SqlClient;
 using KIOSKScreenConfigurator.presentation_layer;
 using System.IO;
+using DAL;
+using BusinessLayer;
 
 namespace KIOSKScreenConfigurator
 {
@@ -40,7 +42,7 @@ namespace KIOSKScreenConfigurator
                 
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = Button.getButtons(); 
+                dataGridView_buttonList.DataSource = BusinessLayer.Button.getButtons(); 
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
 
@@ -167,7 +169,7 @@ namespace KIOSKScreenConfigurator
 
 
                 {
-                    Button b1 = new Button();
+                    BusinessLayer.Button b1 = new BusinessLayer.Button();
                     
                     
                    
@@ -179,7 +181,7 @@ namespace KIOSKScreenConfigurator
                         MessageBox.Show("Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     dataGridView_buttonList.DataSource = null;
-                    dataGridView_buttonList.DataSource = Button.getButtons();
+                    dataGridView_buttonList.DataSource = BusinessLayer.Button.getButtons();
 
                    
                     
@@ -257,7 +259,7 @@ namespace KIOSKScreenConfigurator
 
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = Button.getButtons();
+                dataGridView_buttonList.DataSource = BusinessLayer.Button.getButtons();
 
 
 
@@ -328,7 +330,7 @@ namespace KIOSKScreenConfigurator
             try
             {
                 #region create a selected button 
-                Button b = new Button();
+                BusinessLayer.Button b = new BusinessLayer.Button();
                 b.ButtonName = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString();
                 b.Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString());
                 b.ID1 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
@@ -342,7 +344,7 @@ namespace KIOSKScreenConfigurator
 
                 #region update list in main Form 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = Button.getButtons();
+                dataGridView_buttonList.DataSource = BusinessLayer.Button.getButtons();
             }
             catch (Exception ex)
             {

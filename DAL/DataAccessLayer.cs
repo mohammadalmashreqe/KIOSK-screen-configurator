@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
 using System.Windows.Forms;
-using System.Configuration;
-using System.IO;
 
-namespace KIOSKScreenConfigurator.DAL
-{    // I AM USING SINGILTON DESIGN PATTERN TO HAVE 1 INSTANCE OF DATACCESSLAYER DURING RUNTIME 
-    class DataAccessLayer
+namespace DAL
+{
+   public class DataAccessLayer
     {
         static DataAccessLayer Instance;
         static SqlConnection sqlConnection;
-        
+
         /// <summary>
         /// constructer to establish the connection
         /// </summary>
@@ -41,28 +40,28 @@ namespace KIOSKScreenConfigurator.DAL
             }
         }
 
-        
-        public static DataAccessLayer getConInstance ()
+
+        public static DataAccessLayer getConInstance()
         {
             if (sqlConnection == null)
-                if(File.Exists(Directory.GetCurrentDirectory() + @"\constring.txt"))
-            {
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\constring.txt"))
+                {
                     StreamReader sw2 = new StreamReader(Directory.GetCurrentDirectory() + @"\constring.txt");
-                 
+
 
                     Instance = new DataAccessLayer(sw2.ReadLine());
                     sw2.Close();
-            }
-            
-            
-                return Instance;
-            
+                }
+
+
+            return Instance;
+
         }
 
         /// <summary>
         /// method to open the connection 
         /// </summary>
-      
+
         public bool Open()
         {
             if (sqlConnection.State != ConnectionState.Open)
@@ -74,7 +73,7 @@ namespace KIOSKScreenConfigurator.DAL
                 return false;
         }
 
-        
+
         /// <summary>
         /// method to close the connection 
         /// </summary>
@@ -141,7 +140,7 @@ namespace KIOSKScreenConfigurator.DAL
 
 
             }
-            return null; 
+            return null;
 
         }
 
@@ -151,9 +150,9 @@ namespace KIOSKScreenConfigurator.DAL
         /// </summary>
 
 
-        public bool  myExcute(string stored_proc, SqlParameter[] param)
+        public bool myExcute(string stored_proc, SqlParameter[] param)
         {
-            int x=-1;
+            int x = -1;
             try
             {
 
@@ -166,7 +165,7 @@ namespace KIOSKScreenConfigurator.DAL
                     for (int i = 0; i < param.Length; i++)
                         sqlCommand.Parameters.Add(param[i]);
                 }
-              x  = sqlCommand.ExecuteNonQuery();
+                x = sqlCommand.ExecuteNonQuery();
 
             }
             catch (Exception ex)
@@ -201,7 +200,7 @@ namespace KIOSKScreenConfigurator.DAL
             if (x > 0)
                 return true;
             else
-                return false; 
+                return false;
 
         }
 
@@ -209,16 +208,16 @@ namespace KIOSKScreenConfigurator.DAL
         /// <summary>
         ///method to test connection 
         /// </summary>
-        public static  bool TestCon ( string constring)
+        public static bool TestCon(string constring)
         {
             try
             {
                 SqlConnection con = new SqlConnection(constring);
                 con.Open();
-                
 
-                
-                if (con.State == ConnectionState. Open || con.State == ConnectionState.Open)
+
+
+                if (con.State == ConnectionState.Open || con.State == ConnectionState.Open)
                     return true;
                 else
                     return false;
@@ -257,21 +256,21 @@ namespace KIOSKScreenConfigurator.DAL
         /// <summary>
         ///method to change  connection string 
         /// </summary>
-        public static bool  changeConnectioString (string value)
+        public static bool changeConnectioString(string value)
         {
             try
             {
                 if (TestCon(value))
-                
+
 
                 {
                     StreamWriter sw2 = new StreamWriter(Directory.GetCurrentDirectory() + @"\constring.txt");
-                   sw2.Write(value);
+                    sw2.Write(value);
                     sw2.Close();
-                return true;
+                    return true;
                 }
                 else
-                    return false; 
+                    return false;
             }
 
             catch (Exception ex)
@@ -297,7 +296,7 @@ namespace KIOSKScreenConfigurator.DAL
                 sw.Close();
                 #endregion
 
-                throw ex; 
+                throw ex;
 
             }
 

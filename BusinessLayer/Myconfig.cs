@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,19 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KIOSKScreenConfigurator.business_Layer
+namespace BusinessLayer
 {
     public class Myconfig
     {
         static string server_name;
         static string database_name;
 
-        public static  string Server_name { get => server_name; set => server_name = value; }
+        public static string Server_name { get => server_name; set => server_name = value; }
         public static string Database_name { get => database_name; set => database_name = value; }
 
-        public static bool TestCon (string con )
+        public static bool TestCon(string con)
         {
-            
+
 
             #region test a connection 
             try
@@ -48,7 +49,7 @@ namespace KIOSKScreenConfigurator.business_Layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                return false; 
+                return false;
                 #endregion
 
 
@@ -56,26 +57,26 @@ namespace KIOSKScreenConfigurator.business_Layer
             #endregion
         }
 
-        public static bool changeCon (string con )
+        public static bool changeCon(string con)
         {
             #region change a connection 
             try
             {
-                if (DAL.DataAccessLayer.changeConnectioString(con))
+                if (DataAccessLayer.changeConnectioString(con))
                 {
-                  
+
                     StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
                     sw.Write("F");
                     sw.Close();
 
 
-          
-                    DAL.DataAccessLayer.getConInstance();
+
+                    DataAccessLayer.getConInstance();
                     return true;
 
                 }
                 else
-                    return false; 
+                    return false;
 
 
             }
@@ -102,7 +103,7 @@ namespace KIOSKScreenConfigurator.business_Layer
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
                 #endregion
-                return false; 
+                return false;
 
 
             }
