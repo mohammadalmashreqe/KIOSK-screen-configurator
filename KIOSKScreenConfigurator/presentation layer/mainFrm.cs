@@ -371,7 +371,7 @@ namespace KIOSKScreenConfigurator
                 #endregion
             }
             #endregion
-
+              
         }
         /// <summary>
         ///  close all forms and end all proccess 
