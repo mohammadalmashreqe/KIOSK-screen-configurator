@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KIOSKScreenConfigurator.business_Layer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -21,7 +22,8 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
         private void Config_Load(object sender, EventArgs e)
         {
-
+            textBox_DBName.Text = Myconfig.Database_name;
+            textBox_server.Text = Myconfig.Server_name;
         }
 
         /// <summary>
@@ -33,43 +35,19 @@ namespace KIOSKScreenConfigurator.presentation_layer
             string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
             #endregion
 
-            #region test a connection 
-            try
-            {
-                if (DAL.DataAccessLayer.TestCon(con))
+            if(Myconfig.TestCon(con))
                 {
-                    MessageBox.Show(" test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                 MessageBox.Show(" Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    Myconfig.Database_name = textBox_DBName.Text;
+                    Myconfig.Server_name = textBox_server.Text;
                 }
-
-            }
-            catch (Exception ex)
+                 }
+            else
             {
-                #region Format excepton and write details to the log file 
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                #endregion
-
+                MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            #endregion
 
         }
 
@@ -86,51 +64,24 @@ namespace KIOSKScreenConfigurator.presentation_layer
             #region get and prepare connection string
             string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
             #endregion
-            #region change a connection 
-            try
+        if(Myconfig.changeCon(con))
             {
-                if (DAL.DataAccessLayer.changeConnectioString(con))
-                {
-                    MessageBox.Show(" test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
-                    sw.Write("F");
-                    sw.Close();
-                    
-                    this.Hide();
-                    Form1 frm = new Form1();
-                    frm.Show();
-                    DAL.DataAccessLayer.getConInstance();
-                       
-                }
+                Myconfig.Database_name = textBox_DBName.Text;
+                Myconfig.Server_name = textBox_server.Text;
+                this.Hide();
+                Form1 frm = new Form1();
+                frm.Show();
+            }
+        else
+            {
+                MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            catch (Exception ex)
-            {
-                #region Format excepton and write details to the log file 
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+        }
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                #endregion
-
-
-            }
-            #endregion
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

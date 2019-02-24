@@ -32,58 +32,25 @@ namespace KIOSKScreenConfigurator.presentation_layer
             textBox_name.Text = current.ButtonName;
             textBox_order.Text = current.Order+"";
             textBox_text.Text = current.Text;
-            
+            int val = int.Parse(textBox_id.Text);
+            tabControl1.SelectedIndex = 0;
+            loadDataGrid(val);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
-                dal.Open();
-                SqlParameter[] p = new SqlParameter[4];
-                p[0] = new SqlParameter("@_id", textBox_id.Text);
-                p[1] = new SqlParameter("@_name", textBox_name.Text);
-
-                p[2] = new SqlParameter("@_text", textBox_text.Text);
-
-                p[3] = new SqlParameter("@_order", textBox_order.Text);
-
-                if (dal.myExcute("EditButton", p))
+          
+                if (current.updatButton())
                 {
                     MessageBox.Show("button updated ", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                    MessageBox.Show("no row effected","wraning",MessageBoxButtons.OK,MessageBoxIcon.Warning); 
-                dal.Close();
-
-            }
-            catch (Exception ex)
-            {
-                #region Format excepton and write details to the log file 
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                #endregion
-
-
-            }
+                {
+                    MessageBox.Show("no row effected", "wraning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            
+         
 
         }
 
@@ -129,6 +96,129 @@ namespace KIOSKScreenConfigurator.presentation_layer
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+
+           // Edit_Activity frm;
+            
+           //if (tabControl1.SelectedIndex == 0)
+           // {
+           //     if (dataGridView_print.Rows.Count > 0)
+           //     {
+           //     int n=  int.Parse(  dataGridView_print.CurrentRow.Cells["num_of_tick"].Value.ToString());
+           //       string m=  dataGridView_print.CurrentRow.Cells["info_msg"].Value.ToString();
+           //        int i=  int .Parse(dataGridView_print.CurrentRow.Cells["ID"].Value.ToString());
+           //         Print_ticket_type a = new Print_ticket_type(m, n);
+           //         frm = new Edit_Activity(a, i);
+           //         frm.ShowDialog();
+           //         loadDataGrid(i);
+
+
+           //     }
+           // }
+           //else 
+           //     if (tabControl1.SelectedIndex==1)
+           // {
+           //     if(dataGridView_Request.Rows.Count>0)
+           //     {
+           //         Identification_type idt2;
+           //       string idt=  dataGridView_Request.CurrentRow.Cells["Identification_type"].Value.ToString();
+           //         if (idt == "card")
+           //         {  idt2 = Identification_type.card;
+           //         }
+
+           //         else
+           //         {  idt2 = Identification_type.mobile;
+           //         }
+           //         bool ismandotory = bool.Parse(dataGridView_Request.CurrentRow.Cells["Is_mandatory"].Value.ToString());
+           //         string m = dataGridView_Request.CurrentRow.Cells["info_msg"].Value.ToString();
+           //         Request_identification a = new Request_identification(m, idt2, ismandotory);
+           //         int i = int.Parse(dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString());
+           //         frm = new Edit_Activity(a, i);
+           //         frm.ShowDialog();
+           //         loadDataGrid(i);
+
+           //     }
+           // }
+
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex==0 )
+            {
+                
+                string act_id = dataGridView_print.CurrentRow.Cells["ID"].Value.ToString();
+                string i = textBox_id.Text;
+                if (Print_ticket_type.deleteActivity(act_id))
+                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+
+                loadDataGrid(int.Parse(i));
+
+            }
+            else
+                if(tabControl1.SelectedIndex==1)
+            {
+                string act_id = dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString();
+                string i = textBox_id.Text;
+                if(Request_identification.deleteActivity(act_id))
+                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                loadDataGrid(int.Parse(i));
+
+
+
+            }
+            else
+            {
+                string act_id = dataGridView_Confirm.CurrentRow.Cells["ID"].Value.ToString();
+                string i = textBox_id.Text;
+                if (Request_identification.deleteActivity(act_id))
+                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                loadDataGrid(int.Parse(i));
+            }
+
+
+        }
+
+
+
+        public void loadDataGrid ( int i )
+        {
+            dataGridView_print.DataSource = null;
+            dataGridView_Confirm.DataSource = null;
+            dataGridView_Request.DataSource = null;
+
+            dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(i);
+            dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(i);
+            dataGridView_Request.DataSource = Request_identification.getRequestActivity(i);
         }
     }
 }

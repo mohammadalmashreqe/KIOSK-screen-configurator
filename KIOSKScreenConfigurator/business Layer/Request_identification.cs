@@ -1,5 +1,8 @@
-﻿using System;
+﻿using KIOSKScreenConfigurator.DAL;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +81,52 @@ namespace KIOSKScreenConfigurator
         public override activityType getType()
         {
             return activityType.Request_identification; 
+        }
+
+        public static DataTable getRequestActivity(int val)
+        {
+            SqlParameter[] p = new SqlParameter[1];
+            p[0] = new SqlParameter("@_butId", val);
+            DataAccessLayer dal = DataAccessLayer.getConInstance();
+            dal.Open();
+
+            return dal.SelectData("getRequestTickActivity", p);
+        }
+        public bool AddRequestActivity (int bt_id)
+        {
+           
+            DataAccessLayer dal = DataAccessLayer.getConInstance();
+            dal.Open();
+            SqlParameter[] p3 = new SqlParameter[5];
+
+            p3[0] = new SqlParameter("@_but_id", bt_id);
+            p3[1] = new SqlParameter("@_type", "Request_identification");
+            p3[2] = new SqlParameter("@_info_msg",Information_message);
+            p3[3] = new SqlParameter("@_Identification_type", getIdentificationType());
+
+            p3[4] = new SqlParameter("@_Is_mandatory", getIsmandatory());
+            
+
+            if (dal.myExcute("Add_activity_request", p3))
+                return true;
+            else
+                return false;
+
+        }
+        public static bool deleteActivity(string id)
+        {
+
+            DAL.DataAccessLayer dal = DataAccessLayer.getConInstance();
+            dal.Open();
+
+
+            SqlParameter[] p = new SqlParameter[1];
+            p[0] = new SqlParameter("@_activity_id", id);
+
+            return dal.myExcute("deleteRequestActivity", p);
+
+
+
         }
     }
     #endregion

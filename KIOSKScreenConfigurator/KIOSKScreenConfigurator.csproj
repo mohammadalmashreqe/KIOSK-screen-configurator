@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -50,6 +53,7 @@
     <Compile Include="business Layer\Activity.cs" />
     <Compile Include="business Layer\Button.cs" />
     <Compile Include="business Layer\Confirmation_activity.cs" />
+    <Compile Include="business Layer\Myconfig.cs" />
     <Compile Include="Data access layer\DataAccessLayer.cs" />
     <Compile Include="presentation layer\AddButton.cs">
       <SubType>Form</SubType>

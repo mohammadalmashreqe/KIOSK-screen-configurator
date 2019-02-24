@@ -37,22 +37,23 @@ namespace KIOSKScreenConfigurator
         {
             try
             {
-                dal.Open();
-                DataTable dt = dal.SelectData("getButtons", null);
+                
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = dt;
+                dataGridView_buttonList.DataSource = Button.getButtons(); 
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
-                    SqlParameter[] p = new SqlParameter[1];
+
                     int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    p[0] = new SqlParameter("@_id", val);
 
-                    dt = dal.SelectData("getActivity", p);
+                    dataGridView_print.DataSource = null;
+                    dataGridView_Confirm.DataSource = null;
+                    dataGridView_Request.DataSource = null;
 
-                    dataGridView_activity.DataSource = null;
+                    dataGridView_Confirm.DataSource= Confirmation_activity.getConActivity(val);
+                    dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(val);
+                    dataGridView_Request.DataSource = Request_identification.getRequestActivity(val);
 
-                    dataGridView_activity.DataSource = dt;
                 }
             }
             catch (Exception ex)
@@ -112,16 +113,15 @@ namespace KIOSKScreenConfigurator
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
 
-
-                    SqlParameter[] p = new SqlParameter[1];
                     int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    p[0] = new SqlParameter("@_id", val);
-                    DataTable dt = dal.SelectData("getActivity", p);
 
-                    dataGridView_activity.DataSource = null;
+                    dataGridView_print.DataSource = null;
+                    dataGridView_Confirm.DataSource = null;
+                    dataGridView_Request.DataSource = null;
 
-                    dataGridView_activity.DataSource = dt;
-
+                    dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(val);
+                    dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(val);
+                    dataGridView_Request.DataSource = Request_identification.getRequestActivity(val);
 
                 }
             }
@@ -167,33 +167,49 @@ namespace KIOSKScreenConfigurator
 
 
                 {
-
-                    SqlParameter[] p = new SqlParameter[1];
+                    Button b1 = new Button();
+                    
+                    
+                   
                     int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    p[0] = new SqlParameter("@_id", val);
-                    dal.myExcute("deleteButton", p);
+                    b1.ID1 = val;
+                    if (b1.DeleteButton())
+                        MessageBox.Show("Button deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    DataTable dt = dal.SelectData("getButtons", null);
                     dataGridView_buttonList.DataSource = null;
+                    dataGridView_buttonList.DataSource = Button.getButtons();
 
-                    dataGridView_buttonList.DataSource = dt;
+                   
+                    
                     dataGridView_buttonList.Refresh();
                     if (dataGridView_buttonList.SelectedCells.Count > 0)
                     {
-                        SqlParameter[] p2 = new SqlParameter[1];
+
+
                         int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                        p2[0] = new SqlParameter("@_id", val2);
-                        DataTable dt2 = dal.SelectData("getActivity", p2);
 
-                        dataGridView_activity.DataSource = null;
+                        dataGridView_print.DataSource = null;
+                        dataGridView_Confirm.DataSource = null;
+                        dataGridView_Request.DataSource = null;
 
-                        dataGridView_activity.DataSource = dt2;
+                        dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(val2);
+                        dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(val2);
+                        dataGridView_Request.DataSource = Request_identification.getRequestActivity(val2);
+
+
+                      
                     }
 
 
                     if (dataGridView_buttonList.SelectedCells.Count == 0)
 
-                        dataGridView_activity.DataSource = null;
+                    {
+                        dataGridView_print.DataSource = null;
+                        dataGridView_Confirm.DataSource = null;
+                        dataGridView_Request.DataSource = null;
+                    }
                 }
             }
             catch (Exception ex)
@@ -240,20 +256,40 @@ namespace KIOSKScreenConfigurator
                 // this code will be execute when addButton frm closed .
 
 
-                DataTable dt = dal.SelectData("getButtons", null);
-
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = dt;
+                dataGridView_buttonList.DataSource = Button.getButtons();
 
-                SqlParameter[] p = new SqlParameter[1];
-                int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                p[0] = new SqlParameter("@_id", val);
 
-                dt = dal.SelectData("getActivity", p);
 
-                dataGridView_activity.DataSource = null;
 
-                dataGridView_activity.DataSource = dt;
+                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                {
+
+
+                    int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+
+                    dataGridView_print.DataSource = null;
+                    dataGridView_Confirm.DataSource = null;
+                    dataGridView_Request.DataSource = null;
+
+                    dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(val2);
+                    dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(val2);
+                    dataGridView_Request.DataSource = Request_identification.getRequestActivity(val2);
+
+
+
+                }
+
+
+                if (dataGridView_buttonList.SelectedCells.Count == 0)
+
+                {
+                    dataGridView_print.DataSource = null;
+                    dataGridView_Confirm.DataSource = null;
+                    dataGridView_Request.DataSource = null;
+                }
+
+               
             }
             catch (Exception ex)
             {
@@ -305,10 +341,8 @@ namespace KIOSKScreenConfigurator
                 #endregion
 
                 #region update list in main Form 
-                DataTable dt = dal.SelectData("getButtons", null);
-
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = dt;
+                dataGridView_buttonList.DataSource = Button.getButtons();
             }
             catch (Exception ex)
             {
@@ -357,6 +391,16 @@ namespace KIOSKScreenConfigurator
         /// close all forms and end all proccess 
         /// </summary>
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void kIOSKscreenconfiguratorDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
         }
