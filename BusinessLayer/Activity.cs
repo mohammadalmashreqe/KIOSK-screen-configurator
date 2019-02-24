@@ -29,11 +29,6 @@ namespace BusinessLayer
             }
 
         }
-        abstract public activityType getType();
-        abstract public int getnumberOfprintedTick();
-        abstract public string getIdentificationType();
-        abstract public bool getIsmandatory();
-        abstract public int getTimeOutInSecond();
 
 
 

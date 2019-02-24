@@ -34,27 +34,27 @@ namespace BusinessLayer
 
 
 
-        public override string getIdentificationType()
-        {
-            return null;
-        }
+        //public override string getIdentificationType()
+        //{
+        //    return null;
+        //}
 
-        public override bool getIsmandatory()
-        {
-            return false;
-        }
+        //public override bool getIsmandatory()
+        //{
+        //    return false;
+        //}
 
-        public override int getnumberOfprintedTick()
-        {
-            return 0;
-        }
+        //public override int getnumberOfprintedTick()
+        //{
+        //    return 0;
+        //}
 
-        public override int getTimeOutInSecond()
+        public  int getTimeOutInSecond()
         {
             return Timeout;
         }
 
-        public override activityType getType()
+        public  activityType getType()
         {
             return activityType.Confirmation_activity;
         }

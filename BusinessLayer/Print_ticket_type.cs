@@ -34,27 +34,17 @@ namespace BusinessLayer
 
         public int Num_of_printed_tickets1 { get => _Num_of_printed_tickets; set => _Num_of_printed_tickets = value; }
 
-        public override string getIdentificationType()
-        {
-            return null;
-        }
+    
 
-        public override bool getIsmandatory()
-        {
-            return false;
-        }
 
-        public override int getnumberOfprintedTick()
+        public  int getnumberOfprintedTick()
         {
             return Num_of_printed_tickets1;
         }
 
-        public override int getTimeOutInSecond()
-        {
-            return 0;
-        }
+      
 
-        public override activityType getType()
+        public  activityType getType()
         {
             return activityType.print_ticket_type;
         }
