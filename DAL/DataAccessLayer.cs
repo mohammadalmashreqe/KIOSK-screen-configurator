@@ -41,16 +41,17 @@ namespace DAL
         }
 
 
-        public static DataAccessLayer getConInstance()
+        public static DataAccessLayer getConInstance( )
         {
-            if (sqlConnection == null)
-                if (File.Exists(Directory.GetCurrentDirectory() + @"\constring.txt"))
+            if (Instance == null)
+               
                 {
-                    StreamReader sw2 = new StreamReader(Directory.GetCurrentDirectory() + @"\constring.txt");
+                  
 
+                 
 
-                    Instance = new DataAccessLayer(sw2.ReadLine());
-                    sw2.Close();
+                    Instance = new DataAccessLayer(@"Data Source = M-ALMESHERQE\SQLEXPRESS;Initial Catalog=KIOSK screen configurator object oriented;;Integrated Security=True");
+                    
                 }
 
 

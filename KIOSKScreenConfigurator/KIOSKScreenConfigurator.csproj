@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="presentation layer\AddActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="presentation layer\AddActivity.Designer.cs">
+      <DependentUpon>AddActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="presentation layer\AddButton.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="presentation layer\AddActivity.resx">
+      <DependentUpon>AddActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="presentation layer\AddButton.resx">
       <DependentUpon>AddButton.cs</DependentUpon>
     </EmbeddedResource>

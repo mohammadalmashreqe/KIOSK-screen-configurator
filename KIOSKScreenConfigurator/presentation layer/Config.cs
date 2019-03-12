@@ -32,22 +32,49 @@ namespace KIOSKScreenConfigurator.presentation_layer
         /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
-            #region get and prepare connection string 
-            string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
-            #endregion
-
-            if(Myconfig.TestCon(con))
-                {
-                 MessageBox.Show(" Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                {
-                    Myconfig.Database_name = textBox_DBName.Text;
-                    Myconfig.Server_name = textBox_server.Text;
-                }
-                 }
-            else
+            try
             {
-                MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                #region get and prepare connection string 
+                string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
+                #endregion
 
+                if (Myconfig.TestCon(con))
+                {
+                    MessageBox.Show(" Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    {
+                        Myconfig.Database_name = textBox_DBName.Text;
+                        Myconfig.Server_name = textBox_server.Text;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
             }
 
         }
@@ -62,27 +89,81 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
         private void button2_Click(object sender, EventArgs e)
         {
-            #region get and prepare connection string
-            string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
-            #endregion
-        if(Myconfig.changeCon(con))
+            try
             {
-                Myconfig.Database_name = textBox_DBName.Text;
-                Myconfig.Server_name = textBox_server.Text;
-                this.Hide();
-                Form1 frm = new Form1();
-                frm.Show();
-            }
-        else
-            {
-                MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                #region get and prepare connection string
+                string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
+                #endregion
+                if (Myconfig.changeCon(con))
+                {
+                    Myconfig.Database_name = textBox_DBName.Text;
+                    Myconfig.Server_name = textBox_server.Text;
+                    this.Hide();
+                    Form1 frm = new Form1();
+                    frm.Show();
+                }
+                else
+                {
+                    MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
     }
 }

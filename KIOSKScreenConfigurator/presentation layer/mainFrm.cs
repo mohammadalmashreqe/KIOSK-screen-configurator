@@ -21,18 +21,45 @@ namespace KIOSKScreenConfigurator
       DataAccessLayer dal;
         public Form1()
         {
-            
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\LogFile.txt"))
+            try
             {
-               
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt",true);
-                sw.Write("");
-                sw.Close();
 
-              
+                if (!File.Exists(Directory.GetCurrentDirectory() + @"\LogFile.txt"))
+                {
+
+                    StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                    sw.Write("");
+                    sw.Close();
+
+
+                }
+                dal = DataAccessLayer.getConInstance();
+                InitializeComponent();
             }
-             dal = DataAccessLayer.getConInstance();
-           InitializeComponent();
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -160,7 +187,7 @@ namespace KIOSKScreenConfigurator
             try
             {
 
-                DialogResult response = MessageBox.Show("Are you sure?", "Delete row?",
+                DialogResult response = MessageBox.Show("Are you sure delete selected button ?", "Delete Button",
                                      MessageBoxButtons.YesNo,
                                      MessageBoxIcon.Question,
                                      MessageBoxDefaultButton.Button2);
@@ -175,9 +202,8 @@ namespace KIOSKScreenConfigurator
                    
                     int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
                     b1.ID1 = val;
-                    if (b1.DeleteButton())
-                        MessageBox.Show("Button deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
+                    if (!b1.DeleteButton())
+                       
                         MessageBox.Show("Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     dataGridView_buttonList.DataSource = null;
@@ -377,8 +403,34 @@ namespace KIOSKScreenConfigurator
         ///  close all forms and end all proccess 
         /// </summary>
         private void button4_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+        {try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
         /// <summary>
         /// display configration form to modfiy connection string ana test connection 
@@ -386,15 +438,70 @@ namespace KIOSKScreenConfigurator
         private void changeConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Config frm = new Config();
-            frm.Show();
+            try
+            {
+
+                Config frm = new Config();
+                frm.Show();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
         /// <summary>
         /// close all forms and end all proccess 
         /// </summary>
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
 
         private void kIOSKscreenconfiguratorDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -404,7 +511,34 @@ namespace KIOSKScreenConfigurator
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
     }
 }

@@ -49,8 +49,8 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kIOSKscreenconfiguratorDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button4 = new System.Windows.Forms.Button();
+            this.kIOSKscreenconfiguratorDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_buttonList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -74,7 +74,7 @@
             this.groupBox1.Controls.Add(this.dataGridView_buttonList);
             this.groupBox1.Location = new System.Drawing.Point(12, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(484, 327);
+            this.groupBox1.Size = new System.Drawing.Size(484, 301);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Button ";
@@ -85,7 +85,7 @@
             this.button3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button3.ImageIndex = 1;
             this.button3.ImageList = this.imageList1;
-            this.button3.Location = new System.Drawing.Point(110, 270);
+            this.button3.Location = new System.Drawing.Point(403, 59);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -107,7 +107,7 @@
             this.button2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button2.ImageIndex = 0;
             this.button2.ImageList = this.imageList1;
-            this.button2.Location = new System.Drawing.Point(18, 270);
+            this.button2.Location = new System.Drawing.Point(403, 30);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -120,7 +120,7 @@
             this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button1.ImageIndex = 2;
             this.button1.ImageList = this.imageList1;
-            this.button1.Location = new System.Drawing.Point(205, 270);
+            this.button1.Location = new System.Drawing.Point(403, 88);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -140,7 +140,7 @@
             this.dataGridView_buttonList.Name = "dataGridView_buttonList";
             this.dataGridView_buttonList.ReadOnly = true;
             this.dataGridView_buttonList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_buttonList.Size = new System.Drawing.Size(443, 203);
+            this.dataGridView_buttonList.Size = new System.Drawing.Size(379, 256);
             this.dataGridView_buttonList.TabIndex = 0;
             this.dataGridView_buttonList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_buttonList_CellContentClick);
             this.dataGridView_buttonList.SelectionChanged += new System.EventHandler(this.dataGridView_buttonList_SelectionChanged);
@@ -151,7 +151,7 @@
             this.groupBox2.Controls.Add(this.tabControl1);
             this.groupBox2.Location = new System.Drawing.Point(522, 25);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(458, 327);
+            this.groupBox2.Size = new System.Drawing.Size(450, 301);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Activity ";
@@ -183,7 +183,7 @@
             this.dataGridView_print.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_print.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_print.Name = "dataGridView_print";
-            this.dataGridView_print.Size = new System.Drawing.Size(388, 85);
+            this.dataGridView_print.Size = new System.Drawing.Size(388, 238);
             this.dataGridView_print.TabIndex = 17;
             // 
             // tabPage2
@@ -264,22 +264,22 @@
             this.changeConfigToolStripMenuItem.Text = "Change configuration";
             this.changeConfigToolStripMenuItem.Click += new System.EventHandler(this.changeConfigToolStripMenuItem_Click);
             // 
-            // kIOSKscreenconfiguratorDataSetBindingSource
-            // 
-            this.kIOSKscreenconfiguratorDataSetBindingSource.CurrentChanged += new System.EventHandler(this.kIOSKscreenconfiguratorDataSetBindingSource_CurrentChanged);
-            // 
             // button4
             // 
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.ImageIndex = 3;
             this.button4.ImageList = this.imageList1;
-            this.button4.Location = new System.Drawing.Point(466, 376);
+            this.button4.Location = new System.Drawing.Point(897, 376);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
             this.button4.Text = "Close";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // kIOSKscreenconfiguratorDataSetBindingSource
+            // 
+            this.kIOSKscreenconfiguratorDataSetBindingSource.CurrentChanged += new System.EventHandler(this.kIOSKscreenconfiguratorDataSetBindingSource_CurrentChanged);
             // 
             // Form1
             // 

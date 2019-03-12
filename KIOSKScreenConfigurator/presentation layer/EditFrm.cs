@@ -22,26 +22,81 @@ namespace KIOSKScreenConfigurator.presentation_layer
      
         public EditFrm(BusinessLayer.Button b)
         {
-             current =b;
+            try
+            {
+                current = b;
 
-            InitializeComponent();
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
 
         private void EditFrm_Load(object sender, EventArgs e)
         {
-            textBox_id.Text = current.ID1+"";
-            textBox_name.Text = current.ButtonName;
-            textBox_order.Text = current.Order+"";
-            textBox_text.Text = current.Text;
-            int val = int.Parse(textBox_id.Text);
-            tabControl1.SelectedIndex = 0;
-            loadDataGrid(val);
+            try
+            {
+                textBox_id.Text = current.ID1 + "";
+                textBox_name.Text = current.ButtonName;
+                textBox_order.Text = current.Order + "";
+                textBox_text.Text = current.Text;
+                int val = int.Parse(textBox_id.Text);
+                tabControl1.SelectedIndex = 0;
+                loadDataGrid(val);
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+            try
+            {
                 if (current.updatButton())
                 {
                     MessageBox.Show("button updated ", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -50,31 +105,110 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 {
                     MessageBox.Show("no row effected", "wraning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            
-         
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
+
+
 
         }
 
         private void textBox_name_Leave(object sender, EventArgs e)
         {
-            if (textBox_name.Text.Length == 0)
+            try
             {
-                MessageBox.Show("please fill all fields ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox_name.Focus();
-                
+                if (textBox_name.Text.Length == 0)
+                {
+                    MessageBox.Show("please fill all fields ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox_name.Focus();
 
+
+                }
             }
-           
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
+
         }
 
         private void textBox_text_Leave(object sender, EventArgs e)
         {
-            if (textBox_text.Text.Length == 0)
+            try
             {
-                MessageBox.Show("please fill all fields ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox_text.Focus();
+                if (textBox_text.Text.Length == 0)
+                {
+                    MessageBox.Show("please fill all fields ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox_text.Focus();
+                }
             }
-            
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
+
         }
 
         private void textBox_order_Leave(object sender, EventArgs e)
@@ -162,64 +296,118 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex==0 )
+            try
             {
-                
-                string act_id = dataGridView_print.CurrentRow.Cells["ID"].Value.ToString();
-                string i = textBox_id.Text;
-                if (Print_ticket_type.deleteActivity(act_id))
-                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (tabControl1.SelectedIndex == 0)
+                {
+
+                    string act_id = dataGridView_print.CurrentRow.Cells["ID"].Value.ToString();
+                    string i = textBox_id.Text;
+                    if (Print_ticket_type.deleteActivity(act_id))
+                        MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+
+                    loadDataGrid(int.Parse(i));
+
+                }
                 else
-                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (tabControl1.SelectedIndex == 1)
+                {
+                    string act_id = dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString();
+                    string i = textBox_id.Text;
+                    if (Request_identification.deleteActivity(act_id))
+                        MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                    loadDataGrid(int.Parse(i));
 
 
 
-                loadDataGrid(int.Parse(i));
+                }
+                else
+                {
+                    string act_id = dataGridView_Confirm.CurrentRow.Cells["ID"].Value.ToString();
+                    string i = textBox_id.Text;
+                    if (Request_identification.deleteActivity(act_id))
+                        MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                    loadDataGrid(int.Parse(i));
+                }
 
             }
-            else
-                if(tabControl1.SelectedIndex==1)
+            catch (Exception ex)
             {
-                string act_id = dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString();
-                string i = textBox_id.Text;
-                if(Request_identification.deleteActivity(act_id))
-                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
-
-                loadDataGrid(int.Parse(i));
-
-
-
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
             }
-            else
-            {
-                string act_id = dataGridView_Confirm.CurrentRow.Cells["ID"].Value.ToString();
-                string i = textBox_id.Text;
-                if (Request_identification.deleteActivity(act_id))
-                    MessageBox.Show("Activity Deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                    MessageBox.Show("Error cant delete thae activity try again ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-                loadDataGrid(int.Parse(i));
-            }
-
-
         }
 
 
 
         public void loadDataGrid ( int i )
         {
-            dataGridView_print.DataSource = null;
-            dataGridView_Confirm.DataSource = null;
-            dataGridView_Request.DataSource = null;
+            try
+            {
+                dataGridView_print.DataSource = null;
+                dataGridView_Confirm.DataSource = null;
+                dataGridView_Request.DataSource = null;
 
-            dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(i);
-            dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(i);
-            dataGridView_Request.DataSource = Request_identification.getRequestActivity(i);
+                dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(i);
+                dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(i);
+                dataGridView_Request.DataSource = Request_identification.getRequestActivity(i);
+            }
+            catch (Exception ex)
+            {
+                #region Format excepton and write details to the log file 
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                #endregion
+            }
         }
     }
 }

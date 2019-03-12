@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace KIOSKScreenConfigurator
 {
     static class Program
     {
-     
+     public static    List<Print_ticket_type> myListPrint = new List<Print_ticket_type>();
+        public static List<Confirmation_activity> myListConfirm = new List<Confirmation_activity>();
+        public static List<Request_identification> myListrequest = new List<Request_identification>();
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
