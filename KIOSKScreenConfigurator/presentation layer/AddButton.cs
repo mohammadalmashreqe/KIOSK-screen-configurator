@@ -1,71 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DAL;
-using System.Data.SqlClient;
-using System.IO;
-using BusinessLayer;
-
-namespace KIOSKScreenConfigurator.presentation_layer
+﻿namespace KIOSKScreenConfigurator.presentation_layer
 {
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Defines the <see cref="AddButton" />
+    /// </summary>
     public partial class AddButton : Form
     {
-        BusinessLayer.Button b  = new BusinessLayer.Button();
-       
+        /// <summary>
+        /// Defines the b to pass it to add activity form 
+        /// </summary>
+        BusinessLayer.Button b = new BusinessLayer.Button();
 
-      
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddButton"/> class.
+        /// </summary>
         public AddButton()
         {
             InitializeComponent();
-     
         }
+
         /// <summary>
-        /// choose defualt value and prepare form 
+        /// choose defualt value and prepare form
         /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void AddButton_Load(object sender, EventArgs e)
         {
-           
-
+            button_AddActivity.Enabled = false;
         }
-        /// <summary>
-        ///  AddButton as a object to save it later in database 
-        /// </summary>
+
+       
         private void button3_Click(object sender, EventArgs e)
-        {    
-
-          
-
+        {
         }
 
-
-
-        /// <summary>
-        ///  check selected item 
-        /// </summary>
+        
         private void comboBox_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-
         }
 
+        
         private void AddButton_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
-             
-                
-
         }
-        /// <summary>
-        ///  closed from form and check the number of activity 
-        /// </summary>
 
+        /// <summary>
+        /// closed from form and check the number of activity
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -80,7 +66,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -100,23 +85,27 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
 
 
             }
         }
 
+        /// <summary>
+        /// The textBox_but_order_TextChanged
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void textBox_but_order_TextChanged(object sender, EventArgs e)
         {
-          
         }
-        /// <summary>
-        ///  validate the entered order value 
-        /// </summary>
 
+        /// <summary>
+        /// validate the entered order value
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void textBox_but_order_Leave(object sender, EventArgs e)
         {
-            #region input (order text box ) valiadtion 
 
             try
             {
@@ -131,7 +120,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -151,15 +139,13 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
 
 
             }
-            #endregion
         }
 
         /// <summary>
-        ///  save activities  
+        /// save activities  
         /// </summary>
         /*
         private void button_addactivity_Click(object sender, EventArgs e)
@@ -311,46 +297,44 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
         */
         /// <summary>
-        ///  save all work to the database   
+        ///  save all work to the database
         /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
-                #region AddButton 
                 BusinessLayer.Button b1 = new BusinessLayer.Button();
-                
+
 
                 if (textBox_but_name.Text == "" || textBox_but_order.Text == "" || textBox_but_txt.Text == "")
 
                 {
                     MessageBox.Show("please enter all data field ", "wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; 
+                    return;
 
                 }
-              
-                    b1.Text = textBox_but_txt.Text;
-                    b1.Order = int.Parse(textBox_but_order.Text);
-                    b1.ButtonName = textBox_but_name.Text;
 
-               if( b1.AddButton())
+                b1.Text = textBox_but_txt.Text;
+                b1.Order = int.Parse(textBox_but_order.Text);
+                b1.Name = textBox_but_name.Text;
+
+                if (b1.AddButton())
                 {
                     MessageBox.Show("Button added ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
 
 
-                #endregion
-
-                //HOOOOOOOOON
 
 
-                #region Get id for current button to add activity to it 
-
-               int bt_id= b1.GetId();
 
 
-                
+                int bt_id = b1.GetId();
+
+
+
 
 
                 for (int i = 0; i < Program.myListConfirm.Count; i++)
@@ -360,26 +344,25 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 }
 
 
-                for(int i=0;i< Program.myListPrint.Count;i++)
+                for (int i = 0; i < Program.myListPrint.Count; i++)
 
                 {
                     Program.myListPrint[i].AddPrintActivity(bt_id);
                 }
-                        
-        
 
-                    
-                   for (int i=0;i< Program.myListrequest.Count;i++)
+
+
+
+                for (int i = 0; i < Program.myListrequest.Count; i++)
                 {
                     Program.myListrequest[i].AddRequestActivity(bt_id);
                 }
 
-                }
-                #endregion
-            
+                this.Close();
+            }
+
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -399,16 +382,16 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
 
 
             }
-
         }
-        /// <summary>
-        ///  close the form 
-        /// </summary>
 
+        /// <summary>
+        /// close the form
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button5_Click(object sender, EventArgs e)
         {
             try
@@ -420,7 +403,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -440,32 +422,50 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
             }
         }
+
         /// <summary>
-        ///  return choices to th default "clear" 
+        /// return choices to th default "clear"
         /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            
         }
 
+        /// <summary>
+        /// The groupBox3_Enter
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void groupBox3_Enter(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// The dataGridView_Confirm_CellContentClick
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="DataGridViewCellEventArgs"/></param>
         private void dataGridView_Confirm_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// The groupBox2_Enter
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void groupBox2_Enter(object sender, EventArgs e)
         {
-
         }
 
+        /// <summary>
+        /// The button1_Click_1
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button1_Click_1(object sender, EventArgs e)
         {
             try
@@ -475,7 +475,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -495,9 +494,20 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
             }
+        }
 
+        /// <summary>
+        /// The button2_Click_1
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            b.Name = textBox_but_name.Text;
+            b.Text = textBox_but_txt.Text;
+            b.Order = int.Parse(textBox_but_order.Text);
+            button_AddActivity.Enabled = true;
         }
     }
 }

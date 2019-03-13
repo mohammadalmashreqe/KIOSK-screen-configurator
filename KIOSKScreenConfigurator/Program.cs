@@ -1,28 +1,40 @@
-﻿using BusinessLayer;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-
-namespace KIOSKScreenConfigurator
+﻿namespace KIOSKScreenConfigurator
 {
+    using BusinessLayer;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Defines the <see cref="Program" />
+    /// </summary>
     static class Program
     {
-     public static    List<Print_ticket_type> myListPrint = new List<Print_ticket_type>();
+        /// <summary>
+        /// Defines the myListPrint
+        /// </summary>
+        public static List<Print_ticket_type> myListPrint = new List<Print_ticket_type>();
+
+        /// <summary>
+        /// Defines the myListConfirm
+        /// </summary>
         public static List<Confirmation_activity> myListConfirm = new List<Confirmation_activity>();
+
+        /// <summary>
+        /// Defines the myListrequest
+        /// </summary>
         public static List<Request_identification> myListrequest = new List<Request_identification>();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
-        {   Application.EnableVisualStyles();
+        {
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            #region check first run 
             if (!File.Exists(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt"))
             {
 
@@ -34,7 +46,7 @@ namespace KIOSKScreenConfigurator
 
             string content = sr.ReadLine();
             sr.Close();
-          
+
             if (content == "T")
             {
 
@@ -44,12 +56,9 @@ namespace KIOSKScreenConfigurator
             }
             else
             {
-                DAL.DataAccessLayer.getConInstance();
+                DataAccessLayer.getConInstance();
                 Application.Run(new Form1());
             }
-
-            #endregion
         }
-
     }
 }

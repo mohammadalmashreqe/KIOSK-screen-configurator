@@ -124,10 +124,6 @@
       <Project>{1590eb48-bbba-4a48-92ff-ba12faef06b2}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{626681f6-d452-4d1c-b096-3d56b3731709}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

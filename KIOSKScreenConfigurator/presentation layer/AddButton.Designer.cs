@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddButton));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button_AddActivity = new System.Windows.Forms.Button();
             this.textBox_but_name = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_but_txt = new System.Windows.Forms.TextBox();
@@ -40,13 +38,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.button_AddActivity);
             this.groupBox3.Controls.Add(this.textBox_but_name);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label3);
@@ -61,23 +60,22 @@
             this.groupBox3.Text = "Add Button";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // button_AddActivity
+            // 
+            this.button_AddActivity.Location = new System.Drawing.Point(211, 163);
+            this.button_AddActivity.Name = "button_AddActivity";
+            this.button_AddActivity.Size = new System.Drawing.Size(100, 23);
+            this.button_AddActivity.TabIndex = 8;
+            this.button_AddActivity.Text = "Add activivty";
+            this.button_AddActivity.UseVisualStyleBackColor = true;
+            this.button_AddActivity.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // textBox_but_name
             // 
             this.textBox_but_name.Location = new System.Drawing.Point(94, 41);
             this.textBox_but_name.Name = "textBox_but_name";
             this.textBox_but_name.Size = new System.Drawing.Size(100, 20);
             this.textBox_but_name.TabIndex = 2;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-delete-document-30.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-erase-30.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-plus-30.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-plus-math-480.png");
-            this.imageList1.Images.SetKeyName(4, "icons8-save-30.png");
-            this.imageList1.Images.SetKeyName(5, "icons8-close-button-30.png");
             // 
             // label1
             // 
@@ -127,7 +125,6 @@
             // 
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.ImageIndex = 0;
-            this.button5.ImageList = this.imageList1;
             this.button5.Location = new System.Drawing.Point(250, 237);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(79, 23);
@@ -140,7 +137,6 @@
             // 
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.ImageIndex = 4;
-            this.button4.ImageList = this.imageList1;
             this.button4.Location = new System.Drawing.Point(165, 237);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(79, 23);
@@ -149,30 +145,31 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button1
+            // button2
             // 
-            this.button1.Location = new System.Drawing.Point(211, 163);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Add activivty";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button2.Location = new System.Drawing.Point(130, 163);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Add button";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // AddButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 283);
+            this.ClientSize = new System.Drawing.Size(339, 276);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox3);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(600, 700);
+            this.MaximumSize = new System.Drawing.Size(355, 315);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(355, 315);
             this.Name = "AddButton";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddButton";
+            this.Text = "Add button";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddButton_FormClosed);
             this.Load += new System.EventHandler(this.AddButton_Load);
             this.groupBox3.ResumeLayout(false);
@@ -192,7 +189,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_AddActivity;
+        private System.Windows.Forms.Button button2;
     }
 }

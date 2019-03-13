@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView_buttonList = new System.Windows.Forms.DataGridView();
@@ -50,7 +47,6 @@
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button4 = new System.Windows.Forms.Button();
-            this.kIOSKscreenconfiguratorDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_buttonList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -62,7 +58,6 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Confirm)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kIOSKscreenconfiguratorDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -84,7 +79,6 @@
             // 
             this.button3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button3.ImageIndex = 1;
-            this.button3.ImageList = this.imageList1;
             this.button3.Location = new System.Drawing.Point(403, 59);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
@@ -93,20 +87,10 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-plus-math-480.png");
-            this.imageList1.Images.SetKeyName(1, "icons8-edit-30.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-close-window-30.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-close-button-30.png");
-            // 
             // button2
             // 
             this.button2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button2.ImageIndex = 0;
-            this.button2.ImageList = this.imageList1;
             this.button2.Location = new System.Drawing.Point(403, 30);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -119,7 +103,6 @@
             // 
             this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button1.ImageIndex = 2;
-            this.button1.ImageList = this.imageList1;
             this.button1.Location = new System.Drawing.Point(403, 88);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -164,7 +147,7 @@
             this.tabControl1.Location = new System.Drawing.Point(26, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(408, 126);
+            this.tabControl1.Size = new System.Drawing.Size(408, 256);
             this.tabControl1.TabIndex = 19;
             // 
             // tabPage1
@@ -173,7 +156,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(400, 100);
+            this.tabPage1.Size = new System.Drawing.Size(400, 230);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Print ticket type activities";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -183,7 +166,9 @@
             this.dataGridView_print.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_print.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_print.Name = "dataGridView_print";
-            this.dataGridView_print.Size = new System.Drawing.Size(388, 238);
+            this.dataGridView_print.ReadOnly = true;
+            this.dataGridView_print.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_print.Size = new System.Drawing.Size(388, 228);
             this.dataGridView_print.TabIndex = 17;
             // 
             // tabPage2
@@ -192,9 +177,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(400, 100);
+            this.tabPage2.Size = new System.Drawing.Size(400, 230);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Request identification Activities";
+            this.tabPage2.Text = "Request identification activities";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dataGridView_Request
@@ -202,7 +187,9 @@
             this.dataGridView_Request.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Request.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_Request.Name = "dataGridView_Request";
-            this.dataGridView_Request.Size = new System.Drawing.Size(452, 85);
+            this.dataGridView_Request.ReadOnly = true;
+            this.dataGridView_Request.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Request.Size = new System.Drawing.Size(391, 218);
             this.dataGridView_Request.TabIndex = 0;
             // 
             // tabPage3
@@ -210,7 +197,7 @@
             this.tabPage3.Controls.Add(this.dataGridView_Confirm);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(400, 100);
+            this.tabPage3.Size = new System.Drawing.Size(400, 230);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Confirmation activities";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -220,7 +207,9 @@
             this.dataGridView_Confirm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Confirm.Location = new System.Drawing.Point(3, 3);
             this.dataGridView_Confirm.Name = "dataGridView_Confirm";
-            this.dataGridView_Confirm.Size = new System.Drawing.Size(394, 91);
+            this.dataGridView_Confirm.ReadOnly = true;
+            this.dataGridView_Confirm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Confirm.Size = new System.Drawing.Size(394, 224);
             this.dataGridView_Confirm.TabIndex = 0;
             // 
             // menuStrip1
@@ -268,7 +257,6 @@
             // 
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.ImageIndex = 3;
-            this.button4.ImageList = this.imageList1;
             this.button4.Location = new System.Drawing.Point(897, 376);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
@@ -276,10 +264,6 @@
             this.button4.Text = "Close";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // kIOSKscreenconfiguratorDataSetBindingSource
-            // 
-            this.kIOSKscreenconfiguratorDataSetBindingSource.CurrentChanged += new System.EventHandler(this.kIOSKscreenconfiguratorDataSetBindingSource_CurrentChanged);
             // 
             // Form1
             // 
@@ -311,7 +295,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Confirm)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kIOSKscreenconfiguratorDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,8 +309,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.BindingSource kIOSKscreenconfiguratorDataSetBindingSource;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;

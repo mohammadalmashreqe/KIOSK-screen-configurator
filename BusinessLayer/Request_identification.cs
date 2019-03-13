@@ -1,126 +1,262 @@
-﻿using DAL;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer
-{
-    //Author :mohammad almashreqe 
-    // desc : enum for determine the type of identification for user . 
-    public enum Identification_type { card, mobile };
-
-    //Author :mohammad almashreqe 
-    // desc : class  Request_identification is a sub class from class Activity and i am override some behavior to achiave the polymorphism  . 
-
-    #region class  Request_identification definition  
-    public class Request_identification : Activity
+﻿    namespace BusinessLayer
     {
-        Identification_type _type;
-        bool _is_mandatory;
+    using System;
+    using System.Data;
+        using System.Data.SqlClient;
+    using System.IO;
+    using System.Windows.Forms;
 
-        public Request_identification(string m, Identification_type t, bool im) : base(m)
+    /// <summary>
+    /// Defines the Identification_type
+    /// </summary>
+    public enum Identification_type
         {
-            _type = t;
-            _is_mandatory = im;
-        }
+            /// <summary>
+            /// Defines the card
+            /// </summary>
+            card,
 
-        public Identification_type type
+            /// <summary>
+            /// Defines the mobile
+            /// </summary>
+            mobile
+        };
+
+        /// <summary>
+        /// Defines the <see cref="Request_identification" />
+        /// </summary>
+        public class Request_identification : Activity
         {
+            /// <summary>
+            /// Defines the _type
+            /// </summary>
+            Identification_type _type;
+     
+            /// <summary>
+            /// Defines the _is_mandatory
+            /// </summary>
+            bool _is_mandatory;
 
-            set
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Request_identification"/> class.
+            /// </summary>
+            /// <param name="m">The m<see cref="string"/></param>
+            /// <param name="t">The t<see cref="Identification_type"/></param>
+            /// <param name="im">The im<see cref="bool"/></param>
+            public Request_identification(string m, Identification_type t, bool im) : base(m)
             {
-                _type = value;
+                _type = t;
+                _is_mandatory = im;
             }
 
-            get
+            /// <summary>
+            /// Gets or sets the type
+            /// </summary>
+            public Identification_type type
             {
-                return _type;
+
+                set
+                {
+                    _type = value;
+                }
+
+                get
+                {
+                    return _type;
+                }
             }
 
-
-
-        }
-        public bool is_mandatory
-        {
-            set
+            /// <summary>
+            /// Gets or sets a value indicating whether is_mandatory
+            /// </summary>
+            public bool is_mandatory
             {
-                _is_mandatory = value;
+                set
+                {
+                    _is_mandatory = value;
+                }
+                get
+                {
+                    return _is_mandatory;
+                }
             }
-            get
+
+            /// <summary>
+            /// The getIdentificationType
+            /// </summary>
+            /// <returns>The <see cref="string"/></returns>
+            private string getIdentificationType()
             {
-                return _is_mandatory;
+            try
+            {
+                if (_type == Identification_type.card)
+                    return "card";
+                else
+                    return "mobile";
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                throw ex;
+
             }
         }
 
-        public  string getIdentificationType()
-        {
-            if (_type == Identification_type.card)
-                return "card";
-            else
-                return "mobile";
+            /// <summary>
+            /// The getRequestActivity
+            /// </summary>
+            /// <param name="val">The val<see cref="int"/></param>
+            /// <returns>The <see cref="DataTable"/></returns>
+            public static DataTable getRequestActivity(int val)
+            {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@_butId", val);
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
+
+                return dal.SelectData("getRequestTickActivity", p);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                throw ex;
+
+            }
         }
 
-        public  bool getIsmandatory()
-        {
-            return is_mandatory;
+            /// <summary>
+            /// The AddRequestActivity
+            /// </summary>
+            /// <param name="bt_id">The bt_id<see cref="int"/></param>
+            /// <returns>The <see cref="bool"/></returns>
+            public bool AddRequestActivity(int bt_id)
+            {
+            try
+            {
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
+                SqlParameter[] p3 = new SqlParameter[5];
+
+                p3[0] = new SqlParameter("@_but_id", bt_id);
+                p3[1] = new SqlParameter("@_type", "Request_identification");
+                p3[2] = new SqlParameter("@_info_msg", Information_message);
+                p3[3] = new SqlParameter("@_Identification_type", getIdentificationType());
+
+                p3[4] = new SqlParameter("@_Is_mandatory", is_mandatory);
+
+
+                if (dal.myExcute("Add_activity_request", p3))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                throw ex;
+
+            }
         }
 
-    
+            /// <summary>
+            /// The deleteActivity
+            /// </summary>
+            /// <param name="id">The id<see cref="string"/></param>
+            /// <returns>The <see cref="bool"/></returns>
+            public static bool deleteActivity(string id)
+            {
+            try
+            {
 
-        public  activityType getType()
-        {
-            return activityType.Request_identification;
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
+
+
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@_activity_id", id);
+
+                return dal.myExcute("deleteRequestActivity", p);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                throw ex;
+
+            }
         }
-
-        public static DataTable getRequestActivity(int val)
-        {
-            SqlParameter[] p = new SqlParameter[1];
-            p[0] = new SqlParameter("@_butId", val);
-            DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
-
-            return dal.SelectData("getRequestTickActivity", p);
-        }
-        public bool AddRequestActivity(int bt_id)
-        {
-
-            DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
-            SqlParameter[] p3 = new SqlParameter[5];
-
-            p3[0] = new SqlParameter("@_but_id", bt_id);
-            p3[1] = new SqlParameter("@_type", "Request_identification");
-            p3[2] = new SqlParameter("@_info_msg", Information_message);
-            p3[3] = new SqlParameter("@_Identification_type", getIdentificationType());
-
-            p3[4] = new SqlParameter("@_Is_mandatory", getIsmandatory());
-
-
-            if (dal.myExcute("Add_activity_request", p3))
-                return true;
-            else
-                return false;
-
-        }
-        public static bool deleteActivity(string id)
-        {
-
-            DAL.DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
-
-
-            SqlParameter[] p = new SqlParameter[1];
-            p[0] = new SqlParameter("@_activity_id", id);
-
-            return dal.myExcute("deleteRequestActivity", p);
-
-
-
         }
     }
-    #endregion
-}

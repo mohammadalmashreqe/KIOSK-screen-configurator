@@ -55,6 +55,7 @@
             this.comboBox_type = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.groupBox_confirm);
@@ -83,7 +85,7 @@
             this.groupBox1.Controls.Add(this.comboBox_type);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(531, 338);
+            this.groupBox1.Size = new System.Drawing.Size(545, 338);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Activity ";
@@ -93,10 +95,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(25, 194);
+            this.tabControl1.Location = new System.Drawing.Point(44, 209);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(490, 123);
+            this.tabControl1.Size = new System.Drawing.Size(471, 123);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
@@ -105,7 +107,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(482, 97);
+            this.tabPage1.Size = new System.Drawing.Size(463, 97);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Print ticket type activities";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -128,9 +130,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(482, 97);
+            this.tabPage2.Size = new System.Drawing.Size(463, 97);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Request identification Activities";
+            this.tabPage2.Text = "Request identification activities";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dataGridView_Request
@@ -150,7 +152,7 @@
             this.tabPage3.Controls.Add(this.dataGridView_Confirm);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(482, 97);
+            this.tabPage3.Size = new System.Drawing.Size(463, 97);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Confirmation activities";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -171,7 +173,7 @@
             // 
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.ImageIndex = 1;
-            this.button2.Location = new System.Drawing.Point(255, 147);
+            this.button2.Location = new System.Drawing.Point(432, 150);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 23);
             this.button2.TabIndex = 16;
@@ -183,9 +185,9 @@
             // 
             this.groupBox_confirm.Controls.Add(this.textBox_time_out);
             this.groupBox_confirm.Controls.Add(this.label10);
-            this.groupBox_confirm.Location = new System.Drawing.Point(255, 19);
+            this.groupBox_confirm.Location = new System.Drawing.Point(279, 19);
             this.groupBox_confirm.Name = "groupBox_confirm";
-            this.groupBox_confirm.Size = new System.Drawing.Size(260, 93);
+            this.groupBox_confirm.Size = new System.Drawing.Size(236, 99);
             this.groupBox_confirm.TabIndex = 14;
             this.groupBox_confirm.TabStop = false;
             // 
@@ -209,7 +211,7 @@
             // 
             this.button_addactivity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_addactivity.ImageIndex = 3;
-            this.button_addactivity.Location = new System.Drawing.Point(147, 147);
+            this.button_addactivity.Location = new System.Drawing.Point(324, 151);
             this.button_addactivity.Name = "button_addactivity";
             this.button_addactivity.Size = new System.Drawing.Size(102, 23);
             this.button_addactivity.TabIndex = 15;
@@ -223,20 +225,21 @@
             this.groupBox_requestident.Controls.Add(this.label9);
             this.groupBox_requestident.Controls.Add(this.comboBox_idtype);
             this.groupBox_requestident.Controls.Add(this.label8);
-            this.groupBox_requestident.Location = new System.Drawing.Point(255, 19);
+            this.groupBox_requestident.Location = new System.Drawing.Point(279, 19);
             this.groupBox_requestident.Name = "groupBox_requestident";
-            this.groupBox_requestident.Size = new System.Drawing.Size(260, 93);
+            this.groupBox_requestident.Size = new System.Drawing.Size(236, 93);
             this.groupBox_requestident.TabIndex = 4;
             this.groupBox_requestident.TabStop = false;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(90, 55);
+            this.checkBox1.Location = new System.Drawing.Point(12, 52);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 17);
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "is mandatory ";
+            this.checkBox1.Text = " Is mandatory";
+            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label9
@@ -251,8 +254,8 @@
             // 
             this.comboBox_idtype.FormattingEnabled = true;
             this.comboBox_idtype.Items.AddRange(new object[] {
-            "1-card",
-            "2-mobile"});
+            "Card",
+            "Mobile"});
             this.comboBox_idtype.Location = new System.Drawing.Point(111, 16);
             this.comboBox_idtype.Name = "comboBox_idtype";
             this.comboBox_idtype.Size = new System.Drawing.Size(121, 21);
@@ -271,9 +274,9 @@
             // 
             this.groupBox_printtickType.Controls.Add(this.label7);
             this.groupBox_printtickType.Controls.Add(this.numericUpDown1);
-            this.groupBox_printtickType.Location = new System.Drawing.Point(255, 19);
+            this.groupBox_printtickType.Location = new System.Drawing.Point(279, 19);
             this.groupBox_printtickType.Name = "groupBox_printtickType";
-            this.groupBox_printtickType.Size = new System.Drawing.Size(260, 52);
+            this.groupBox_printtickType.Size = new System.Drawing.Size(236, 52);
             this.groupBox_printtickType.TabIndex = 13;
             this.groupBox_printtickType.TabStop = false;
             // 
@@ -282,13 +285,13 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 21);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Number of printed tickets:";
+            this.label7.Text = "Number of  tickets:";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(139, 19);
+            this.numericUpDown1.Location = new System.Drawing.Point(111, 19);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             5,
             0,
@@ -311,15 +314,15 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 86);
+            this.label6.Location = new System.Drawing.Point(6, 86);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.Size = new System.Drawing.Size(113, 13);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Info message : ";
+            this.label6.Text = "Information message : ";
             // 
             // textBox_Info_msg
             // 
-            this.textBox_Info_msg.Location = new System.Drawing.Point(102, 83);
+            this.textBox_Info_msg.Location = new System.Drawing.Point(126, 83);
             this.textBox_Info_msg.Name = "textBox_Info_msg";
             this.textBox_Info_msg.Size = new System.Drawing.Size(121, 20);
             this.textBox_Info_msg.TabIndex = 8;
@@ -327,7 +330,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 32);
+            this.label5.Location = new System.Drawing.Point(6, 32);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 11;
@@ -340,7 +343,7 @@
             "Print ticket type",
             "Request identification",
             "Confirmation activity"});
-            this.comboBox_type.Location = new System.Drawing.Point(102, 32);
+            this.comboBox_type.Location = new System.Drawing.Point(126, 32);
             this.comboBox_type.Name = "comboBox_type";
             this.comboBox_type.Size = new System.Drawing.Size(121, 21);
             this.comboBox_type.TabIndex = 10;
@@ -350,7 +353,7 @@
             // 
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.ImageIndex = 3;
-            this.button3.Location = new System.Drawing.Point(378, 376);
+            this.button3.Location = new System.Drawing.Point(392, 376);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(76, 23);
             this.button3.TabIndex = 19;
@@ -362,7 +365,7 @@
             // 
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.ImageIndex = 1;
-            this.button1.Location = new System.Drawing.Point(460, 376);
+            this.button1.Location = new System.Drawing.Point(474, 376);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 20;
@@ -370,16 +373,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(12, 189);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(503, 2);
+            this.label1.TabIndex = 10;
+            // 
             // AddActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 414);
+            this.ClientSize = new System.Drawing.Size(564, 411);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
+            this.MaximumSize = new System.Drawing.Size(585, 450);
+            this.MinimumSize = new System.Drawing.Size(580, 450);
             this.Name = "AddActivity";
-            this.Text = "AddActivity";
+            this.Text = "Add Activity";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddActivity_FormClosing);
             this.Load += new System.EventHandler(this.AddActivity_Load);
             this.groupBox1.ResumeLayout(false);
@@ -431,5 +444,6 @@
         private System.Windows.Forms.ComboBox comboBox_type;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }

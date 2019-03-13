@@ -1,35 +1,50 @@
-﻿using DAL;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace BusinessLayer
+﻿namespace BusinessLayer
 {
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Defines the <see cref="Myconfig" />
+    /// </summary>
     public class Myconfig
     {
+        /// <summary>
+        /// Defines the server_name
+        /// </summary>
         static string server_name;
+
+        /// <summary>
+        /// Defines the database_name
+        /// </summary>
         static string database_name;
 
+        /// <summary>
+        /// Gets or sets the Server_name
+        /// </summary>
         public static string Server_name { get => server_name; set => server_name = value; }
+
+        /// <summary>
+        /// Gets or sets the Database_name
+        /// </summary>
         public static string Database_name { get => database_name; set => database_name = value; }
 
+        /// <summary>
+        /// The Test connection string 
+        /// </summary>
+        /// <param name="con">The connection string <see cref="string"/></param>
+        /// <returns>The <see cref="bool"/></returns>
         public static bool TestCon(string con)
         {
 
 
-            #region test a connection 
             try
             {
-                return (DAL.DataAccessLayer.TestCon(con));
+                return (DataAccessLayer.TestCon(con));
 
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -49,17 +64,19 @@ namespace BusinessLayer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                return false;
-                #endregion
+                throw ex; 
 
 
             }
-            #endregion
         }
 
+        /// <summary>
+        /// change the connection string 
+        /// </summary>
+        /// <param name="con">The connection string <see cref="string"/></param>
+        /// <returns>The <see cref="bool"/></returns>
         public static bool changeCon(string con)
         {
-            #region change a connection 
             try
             {
                 if (DataAccessLayer.changeConnectioString(con))
@@ -82,7 +99,6 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -102,12 +118,9 @@ namespace BusinessLayer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
-                return false;
-
+                throw ex; 
 
             }
-            #endregion
         }
     }
 }

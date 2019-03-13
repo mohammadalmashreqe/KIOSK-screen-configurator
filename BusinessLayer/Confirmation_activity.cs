@@ -1,24 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-namespace BusinessLayer
+﻿namespace BusinessLayer
 {
-  public   class Confirmation_activity : Activity
+    using System;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.IO;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Defines the <see cref="Confirmation_activity" />
+    /// </summary>
+    public class Confirmation_activity : Activity
     {
-
-
+        /// <summary>
+        /// Defines the _Timeout
+        /// </summary>
         int _Timeout;
 
-        public Confirmation_activity(string m, int s) : base(m)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Confirmation_activity"/> class.
+        /// </summary>
+        /// <param name="message">The message<see cref="string"/></param>
+        /// <param name="timout">The timout<see cref="int"/></param>
+        public Confirmation_activity(string message, int timout) : base(message)
         {
-            _Timeout = s;
+            _Timeout = timout;
         }
 
+        /// <summary>
+        /// Gets or sets the Timeout
+        /// </summary>
         public int Timeout
         {
             set
@@ -32,74 +42,138 @@ namespace BusinessLayer
             }
         }
 
-
-
-        //public override string getIdentificationType()
-        //{
-        //    return null;
-        //}
-
-        //public override bool getIsmandatory()
-        //{
-        //    return false;
-        //}
-
-        //public override int getnumberOfprintedTick()
-        //{
-        //    return 0;
-        //}
-
-        public  int getTimeOutInSecond()
-        {
-            return Timeout;
-        }
-
-        public  activityType getType()
-        {
-            return activityType.Confirmation_activity;
-        }
-
+        /// <summary>
+        /// The getConActivity
+        /// </summary>
+        /// <param name="val">The val<see cref="int"/></param>
+        /// <returns>The <see cref="DataTable"/></returns>
         public static DataTable getConActivity(int val)
         {
-            SqlParameter[] p = new SqlParameter[1];
-            p[0] = new SqlParameter("@_butId", val);
-            DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@_butId", val);
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
 
-            return dal.SelectData("getConActivity", p);
+                return dal.SelectData("getConActivity", p);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+
+                throw ex;
+
+            }
         }
 
+        /// <summary>
+        /// The AddconActivity
+        /// </summary>
+        /// <param name="bt_id">The bt_id<see cref="int"/></param>
+        /// <returns>The <see cref="bool"/></returns>
         public bool AddconActivity(int bt_id)
         {
-            SqlParameter[] p4 = new SqlParameter[4];
-            DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
-            p4[0] = new SqlParameter("@_but_id", bt_id);
-            p4[1] = new SqlParameter("@_type", "Confirmation_activity");
-            p4[2] = new SqlParameter("@_info_msg", Information_message);
-            p4[3] = new SqlParameter("@_timeOut", getTimeOutInSecond());
-            if (dal.myExcute("Add_activity_Confirm", p4))
-                return true;
-            else
-                return false;
+            try
+            {
+                SqlParameter[] p4 = new SqlParameter[4];
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
+                p4[0] = new SqlParameter("@_but_id", bt_id);
+                p4[1] = new SqlParameter("@_type", "Confirmation_activity");
+                p4[2] = new SqlParameter("@_info_msg", Information_message);
+                p4[3] = new SqlParameter("@_timeOut", Timeout);
+                if (dal.myExcute("Add_activity_Confirm", p4))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
 
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+
+                throw ex;
+
+            }
         }
 
+        /// <summary>
+        /// The deleteActivity
+        /// </summary>
+        /// <param name="id">The id<see cref="string"/></param>
+        /// <returns>The <see cref="bool"/></returns>
         public static bool deleteActivity(string id)
         {
-
-            DAL.DataAccessLayer dal = DataAccessLayer.getConInstance();
-            dal.Open();
-
-
-            SqlParameter[] p = new SqlParameter[1];
-            p[0] = new SqlParameter("@_activity_id", id);
-
-            return dal.myExcute("deleteConfirmationActivity", p);
+            try
+            {
+                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                dal.Open();
 
 
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@_activity_id", id);
 
+                return dal.myExcute("deleteConfirmationActivity", p);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("message : ");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("stack trace :");
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine(ex.StackTrace);
+                sw.WriteLine("------------------------------------------------------------------------------------");
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
+                throw ex;
+            }
         }
-
     }
 }

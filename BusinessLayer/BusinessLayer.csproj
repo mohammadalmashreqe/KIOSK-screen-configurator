@@ -45,16 +45,11 @@
     <Compile Include="Activity.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Confirmation_activity.cs" />
+    <Compile Include="DataAccessLayer.cs" />
     <Compile Include="Myconfig.cs" />
     <Compile Include="Print_ticket_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request_identification.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{626681f6-d452-4d1c-b096-3d56b3731709}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,26 +1,28 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BusinessLayer;
-
-namespace KIOSKScreenConfigurator.presentation_layer
+﻿namespace KIOSKScreenConfigurator.presentation_layer
 {
+    using BusinessLayer;
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Defines the <see cref="Config" />
+    /// </summary>
     public partial class Config : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Config"/> class.
+        /// </summary>
         public Config()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// The Config_Load
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void Config_Load(object sender, EventArgs e)
         {
             textBox_DBName.Text = Myconfig.Database_name;
@@ -30,13 +32,13 @@ namespace KIOSKScreenConfigurator.presentation_layer
         /// <summary>
         /// test the connection string by calling TestCon from DataAccessLayer .
         /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                #region get and prepare connection string 
                 string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
-                #endregion
 
                 if (Myconfig.TestCon(con))
                 {
@@ -54,7 +56,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -74,26 +75,28 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
             }
-
         }
 
+        /// <summary>
+        /// The groupBox1_Enter
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-
         }
+
         /// <summary>
         /// change the connection string by calling changeConnectioString from DataAccessLayer .
         /// </summary>
-
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                #region get and prepare connection string
                 string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
-                #endregion
                 if (Myconfig.changeCon(con))
                 {
                     Myconfig.Database_name = textBox_DBName.Text;
@@ -110,7 +113,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -130,10 +132,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
             }
         }
 
+        /// <summary>
+        /// The button3_Click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -142,7 +148,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                #region Format excepton and write details to the log file 
                 StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now);
                 sw.WriteLine("message : ");
@@ -162,7 +167,6 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                #endregion
             }
         }
     }
