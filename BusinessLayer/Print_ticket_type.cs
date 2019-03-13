@@ -7,42 +7,42 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// Defines the <see cref="Print_ticket_type" />
+    /// Defines the <see cref="PrintTicketType" />
     /// </summary>
-    public class Print_ticket_type : Activity
+    public class PrintTicketType : Activity
     {
         /// <summary>
         /// Defines the _Num_of_printed_tickets
         /// </summary>
-        int _Num_of_printed_tickets;
+        int _numOfPrintedTickets;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Print_ticket_type"/> class.
+        /// Initializes a new instance of the <see cref="PrintTicketType"/> class.
         /// </summary>
         /// <param name="i">The i<see cref="string"/></param>
         /// <param name="n">The n<see cref="int"/></param>
-        public Print_ticket_type(string i, int n) : base(i)
+        public PrintTicketType(string i, int n) : base(i)
         {
-            Num_of_printed_tickets = n;
+            NumOfPrintedTickets = n;
         }
 
         /// <summary>
         /// Gets or sets the Num_of_printed_tickets
         /// </summary>
-        public int Num_of_printed_tickets { get => _Num_of_printed_tickets; set => _Num_of_printed_tickets = value; }
+        public int NumOfPrintedTickets { get => _numOfPrintedTickets; set => _numOfPrintedTickets = value; }
 
         /// <summary>
         /// get Print Activity
         /// </summary>
         /// <param name="id">id of button want get its activities<see cref="int"/></param>
         /// <returns>The <see cref="DataTable"/></returns>
-        public static DataTable getPrintActivity(int id)
+        public static DataTable GetPrintActivity(int id)
         {
             try
             {
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@_butId", id);
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
 
                 return dal.SelectData("getPrintTickActivity", p);
@@ -68,29 +68,29 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
 
         /// <summary>
-        /// Add Print tickit Activity
+        /// Add Print tickets Activity
         /// </summary>
-        /// <param name="bt_id">id of button want to add avtivity to it <see cref="int"/></param>
+        /// <param name="btId">id of button want to add activity to it <see cref="int"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public bool AddPrintActivity(int bt_id)
+        public bool AddPrintActivity(int btId)
         {
             try
             {
                 SqlParameter[] p2 = new SqlParameter[4];
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
-                p2[0] = new SqlParameter("@_but_id", bt_id);
+                p2[0] = new SqlParameter("@_but_id", btId);
                 p2[1] = new SqlParameter("@_type", "print_ticket_type");
-                p2[2] = new SqlParameter("@_info_msg", Information_message);
-                p2[3] = new SqlParameter("@_num_Of_tick", Num_of_printed_tickets);
+                p2[2] = new SqlParameter("@_info_msg", InformationMessage);
+                p2[3] = new SqlParameter("@_num_Of_tick", NumOfPrintedTickets);
 
-                if (dal.myExcute("Add_activity_print", p2))
+                if (dal.MyExcute("Add_activity_print", p2))
                     return true;
                 else
                     return false;
@@ -116,7 +116,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
@@ -124,19 +124,19 @@
         /// <summary>
         /// The delete  Activity
         /// </summary>
-        /// <param name="id">The id of button wnat to delete activity from it <see cref="string"/></param>
+        /// <param name="id">The id of button want to delete activity from it <see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public static bool deleteActivity(string id)
+        public static bool DeleteActivity(string id)
         {
 
-            DataAccessLayer dal = DataAccessLayer.getConInstance();
+            DataAccessLayer dal = DataAccessLayer.GetConInstance();
             dal.Open();
 
 
             SqlParameter[] p = new SqlParameter[1];
             p[0] = new SqlParameter("@_activity_id", id);
 
-            return dal.myExcute("deletePrintActivity", p);
+            return dal.MyExcute("deletePrintActivity", p);
         }
     }
 }

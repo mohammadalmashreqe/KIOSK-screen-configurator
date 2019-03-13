@@ -1,4 +1,4 @@
-﻿namespace KIOSKScreenConfigurator
+﻿namespace KIOSKScreenConfigurator.presentation_layer
 {
     partial class Form1
     {

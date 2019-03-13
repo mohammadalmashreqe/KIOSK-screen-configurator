@@ -1,4 +1,6 @@
-﻿namespace KIOSKScreenConfigurator
+﻿using KIOSKScreenConfigurator.presentation_layer;
+
+namespace KIOSKScreenConfigurator
 {
     using BusinessLayer;
     using System;
@@ -14,17 +16,17 @@
         /// <summary>
         /// Defines the myListPrint
         /// </summary>
-        public static List<Print_ticket_type> myListPrint = new List<Print_ticket_type>();
+        public static List<PrintTicketType> MyListPrint = new List<PrintTicketType>();
 
         /// <summary>
         /// Defines the myListConfirm
         /// </summary>
-        public static List<Confirmation_activity> myListConfirm = new List<Confirmation_activity>();
+        public static List<ConfirmationActivity> MyListConfirm = new List<ConfirmationActivity>();
 
         /// <summary>
-        /// Defines the myListrequest
+        /// Defines the myList-request
         /// </summary>
-        public static List<Request_identification> myListrequest = new List<Request_identification>();
+        public static List<RequestIdentification> MyListrequest = new List<RequestIdentification>();
 
         /// <summary>
         /// The main entry point for the application.
@@ -51,12 +53,12 @@
             {
 
 
-                Application.Run(new KIOSKScreenConfigurator.presentation_layer.Config());
+                Application.Run(new Config());
 
             }
             else
             {
-                DataAccessLayer.getConInstance();
+                DataAccessLayer.GetConInstance();
                 Application.Run(new Form1());
             }
         }

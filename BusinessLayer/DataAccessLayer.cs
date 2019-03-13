@@ -14,22 +14,22 @@
         /// <summary>
         /// Defines the Instance
         /// </summary>
-        static DataAccessLayer Instance;
+        static DataAccessLayer _instance;
 
         /// <summary>
         /// Defines the sqlConnection
         /// </summary>
-        static SqlConnection sqlConnection;
+        private static SqlConnection _sqlConnection;
 
         /// <summary>
         /// Prevents a default instance of the <see cref="DataAccessLayer"/> class from being created.
         /// </summary>
         /// <param name="conString">The conString<see cref="String"/></param>
-        private DataAccessLayer(String conString)
+        private DataAccessLayer(string conString)
         {
             try
             {
-                sqlConnection = new SqlConnection(conString);
+                _sqlConnection = new SqlConnection(conString);
             }
             catch (Exception ex)
             {
@@ -50,21 +50,14 @@
         /// The getConInstance
         /// </summary>
         /// <returns>The <see cref="DataAccessLayer"/></returns>
-        public static DataAccessLayer getConInstance()
+        public static DataAccessLayer GetConInstance()
         {
-            if (Instance == null)
-
-            {
-
-
-
-                //this value of con string for testing i save it and read it from file ,
-                Instance = new DataAccessLayer(@"Data Source = M-ALMESHERQE\SQLEXPRESS;Initial Catalog=KIOSK screen configurator object oriented;;Integrated Security=True");
-
-            }
-
-
-            return Instance;
+            return _instance ?? (_instance = new DataAccessLayer(
+                       // ReSharper disable once StringLiteralTypo
+                       // ReSharper disable once StringLiteralTypo
+                       // ReSharper disable once StringLiteralTypo
+                       @"Data Source = M-ALMESHERQE\SQLEXPRESS;Initial Catalog=KIOSK screen configurator object oriented;;Integrated Security=True")
+                   );
         }
 
         /// <summary>
@@ -73,9 +66,9 @@
         /// <returns>The <see cref="bool"/></returns>
         public bool Open()
         {
-            if (sqlConnection.State != ConnectionState.Open)
+            if (_sqlConnection.State != ConnectionState.Open)
             {
-                sqlConnection.Open();
+                _sqlConnection.Open();
                 return true;
             }
             else
@@ -88,9 +81,9 @@
         /// <returns>The <see cref="bool"/></returns>
         public bool Close()
         {
-            if (sqlConnection.State != ConnectionState.Closed)
+            if (_sqlConnection.State != ConnectionState.Closed)
             {
-                sqlConnection.Close();
+                _sqlConnection.Close();
                 return true;
             }
             else
@@ -100,25 +93,25 @@
         /// <summary>
         /// The SelectData
         /// </summary>
-        /// <param name="stored_proc">The stored_proc<see cref="string"/></param>
-        /// <param name="param">The param<see cref="SqlParameter[]"/></param>
+        /// <param name="storedProc">The stored_proc<see cref="string"/></param>
+        /// <param name="param">The param<see cref="SqlParameter"/></param>
         /// <returns>The <see cref="DataTable"/></returns>
-        public DataTable SelectData(string stored_proc, SqlParameter[] param)
+        public DataTable SelectData(string storedProc, SqlParameter[] param)
         {
             try
             {
                 Open();
-                SqlCommand sqlCommand = new SqlCommand();
+                SqlCommand sqlCommand = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure, CommandText = storedProc, Connection = _sqlConnection
+                };
 
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.CommandText = stored_proc;
-                sqlCommand.Connection = sqlConnection;
 
 
                 if (param != null)
                 {
-                    for (int i = 0; i < param.Length; i++)
-                        sqlCommand.Parameters.Add(param[i]);
+                    foreach (SqlParameter t in param)
+                        sqlCommand.Parameters.Add(t);
                 }
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
@@ -146,7 +139,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex; 
+                throw; 
 
 
             }
@@ -160,25 +153,24 @@
         /// <summary>
         /// method to delete insert update to database
         /// </summary>
-        /// <param name="stored_proc">The stored_proc<see cref="string"/></param>
-        /// <param name="param">The param<see cref="SqlParameter[]"/></param>
+        /// <param name="storedProc">The stored_proc<see cref="string"/></param>
+        /// <param name="param">The param<see cref="SqlParameter"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public bool myExcute(string stored_proc, SqlParameter[] param)
+        public bool MyExcute(string storedProc, SqlParameter[] param)
         {
-            int x = -1;
             try
             {
                 Open();
-                SqlCommand sqlCommand = new SqlCommand();
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.CommandText = stored_proc;
-                sqlCommand.Connection = sqlConnection;
+                SqlCommand sqlCommand = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure, CommandText = storedProc, Connection = _sqlConnection
+                };
                 if (param != null)
                 {
-                    for (int i = 0; i < param.Length; i++)
-                        sqlCommand.Parameters.Add(param[i]);
+                    foreach (SqlParameter t in param)
+                        sqlCommand.Parameters.Add(t);
                 }
-                x = sqlCommand.ExecuteNonQuery();
+                int x = sqlCommand.ExecuteNonQuery();
 
                 if (x > 0)
                     return true;
@@ -207,22 +199,20 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex; 
+                throw; 
 
             }
             finally
             {
                 Close();
             }
-
-
-
         }
 
         /// <summary>
         /// method to test connection
         /// </summary>
-        /// <param name="constring">The constring<see cref="string"/></param>
+        
+        /// <param name="constring">The con string<see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
         public static bool TestCon(string constring)
         {
@@ -233,10 +223,7 @@
 
 
 
-                if (con.State == ConnectionState.Open || con.State == ConnectionState.Open)
-                    return true;
-                else
-                    return false;
+                return con.State == ConnectionState.Open || con.State == ConnectionState.Open;
             }
             catch (Exception ex)
             {
@@ -259,7 +246,7 @@
 
                 sw.Close();
 
-                throw ex;
+                throw;
 
 
             }
@@ -270,7 +257,7 @@
         /// </summary>
         /// <param name="value">The value<see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public static bool changeConnectioString(string value)
+        public static bool ChangeConnectioString(string value)
         {
             try
             {
@@ -308,7 +295,7 @@
 
                 sw.Close();
 
-                throw ex;
+                throw;
 
             }
         }

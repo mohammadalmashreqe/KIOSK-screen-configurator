@@ -7,23 +7,23 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// Defines the <see cref="Confirmation_activity" />
+    /// Defines the <see cref="ConfirmationActivity" />
     /// </summary>
-    public class Confirmation_activity : Activity
+    public class ConfirmationActivity : Activity
     {
         /// <summary>
         /// Defines the _Timeout
         /// </summary>
-        int _Timeout;
+        int _timeout;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Confirmation_activity"/> class.
+        /// Initializes a new instance of the <see cref="ConfirmationActivity"/> class.
         /// </summary>
         /// <param name="message">The message<see cref="string"/></param>
-        /// <param name="timout">The timout<see cref="int"/></param>
-        public Confirmation_activity(string message, int timout) : base(message)
+        /// <param name="timeout">The timeout<see cref="int"/></param>
+        public ConfirmationActivity(string message, int timeout) : base(message)
         {
-            _Timeout = timout;
+            _timeout = timeout;
         }
 
         /// <summary>
@@ -31,15 +31,11 @@
         /// </summary>
         public int Timeout
         {
-            set
-            {
-                _Timeout = value;
+            set=>_timeout = value;
 
-            }
-            get
-            {
-                return _Timeout; ;
-            }
+            
+            get=> _timeout; 
+            
         }
 
         /// <summary>
@@ -47,13 +43,13 @@
         /// </summary>
         /// <param name="val">The val<see cref="int"/></param>
         /// <returns>The <see cref="DataTable"/></returns>
-        public static DataTable getConActivity(int val)
+        public static DataTable GetConfirmationActivity(int val)
         {
             try
             {
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@_butId", val);
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
 
                 return dal.SelectData("getConActivity", p);
@@ -80,28 +76,28 @@
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
 
-                throw ex;
+                throw;
 
             }
         }
 
         /// <summary>
-        /// The AddconActivity
+        /// The Add-confirm Activity
         /// </summary>
-        /// <param name="bt_id">The bt_id<see cref="int"/></param>
+        /// <param name="btId">The bt_id<see cref="int"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public bool AddconActivity(int bt_id)
+        public bool AddConfirmationActivity(int btId)
         {
             try
             {
                 SqlParameter[] p4 = new SqlParameter[4];
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
-                p4[0] = new SqlParameter("@_but_id", bt_id);
+                p4[0] = new SqlParameter("@_but_id", btId);
                 p4[1] = new SqlParameter("@_type", "Confirmation_activity");
-                p4[2] = new SqlParameter("@_info_msg", Information_message);
+                p4[2] = new SqlParameter("@_info_msg", InformationMessage);
                 p4[3] = new SqlParameter("@_timeOut", Timeout);
-                if (dal.myExcute("Add_activity_Confirm", p4))
+                if (dal.MyExcute("Add_activity_Confirm", p4))
                     return true;
                 else
                     return false;
@@ -128,7 +124,7 @@
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
 
-                throw ex;
+                throw;
 
             }
         }
@@ -138,18 +134,18 @@
         /// </summary>
         /// <param name="id">The id<see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public static bool deleteActivity(string id)
+        public static bool DeleteActivity(string id)
         {
             try
             {
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
 
 
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@_activity_id", id);
 
-                return dal.myExcute("deleteConfirmationActivity", p);
+                return dal.MyExcute("deleteConfirmationActivity", p);
             }
             catch (Exception ex)
             {
@@ -172,7 +168,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
             }
         }
     }

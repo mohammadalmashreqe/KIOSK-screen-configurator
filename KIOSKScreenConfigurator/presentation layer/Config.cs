@@ -25,8 +25,8 @@
         /// <param name="e">The e<see cref="EventArgs"/></param>
         private void Config_Load(object sender, EventArgs e)
         {
-            textBox_DBName.Text = Myconfig.Database_name;
-            textBox_server.Text = Myconfig.Server_name;
+            textBox_DBName.Text = Myconfig.DatabaseName;
+            textBox_server.Text = Myconfig.ServerName;
         }
 
         /// <summary>
@@ -38,14 +38,15 @@
         {
             try
             {
-                string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
+                string con =
+                    $"Data Source = {textBox_server.Text};Initial Catalog={textBox_DBName.Text};;Integrated Security=True";
 
                 if (Myconfig.TestCon(con))
                 {
                     MessageBox.Show(" Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     {
-                        Myconfig.Database_name = textBox_DBName.Text;
-                        Myconfig.Server_name = textBox_server.Text;
+                        Myconfig.DatabaseName = textBox_DBName.Text;
+                        Myconfig.ServerName = textBox_server.Text;
                     }
                 }
                 else
@@ -88,7 +89,7 @@
         }
 
         /// <summary>
-        /// change the connection string by calling changeConnectioString from DataAccessLayer .
+        /// change the connection string by calling change Connection String from DataAccessLayer .
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
         /// <param name="e">The e<see cref="EventArgs"/></param>
@@ -96,12 +97,14 @@
         {
             try
             {
-                string con = string.Format("Data Source = {0};Initial Catalog={1};;Integrated Security=True", textBox_server.Text, textBox_DBName.Text);
-                if (Myconfig.changeCon(con))
+                // ReSharper disable once SuggestVarOrType_BuiltInTypes
+                string con =
+                    $"Data Source = {textBox_server.Text};Initial Catalog={textBox_DBName.Text};;Integrated Security=True";
+                if (Myconfig.ChangeCon(con))
                 {
-                    Myconfig.Database_name = textBox_DBName.Text;
-                    Myconfig.Server_name = textBox_server.Text;
-                    this.Hide();
+                    Myconfig.DatabaseName = textBox_DBName.Text;
+                    Myconfig.ServerName = textBox_server.Text;
+                    Hide();
                     Form1 frm = new Form1();
                     frm.Show();
                 }
@@ -144,7 +147,7 @@
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {

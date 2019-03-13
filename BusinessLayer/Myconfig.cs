@@ -12,22 +12,22 @@
         /// <summary>
         /// Defines the server_name
         /// </summary>
-        static string server_name;
+        static string _serverName;
 
         /// <summary>
         /// Defines the database_name
         /// </summary>
-        static string database_name;
+        static string _databaseName;
 
         /// <summary>
         /// Gets or sets the Server_name
         /// </summary>
-        public static string Server_name { get => server_name; set => server_name = value; }
+        public static string ServerName { get => _serverName; set => _serverName = value; }
 
         /// <summary>
         /// Gets or sets the Database_name
         /// </summary>
-        public static string Database_name { get => database_name; set => database_name = value; }
+        public static string DatabaseName { get => _databaseName; set => _databaseName = value; }
 
         /// <summary>
         /// The Test connection string 
@@ -64,7 +64,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex; 
+                throw; 
 
 
             }
@@ -75,11 +75,11 @@
         /// </summary>
         /// <param name="con">The connection string <see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
-        public static bool changeCon(string con)
+        public static bool ChangeCon(string con)
         {
             try
             {
-                if (DataAccessLayer.changeConnectioString(con))
+                if (DataAccessLayer.ChangeConnectioString(con))
                 {
 
                     StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\FIrstTimeCheck.txt");
@@ -88,7 +88,7 @@
 
 
 
-                    DataAccessLayer.getConInstance();
+                    DataAccessLayer.GetConInstance();
                     return true;
 
                 }
@@ -118,7 +118,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex; 
+                throw; 
 
             }
         }

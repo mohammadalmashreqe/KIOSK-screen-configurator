@@ -13,7 +13,7 @@
         /// <summary>
         /// Defines the current
         /// </summary>
-        BusinessLayer.Button current;
+      readonly  BusinessLayer.Button _current;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EditFrm"/> class.
@@ -23,7 +23,7 @@
         {
             try
             {
-                current = b;
+                _current = b;
 
                 InitializeComponent();
             }
@@ -60,13 +60,13 @@
         {
             try
             {
-                textBox_id.Text = current.ID + "";
-                textBox_name.Text = current.Name;
-                textBox_order.Text = current.Order + "";
-                textBox_text.Text = current.Text;
+                textBox_id.Text = _current.Id + "";
+                textBox_name.Text = _current.Name;
+                textBox_order.Text = _current.Order + "";
+                textBox_text.Text = _current.Text;
                 int val = int.Parse(textBox_id.Text);
                 tabControl1.SelectedIndex = 0;
-                loadDataGrid(val);
+                LoadDataGrid(val);
             }
             catch (Exception ex)
             {
@@ -101,13 +101,13 @@
         {
             try
             {
-                if (current.updatButton())
+                if (_current.UpdateButton())
                 {
                     MessageBox.Show("button updated ", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("no row effected", "wraning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("no row effected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -221,14 +221,13 @@
         /// <param name="e">The e<see cref="EventArgs"/></param>
         private void textBox_order_Leave(object sender, EventArgs e)
         {
-            int IntOrder;
             if (textBox_order.Text.Length == 0)
             {
                 MessageBox.Show("please fill all fields ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox_order.Focus();
 
             }
-            else if (!int.TryParse(textBox_order.Text, out IntOrder))
+            else if (!int.TryParse(textBox_order.Text, out int _))
             {
                 MessageBox.Show("please enter a valid int order ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox_order.Focus();
@@ -242,7 +241,7 @@
         /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -264,15 +263,6 @@
         }
 
         /// <summary>
-        /// The button3_Click
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="EventArgs"/></param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
         /// The button5_Click
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
@@ -281,51 +271,53 @@
         {
             try
             {
-
-                if (tabControl1.SelectedIndex == 0)
+                switch (tabControl1.SelectedIndex)
                 {
+                    case 0 when dataGridView_print.CurrentRow == null:
+                        return;
+                    case 0:
+                    {
+                        string actId = dataGridView_print.CurrentRow.Cells["ID"].Value.ToString();
+                        string i = textBox_id.Text;
+                        if (MessageBox.Show("are you sure want delete selected activity", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                            PrintTicketType.DeleteActivity(actId);
 
-                    string act_id = dataGridView_print.CurrentRow.Cells["ID"].Value.ToString();
-                    string i = textBox_id.Text;
-                    if (MessageBox.Show("are you sure want delete selected activty", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                        Print_ticket_type.deleteActivity(act_id);
 
 
 
 
+                        LoadDataGrid(int.Parse(i));
+                        break;
+                    }
+                    case 1:
+                    {
+                        string actId = dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString();
+                        string i = textBox_id.Text;
+                        if (MessageBox.Show("are you sure want delete selected activity", "Warning",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                        {
+                        }
+                        else
+                            RequestIdentification.DeleteActivity(actId);
 
-                    loadDataGrid(int.Parse(i));
 
+                        LoadDataGrid(int.Parse(i));
+                        break;
+                    }
+                    default:
+                    {
+                        string actId = dataGridView_Confirm.CurrentRow.Cells["ID"].Value.ToString();
+                        string i = textBox_id.Text;
+                        if (MessageBox.Show("are you sure want delete selected activity", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+
+                            ConfirmationActivity.DeleteActivity(actId);
+
+
+
+                        LoadDataGrid(int.Parse(i));
+                        break;
+                    }
                 }
-                else
-                    if (tabControl1.SelectedIndex == 1)
-                {
-                    string act_id = dataGridView_Request.CurrentRow.Cells["ID"].Value.ToString();
-                    string i = textBox_id.Text;
-                    if (MessageBox.Show("are you sure want delete selected activty", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-
-                        Request_identification.deleteActivity(act_id);
-
-
-
-                    loadDataGrid(int.Parse(i));
-
-
-
-                }
-                else
-                {
-                    string act_id = dataGridView_Confirm.CurrentRow.Cells["ID"].Value.ToString();
-                    string i = textBox_id.Text;
-                    if (MessageBox.Show("are you sure want delete selected activty", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-
-                        Confirmation_activity.deleteActivity(act_id);
-
-
-
-                    loadDataGrid(int.Parse(i));
-                }
-
             }
             catch (Exception ex)
             {
@@ -355,7 +347,7 @@
         /// The loadDataGrid
         /// </summary>
         /// <param name="i">The i<see cref="int"/></param>
-        public void loadDataGrid(int i)
+        public void LoadDataGrid(int i)
         {
             try
             {
@@ -363,19 +355,19 @@
                 dataGridView_Confirm.DataSource = null;
                 dataGridView_Request.DataSource = null;
 
-                dataGridView_Confirm.DataSource = Confirmation_activity.getConActivity(i);
+                dataGridView_Confirm.DataSource = ConfirmationActivity.GetConfirmationActivity(i);
                 dataGridView_Confirm.Columns["info_msg"].HeaderText = "Message";
                 dataGridView_Confirm.Columns["but_id"].HeaderText = "Button ID";
                 dataGridView_Confirm.Columns["type"].HeaderText = "Type";
                 dataGridView_Confirm.Columns["timeOutInSec"].HeaderText = "Time out";
 
-                dataGridView_print.DataSource = Print_ticket_type.getPrintActivity(i);
+                dataGridView_print.DataSource = PrintTicketType.GetPrintActivity(i);
                 dataGridView_print.Columns["info_msg"].HeaderText = "Message";
                 dataGridView_print.Columns["but_id"].HeaderText = "Button ID";
                 dataGridView_print.Columns["type"].HeaderText = "Type";
                 dataGridView_print.Columns["num_of_tick"].HeaderText = "Number of tickets";
 
-                dataGridView_Request.DataSource = Request_identification.getRequestActivity(i);
+                dataGridView_Request.DataSource = RequestIdentification.GetRequestActivity(i);
                 dataGridView_Request.Columns["info_msg"].HeaderText = "Message";
                 dataGridView_Request.Columns["but_id"].HeaderText = "Button ID";
                 dataGridView_Request.Columns["type"].HeaderText = "Type";

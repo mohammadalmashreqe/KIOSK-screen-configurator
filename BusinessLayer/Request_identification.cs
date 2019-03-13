@@ -9,87 +9,77 @@
     /// <summary>
     /// Defines the Identification_type
     /// </summary>
-    public enum Identification_type
+    public enum IdentificationType
         {
             /// <summary>
             /// Defines the card
             /// </summary>
-            card,
+            Card,
 
             /// <summary>
             /// Defines the mobile
             /// </summary>
-            mobile
+            Mobile
         };
 
+        /// <inheritdoc />
         /// <summary>
-        /// Defines the <see cref="Request_identification" />
+        /// Defines the <see cref="T:BusinessLayer.RequestIdentification" />
         /// </summary>
-        public class Request_identification : Activity
+        public class RequestIdentification : Activity
         {
             /// <summary>
             /// Defines the _type
             /// </summary>
-            Identification_type _type;
+             IdentificationType _type;
      
             /// <summary>
             /// Defines the _is_mandatory
             /// </summary>
-            bool _is_mandatory;
+            bool _isMandatory;
 
+            /// <inheritdoc />
             /// <summary>
-            /// Initializes a new instance of the <see cref="Request_identification"/> class.
+            /// Initializes a new instance of the <see cref="T:BusinessLayer.RequestIdentification" /> class.
             /// </summary>
-            /// <param name="m">The m<see cref="string"/></param>
-            /// <param name="t">The t<see cref="Identification_type"/></param>
-            /// <param name="im">The im<see cref="bool"/></param>
-            public Request_identification(string m, Identification_type t, bool im) : base(m)
+            /// <param name="m">The m<see cref="T:System.String" /></param>
+            /// <param name="t">The t<see cref="T:BusinessLayer.IdentificationType" /></param>
+            /// <param name="im">The im<see cref="T:System.Boolean" /></param>
+            public RequestIdentification(string m, IdentificationType t, bool im) : base(m)
             {
-                _type = t;
-                _is_mandatory = im;
-            }
-
-            /// <summary>
-            /// Gets or sets the type
-            /// </summary>
-            public Identification_type type
-            {
-
-                set
-                {
-                    _type = value;
-                }
-
-                get
-                {
-                    return _type;
-                }
+                Type = t;
+                _isMandatory = im;
             }
 
             /// <summary>
             /// Gets or sets a value indicating whether is_mandatory
             /// </summary>
-            public bool is_mandatory
+            public bool IsMandatory
             {
-                set
-                {
-                    _is_mandatory = value;
-                }
-                get
-                {
-                    return _is_mandatory;
-                }
+                set =>_isMandatory = value;
+                
+                get=>_isMandatory;
+                
             }
 
             /// <summary>
-            /// The getIdentificationType
+            /// Defines the _type
             /// </summary>
-            /// <returns>The <see cref="string"/></returns>
-            private string getIdentificationType()
+            public IdentificationType Type
+            {
+                get => _type;
+            set => _type = value;
+        }
+
+        /// <summary>
+        /// The getIdentificationType
+        /// </summary>
+        /// <returns>The <see cref="string"/></returns>
+        private string GetIdentificationType()
             {
             try
             {
-                if (_type == Identification_type.card)
+                if (Type == IdentificationType.Card)
                     return "card";
                 else
                     return "mobile";
@@ -115,7 +105,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
@@ -125,13 +115,13 @@
             /// </summary>
             /// <param name="val">The val<see cref="int"/></param>
             /// <returns>The <see cref="DataTable"/></returns>
-            public static DataTable getRequestActivity(int val)
+            public static DataTable GetRequestActivity(int val)
             {
             try
             {
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@_butId", val);
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
 
                 return dal.SelectData("getRequestTickActivity", p);
@@ -157,7 +147,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
@@ -165,25 +155,25 @@
             /// <summary>
             /// The AddRequestActivity
             /// </summary>
-            /// <param name="bt_id">The bt_id<see cref="int"/></param>
+            /// <param name="btId">The bt_id<see cref="int"/></param>
             /// <returns>The <see cref="bool"/></returns>
-            public bool AddRequestActivity(int bt_id)
+            public bool AddRequestActivity(int btId)
             {
             try
             {
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
                 SqlParameter[] p3 = new SqlParameter[5];
 
-                p3[0] = new SqlParameter("@_but_id", bt_id);
+                p3[0] = new SqlParameter("@_but_id", btId);
                 p3[1] = new SqlParameter("@_type", "Request_identification");
-                p3[2] = new SqlParameter("@_info_msg", Information_message);
-                p3[3] = new SqlParameter("@_Identification_type", getIdentificationType());
+                p3[2] = new SqlParameter("@_info_msg", InformationMessage);
+                p3[3] = new SqlParameter("@_Identification_type", GetIdentificationType());
 
-                p3[4] = new SqlParameter("@_Is_mandatory", is_mandatory);
+                p3[4] = new SqlParameter("@_Is_mandatory", IsMandatory);
 
 
-                if (dal.myExcute("Add_activity_request", p3))
+                if (dal.MyExcute("Add_activity_request", p3))
                     return true;
                 else
                     return false;
@@ -209,7 +199,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
@@ -219,19 +209,19 @@
             /// </summary>
             /// <param name="id">The id<see cref="string"/></param>
             /// <returns>The <see cref="bool"/></returns>
-            public static bool deleteActivity(string id)
+            public static bool DeleteActivity(string id)
             {
             try
             {
 
-                DataAccessLayer dal = DataAccessLayer.getConInstance();
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
 
 
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@_activity_id", id);
 
-                return dal.myExcute("deleteRequestActivity", p);
+                return dal.MyExcute("deleteRequestActivity", p);
             }
             catch (Exception ex)
             {
@@ -254,7 +244,7 @@
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
-                throw ex;
+                throw;
 
             }
         }
