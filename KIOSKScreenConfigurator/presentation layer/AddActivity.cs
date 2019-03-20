@@ -13,148 +13,17 @@
         /// <summary>
         /// Defines the isPrint
         /// </summary>
-        private bool _isPrint;
+        
 
+        private readonly int _id; 
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:KIOSKScreenConfigurator.presentation_layer.AddActivity" /> class.
         /// </summary>
-        public AddActivity()
+        public AddActivity(int i)
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// add activity to the list 
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="EventArgs"/></param>
-        private void button_addactivity_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                switch (comboBox_type.SelectedIndex)
-                {
-                    case 0:
-                    case 1:
-                    {
-                        if (textBox_Info_msg.Text == "")
-                        {
-                            MessageBox.Show(@"please enter all data field ", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            textBox_Info_msg.Focus();
-                            return;
-                        }
-
-                        break;
-                    }
-                    case 2 when textBox_Info_msg.Text == "" || textBox_time_out.Text == "":
-                        MessageBox.Show(@"please enter all data field ", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        textBox_Info_msg.Focus();
-                        return;
-                }
-
-
-                if (_isPrint)
-                {
-                    MessageBox.Show(@"can not add activity after print tickets ", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-
-
-                if (Program.MyListPrint.Count + Program.MyListConfirm.Count + Program.MyListrequest.Count < 5)
-                {
-                    if (comboBox_type.SelectedIndex == 0)
-                    {
-                        string m = textBox_Info_msg.Text;
-                        int n = (int) numericUpDown1.Value;
-                        PrintTicketType a = new PrintTicketType(m, n);
-                        Program.MyListPrint.Add(a);
-                        _isPrint = true;
-                        button_addactivity.Text = "add activity" + " ( " +
-                                                  (Program.MyListPrint.Count + Program.MyListConfirm.Count +
-                                                   Program.MyListrequest.Count) + " /5 )";
-                    }
-                    else if (comboBox_type.SelectedIndex == 1)
-                    {
-                        string m = textBox_Info_msg.Text;
-                        IdentificationType ty = comboBox_idtype.SelectedIndex == 0
-                            ? IdentificationType.Card
-                            : IdentificationType.Mobile;
-
-                        var ismand = checkBox1.Checked;
-
-                        RequestIdentification a = new RequestIdentification(m, ty, ismand);
-                        Program.MyListrequest.Add(a);
-
-                        button_addactivity.Text = "add activity" + " ( " +
-                                                  (Program.MyListPrint.Count + Program.MyListConfirm.Count +
-                                                   Program.MyListrequest.Count) + " /5 )";
-                    }
-                    else if (comboBox_type.SelectedIndex == 2)
-                    {
-                        string m = textBox_Info_msg.Text;
-                        int n = int.Parse(textBox_time_out.Text);
-                        ConfirmationActivity a = new ConfirmationActivity(m, n);
-                        Program.MyListConfirm.Add(a);
-
-
-                        button_addactivity.Text = "add activity" + " ( " +
-                                                  (Program.MyListPrint.Count + Program.MyListConfirm.Count +
-                                                   Program.MyListrequest.Count) + " /5 )";
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("yo can not add more than 5 activity for button ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-              
-                    dataGridView_print.DataSource = null;
-                    dataGridView_print.DataSource = Program.MyListPrint;
-                    dataGridView_print.Columns["InformationMessage"].HeaderText = "Information message";
-                    dataGridView_print.Columns["NumOfPrintedTickets"].HeaderText = "Number of tickets";
-                
-
-                dataGridView_Confirm.DataSource = null;
-                dataGridView_Confirm.DataSource = Program.MyListConfirm;
-                dataGridView_Confirm.Columns["InformationMessage"].HeaderText = "Information message";
-                //--------------------------------
-                dataGridView_Request.DataSource = null;
-                dataGridView_Request.DataSource = Program.MyListrequest;
-                dataGridView_Request.Columns["InformationMessage"].HeaderText = "Information message";
-                dataGridView_Request.Columns["IsMandatory"].HeaderText = "Is mandatory";
-                dataGridView_Request.Columns["type"].HeaderText = "Type";
-                textBox_Info_msg.Text = "";
-                textBox_time_out.Text = "";
-                numericUpDown1.Value = 1;
-
-            }
-            catch (Exception ex)
-            {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-
-
-            }
+            _id = i; 
         }
 
         /// <summary>
@@ -166,13 +35,122 @@
         {
             try
             {
-                Program.MyListConfirm.Clear();
-                Program.MyListPrint.Clear();
-                Program.MyListrequest.Clear();
+             
                 comboBox_idtype.SelectedIndex = 0;
                 comboBox_type.SelectedIndex = 0;
                 numericUpDown1.Value = 1;
-                button_addactivity.Text = "add activity" + " ( " + (Program.MyListPrint.Count + Program.MyListConfirm.Count + Program.MyListrequest.Count) + " /5 )";
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+
+                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+            }
+        }
+
+        /// <summary>
+        /// The button3_Click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (comboBox_type.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        {
+                            if (textBox_Info_msg.Text == "")
+                            {
+                                MessageBox.Show(@"please enter all data field ", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                textBox_Info_msg.Focus();
+                                return;
+                            }
+
+                            break;
+                        }
+                    case 2 when textBox_Info_msg.Text == "" || textBox_Timout.Text == "":
+                        MessageBox.Show(@"please enter all data field ", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        textBox_Info_msg.Focus();
+                        return;
+                }
+
+
+             
+
+
+
+             
+                    if (comboBox_type.SelectedIndex == 0)
+                    {
+                        string m = textBox_Info_msg.Text;
+                        int n = (int)numericUpDown1.Value;
+                        PrintTicketType a = new PrintTicketType(m, n);
+                        a.Type = ActivityType.PrintTicketType;
+                        if(_id>0)
+                       
+                        a.AddPrintActivity(_id);
+                        else
+                          Program.MyListPrint.Add(a);
+                        Close();
+                       
+                    }
+                    else if (comboBox_type.SelectedIndex == 1)
+                    {
+                        string m = textBox_Info_msg.Text;
+                        IdentificationType ty = comboBox_idtype.SelectedIndex == 0
+                            ? IdentificationType.Card
+                            : IdentificationType.Mobile;
+
+                        var ismand = checkBox1.Checked;
+
+                        RequestIdentification a = new RequestIdentification(m, ty, ismand);
+                        a.Type = ActivityType.RequestIdentification;
+                        if(_id>0)
+                         a.AddRequestActivity(_id);
+                         else
+                          Program.MyListrequest.Add(a);
+
+                        
+                        Close();
+
+
+                    }
+                    else if (comboBox_type.SelectedIndex == 2)
+                    {
+                        string m = textBox_Info_msg.Text;
+                        int n = int.Parse(textBox_Timout.Text);
+                        ConfirmationActivity a = new ConfirmationActivity(m, n);
+                        a.Type = ActivityType.ConfirmationActivity;
+                    if(_id>0)
+                        a.AddConfirmationActivity(_id);
+                    else
+                    {
+                                                Program.MyListConfirm.Add(a);
+
+                    }
+                        Close();
+
+
+                        
+                    }
+                
+             
+
+
+
+
+
+                //--------------------------------
+   
+                textBox_Info_msg.Text = "";
+                textBox_Timout.Text = "";
+                numericUpDown1.Value = 1;
 
             }
             catch (Exception ex)
@@ -197,18 +175,11 @@
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
 
+
             }
-        }
 
-        /// <summary>
-        /// The button3_Click
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="EventArgs"/></param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-            Close();
+          
+            
         }
 
         /// <summary>
@@ -220,32 +191,15 @@
         {
             try
             {
-                Program.MyListConfirm.Clear();
-                Program.MyListPrint.Clear();
-                Program.MyListrequest.Clear();
+               
                Close();
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+              
             }
         }
 
@@ -283,66 +237,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+               
 
-
-            }
-        }
-
-        /// <summary>
-        /// The button2_Click
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/></param>
-        /// <param name="e">The e<see cref="EventArgs"/></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                comboBox_type.SelectedIndex = 0;
-                textBox_Info_msg.Text = "";
-                textBox_time_out.Text = "";
-                comboBox_idtype.SelectedIndex = 0;
-                numericUpDown1.Value = 1;
-            }
-            catch (Exception ex)
-            {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
             }
         }
 
@@ -353,6 +252,21 @@
         /// <param name="e">The e<see cref="FormClosingEventArgs"/></param>
         private void AddActivity_FormClosing(object sender, FormClosingEventArgs e)
         {
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox_requestident_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using BusinessLayer;
+using Button = BusinessLayer.Button;
 
 namespace KIOSKScreenConfigurator.presentation_layer
 {
@@ -32,25 +34,9 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
 
+                ErrorLogger.ErrorLog((ex));
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
             }
         }
 
@@ -63,72 +49,65 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             try
             {
-
+               
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = BusinessLayer.Button.GetButtons();
-                dataGridView_buttonList.Columns["id"].HeaderText = "ID";
+
+                dataGridView_buttonList.DataSource = Button.GetButtons();
+
                 dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                dataGridView_buttonList.Columns["text"].HeaderText = "Text";
                 dataGridView_buttonList.Columns["order"].HeaderText = "Order";
 
+                listView1.Items.Clear();
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
 
-                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    dataGridView_print.DataSource = null;
-                    dataGridView_Confirm.DataSource = null;
-                    dataGridView_Request.DataSource = null;
+                    Button temp = new Button
+                    {
+                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                    };
+                    temp.Id = temp.GetId();
+                    dataGridView_buttonList.Columns[0].Visible = false;
+                    int val = temp.Id;
 
-                    dataGridView_Confirm.DataSource = ConfirmationActivity.GetConfirmationActivity(val);
+                    foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                    {
 
-                    dataGridView_Confirm.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Confirm.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Confirm.Columns["type"].HeaderText = "Type";
-                    dataGridView_Confirm.Columns["timeOutInSec"].HeaderText = "Time out"; 
+                       
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(),x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                    foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                    {
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+                    foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                    {
+                        
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
 
 
 
 
 
-                    dataGridView_print.DataSource = PrintTicketType.GetPrintActivity(val);
-
-                    dataGridView_print.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_print.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_print.Columns["type"].HeaderText = "Type";
-                    dataGridView_print.Columns["num_of_tick"].HeaderText = "Number of tickets";
-                
-
-                    dataGridView_Request.DataSource = RequestIdentification.GetRequestActivity(val);
-                    dataGridView_Request.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Request.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Request.Columns["type"].HeaderText = "Type";
-                    dataGridView_Request.Columns["Identification_type"].HeaderText = "Identification type";
-                    dataGridView_Request.Columns["Is_mandatory"].HeaderText = "Is mandatory ";
 
                 }
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+
 
             }
         }
@@ -169,56 +148,61 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             try
             {
+                listView1.Items.Clear();
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
+                    Button temp = new Button
+                    {
+                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                    };
+                    temp.Id = temp.GetId();
 
-                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    int val = temp.Id;
 
-                    dataGridView_print.DataSource = null;
-                    dataGridView_Confirm.DataSource = null;
-                    dataGridView_Request.DataSource = null;
+                    foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                    {
 
-                    dataGridView_Confirm.DataSource = ConfirmationActivity.GetConfirmationActivity(val);
-                    dataGridView_Confirm.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Confirm.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Confirm.Columns["type"].HeaderText = "Type";
-                    dataGridView_Confirm.Columns["timeOutInSec"].HeaderText = "Time out";
 
-                    dataGridView_print.DataSource = PrintTicketType.GetPrintActivity(val);
-                    dataGridView_print.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_print.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_print.Columns["type"].HeaderText = "Type";
-                    dataGridView_print.Columns["num_of_tick"].HeaderText = "Number of tickets";
-                    dataGridView_Request.DataSource = RequestIdentification.GetRequestActivity(val);
-                    dataGridView_Request.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Request.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Request.Columns["type"].HeaderText = "Type";
-                    dataGridView_Request.Columns["Identification_type"].HeaderText = "Identification type";
-                    dataGridView_Request.Columns["Is_mandatory"].HeaderText = "Is mandatory ";
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                    foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                    {
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                    foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                    {
+
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
 
                 }
+
+
+
+
+
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
 
             }
@@ -243,51 +227,63 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
                 {
-                    BusinessLayer.Button b1 = new BusinessLayer.Button();
+                    Button b1 = new Button
+                    {
+                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                    };
 
 
 
-                    int val = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
-                    b1.Id = val;
+                    b1.Id = b1.GetId();
                     if (!b1.DeleteButton())
 
                         MessageBox.Show("Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     dataGridView_buttonList.DataSource = null;
-                    dataGridView_buttonList.DataSource = BusinessLayer.Button.GetButtons();
+                    dataGridView_buttonList.DataSource = Button.GetButtons();
 
-                    dataGridView_buttonList.Columns["id"].HeaderText = "ID";
                     dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                    dataGridView_buttonList.Columns["text"].HeaderText = "Text";
                     dataGridView_buttonList.Columns["order"].HeaderText = "Order";
-                    
+
                     if (dataGridView_buttonList.SelectedCells.Count > 0)
                     {
+                        Button temp = new Button
+                        {
+                            Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                            Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        };
+                        temp.Id = temp.GetId();
+                        dataGridView_buttonList.Columns["id"].Visible = false;
+
+                        int val = temp.Id;
+                        listView1.Items.Clear();
+                        foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                        {
 
 
-                        int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
 
-                        dataGridView_print.DataSource = null;
-                        dataGridView_Confirm.DataSource = null;
-                        dataGridView_Request.DataSource = null;
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
 
-                        dataGridView_Confirm.DataSource = ConfirmationActivity.GetConfirmationActivity(val2);
-                        dataGridView_Confirm.Columns["info_msg"].HeaderText = "Message";
-                        dataGridView_Confirm.Columns["but_id"].HeaderText = "Button ID";
-                        dataGridView_Confirm.Columns["type"].HeaderText = "Type";
-                        dataGridView_Confirm.Columns["timeOutInSec"].HeaderText = "Time out";
+                        foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                        {
 
-                        dataGridView_print.DataSource = PrintTicketType.GetPrintActivity(val2);
-                        dataGridView_print.Columns["info_msg"].HeaderText = "Message";
-                        dataGridView_print.Columns["but_id"].HeaderText = "Button ID";
-                        dataGridView_print.Columns["type"].HeaderText = "Type";
-                        dataGridView_print.Columns["num_of_tick"].HeaderText = "Number of tickets";
-                        dataGridView_Request.DataSource = RequestIdentification.GetRequestActivity(val2);
-                        dataGridView_Request.Columns["info_msg"].HeaderText = "Message";
-                        dataGridView_Request.Columns["but_id"].HeaderText = "Button ID";
-                        dataGridView_Request.Columns["type"].HeaderText = "Type";
-                        dataGridView_Request.Columns["Identification_type"].HeaderText = "Identification type";
-                        dataGridView_Request.Columns["Is_mandatory"].HeaderText = "Is mandatory ";
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
+
+                        foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                        {
+
+
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
 
 
 
@@ -297,33 +293,16 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     if (dataGridView_buttonList.SelectedCells.Count == 0)
 
                     {
-                        dataGridView_print.DataSource = null;
-                        dataGridView_Confirm.DataSource = null;
-                        dataGridView_Request.DataSource = null;
                     }
                 }
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+
 
             }
         }
@@ -338,51 +317,68 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
 
-                AddButton frm = new AddButton();
+                ButtonAttributes frm = new ButtonAttributes(null) {Text = "Add Button"};
                 frm.ShowDialog();
 
                 // this code will be execute when addButton frm closed .
 
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = BusinessLayer.Button.GetButtons();
+                dataGridView_buttonList.DataSource = Button.GetButtons();
 
-                dataGridView_buttonList.Columns["id"].HeaderText = "ID";
+
                 dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                dataGridView_buttonList.Columns["text"].HeaderText = "Text";
+
                 dataGridView_buttonList.Columns["order"].HeaderText = "Order";
 
 
                 if (dataGridView_buttonList.SelectedCells.Count > 0)
                 {
+                    listView1.Items.Clear();
 
 
-                    int val2 = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString());
+                    {
+                        Button temp = new Button
+                        {
+                            Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                            Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        };
+                        temp.Id = temp.GetId();
+                        dataGridView_buttonList.Columns["id"].Visible = false;
 
-                    dataGridView_print.DataSource = null;
-                    dataGridView_Confirm.DataSource = null;
-                    dataGridView_Request.DataSource = null;
-
-                    dataGridView_Confirm.DataSource = ConfirmationActivity.GetConfirmationActivity(val2);
-                    dataGridView_Confirm.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Confirm.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Confirm.Columns["type"].HeaderText = "Type";
-                    dataGridView_Confirm.Columns["timeOutInSec"].HeaderText = "Time out";
-
-
-                    dataGridView_print.DataSource = PrintTicketType.GetPrintActivity(val2);
-                    dataGridView_print.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_print.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_print.Columns["type"].HeaderText = "Type";
-                    dataGridView_print.Columns["num_of_tick"].HeaderText = "Number of tickets";
+                        int val = temp.Id;
+                        listView1.Items.Clear();
+                        foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                        {
 
 
-                    dataGridView_Request.DataSource = RequestIdentification.GetRequestActivity(val2);
-                    dataGridView_Request.Columns["info_msg"].HeaderText = "Message";
-                    dataGridView_Request.Columns["but_id"].HeaderText = "Button ID";
-                    dataGridView_Request.Columns["type"].HeaderText = "Type";
-                    dataGridView_Request.Columns["Identification_type"].HeaderText = "Identification type";
-                    dataGridView_Request.Columns["Is_mandatory"].HeaderText = "Is mandatory ";
+
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
+
+                        foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                        {
+
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
+
+                        foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                        {
+
+
+                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            ListViewItem l = new ListViewItem(row);
+                            listView1.Items.Add(l);
+                        }
+
+
+
+                    }
+
 
 
 
@@ -392,34 +388,16 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 if (dataGridView_buttonList.SelectedCells.Count == 0)
 
                 {
-                    dataGridView_print.DataSource = null;
-                    dataGridView_Confirm.DataSource = null;
-                    dataGridView_Request.DataSource = null;
                 }
 
 
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
 
             }
@@ -436,47 +414,99 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 if (dataGridView_buttonList.CurrentRow != null)
                 {
-                    BusinessLayer.Button b = new BusinessLayer.Button
+
+
+                    Button b = new Button
                     {
                         Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString()),
-                        Id = int.Parse(dataGridView_buttonList.CurrentRow.Cells["id"].Value.ToString()),
-                        Text = dataGridView_buttonList.CurrentRow.Cells["text"].Value.ToString()
-                    };
+                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        
 
-                    // ReSharper disable once SuggestVarOrType_SimpleTypes
-                    EditFrm frm = new EditFrm(b);
+
+                    };
+                    b.Id = b.GetId();
+
+                    ButtonAttributes frm = new ButtonAttributes(b) {Text = "Edit Button"};
                     frm.ShowDialog();
+
+                    if (dataGridView_buttonList.SelectedCells.Count > 0)
+                    {
+                        listView1.Items.Clear();
+
+
+                        {
+                            Button temp = new Button
+                            {
+                                Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
+                                Order = int.Parse(
+                                    dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                            };
+                            temp.Id = temp.GetId();
+                            dataGridView_buttonList.Columns["id"].Visible = false;
+
+                            int val = temp.Id;
+                            listView1.Items.Clear();
+                            foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                            {
+
+
+
+                                string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
+                                ListViewItem l = new ListViewItem(row);
+                                listView1.Items.Add(l);
+                            }
+
+                            foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                            {
+
+                                string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
+                                ListViewItem l = new ListViewItem(row);
+                                listView1.Items.Add(l);
+                            }
+
+                            foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                            {
+
+
+                                string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
+                                ListViewItem l = new ListViewItem(row);
+                                listView1.Items.Add(l);
+                            }
+
+
+
+                        }
+
+
+
+
+                    }
+
+
                 }
+                else
+                    MessageBox.Show("Please select item from list", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+
+                #region MyRegion
+
+
 
                 dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = BusinessLayer.Button.GetButtons();
-                dataGridView_buttonList.Columns["id"].HeaderText = "ID";
+                dataGridView_buttonList.DataSource = Button.GetButtons();
+                dataGridView_buttonList.Columns["id"].Visible = false;
                 dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                dataGridView_buttonList.Columns["text"].HeaderText = "Text";
                 dataGridView_buttonList.Columns["order"].HeaderText = "Order";
+                #endregion
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+
             }
         }
 
@@ -494,25 +524,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+
             }
         }
 
@@ -532,25 +548,10 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+
             }
         }
 
@@ -567,25 +568,10 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
             }
         }
 
@@ -602,26 +588,36 @@ namespace KIOSKScreenConfigurator.presentation_layer
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
             }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void dataGridView_buttonList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+
+        }
+
+        private void listView1_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = listView1.Columns[e.ColumnIndex].Width;
         }
     }
 }

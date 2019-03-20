@@ -28,15 +28,15 @@
         /// </summary>
         public class RequestIdentification : Activity
         {
-            /// <summary>
-            /// Defines the _type
-            /// </summary>
-             IdentificationType _type;
+        /// <summary>
+        /// Defines the _IDtype
+        /// </summary>
+        private IdentificationType _iDtype;
      
             /// <summary>
             /// Defines the _is_mandatory
             /// </summary>
-            bool _isMandatory;
+            private bool _isMandatory;
 
             /// <inheritdoc />
             /// <summary>
@@ -47,7 +47,7 @@
             /// <param name="im">The im<see cref="T:System.Boolean" /></param>
             public RequestIdentification(string m, IdentificationType t, bool im) : base(m)
             {
-                Type = t;
+                IdType = t;
                 _isMandatory = im;
             }
 
@@ -63,12 +63,12 @@
             }
 
             /// <summary>
-            /// Defines the _type
+            /// Defines the _IDtype
             /// </summary>
-            public IdentificationType Type
+            public  IdentificationType IdType
             {
-                get => _type;
-            set => _type = value;
+                get => _iDtype;
+            set => _iDtype = value;
         }
 
         /// <summary>
@@ -79,33 +79,17 @@
             {
             try
             {
-                if (Type == IdentificationType.Card)
+                if (IdType == IdentificationType.Card)
                     return "card";
                 else
                     return "mobile";
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+                return null;
 
             }
         }
@@ -128,26 +112,10 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
 
+                ErrorLogger.ErrorLog(ex);
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+                return null; 
 
             }
         }
@@ -173,33 +141,14 @@
                 p3[4] = new SqlParameter("@_Is_mandatory", IsMandatory);
 
 
-                if (dal.MyExcute("Add_activity_request", p3))
-                    return true;
-                else
-                    return false;
+                return dal.MyExcute("Add_activity_request", p3);
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+                return false; 
 
             }
         }
@@ -225,28 +174,56 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
+                ErrorLogger.ErrorLog(ex);
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+
+                return false; 
 
             }
         }
-        }
+
+
+            public static RequestIdentification GetInfoById(int id)
+            {
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
+                dal.Open();
+                DataTable dt = dal.SelectData("getrequestActByid", new[] { new SqlParameter("@_id", id) });
+                DataRow row = dt.Rows[0];
+                IdentificationType r = row["Identification_type"].ToString() == "card"
+                    ? IdentificationType.Card
+                    : IdentificationType.Mobile;
+
+                RequestIdentification t = new RequestIdentification(row["info_msg"].ToString(), r,
+                    bool.Parse(row["Is_mandatory"].ToString()))
+                {
+                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.RequestIdentification
+                };
+                return t;
+            }
+
+            
+
+            public bool UpdateActivity()
+            {
+
+                try
+                {
+                    DataAccessLayer dal = DataAccessLayer.GetConInstance();
+                    dal.Open();
+                    SqlParameter[] p = new SqlParameter[4];
+                    p[0] = new SqlParameter("@_id", Id);
+                    p[1] = new SqlParameter("@_Identification_type", IdType.ToString());
+                    p[2] = new SqlParameter("@_info_msg ", InformationMessage);
+                    p[3]= new SqlParameter("@_Is_mandatory",IsMandatory);
+                    return dal.MyExcute("UpdateRequestID", p);
+                }
+                catch (Exception ex)
+                {
+                    ErrorLogger.ErrorLog(ex);
+                    return false;
+                }
+
+
+            }
+    }
     }

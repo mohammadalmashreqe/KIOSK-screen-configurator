@@ -56,11 +56,11 @@
     <Compile Include="presentation layer\AddActivity.Designer.cs">
       <DependentUpon>AddActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="presentation layer\AddButton.cs">
+    <Compile Include="presentation layer\ButtonAttributes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="presentation layer\AddButton.Designer.cs">
-      <DependentUpon>AddButton.cs</DependentUpon>
+    <Compile Include="presentation layer\ButtonAttributes.Designer.cs">
+      <DependentUpon>ButtonAttributes.cs</DependentUpon>
     </Compile>
     <Compile Include="presentation layer\Config.cs">
       <SubType>Form</SubType>
@@ -68,11 +68,11 @@
     <Compile Include="presentation layer\Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
-    <Compile Include="presentation layer\EditFrm.cs">
+    <Compile Include="presentation layer\EditActivity.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="presentation layer\EditFrm.Designer.cs">
-      <DependentUpon>EditFrm.cs</DependentUpon>
+    <Compile Include="presentation layer\EditActivity.Designer.cs">
+      <DependentUpon>EditActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="presentation layer\mainFrm.cs">
       <SubType>Form</SubType>
@@ -85,14 +85,14 @@
     <EmbeddedResource Include="presentation layer\AddActivity.resx">
       <DependentUpon>AddActivity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="presentation layer\AddButton.resx">
-      <DependentUpon>AddButton.cs</DependentUpon>
+    <EmbeddedResource Include="presentation layer\ButtonAttributes.resx">
+      <DependentUpon>ButtonAttributes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="presentation layer\Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="presentation layer\EditFrm.resx">
-      <DependentUpon>EditFrm.cs</DependentUpon>
+    <EmbeddedResource Include="presentation layer\EditActivity.resx">
+      <DependentUpon>EditActivity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="presentation layer\mainFrm.resx">
       <DependentUpon>mainFrm.cs</DependentUpon>

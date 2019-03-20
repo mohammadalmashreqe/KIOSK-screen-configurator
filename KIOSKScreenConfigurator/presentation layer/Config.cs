@@ -57,25 +57,10 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
             }
         }
 
@@ -116,25 +101,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+               
             }
         }
 
@@ -151,25 +122,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+                
             }
         }
     }

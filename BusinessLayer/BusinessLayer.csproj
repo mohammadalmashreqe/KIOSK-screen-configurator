@@ -46,6 +46,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Confirmation_activity.cs" />
     <Compile Include="DataAccessLayer.cs" />
+    <Compile Include="ErrorLogger.cs" />
     <Compile Include="Myconfig.cs" />
     <Compile Include="Print_ticket_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

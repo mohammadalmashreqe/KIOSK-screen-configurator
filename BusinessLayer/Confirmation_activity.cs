@@ -56,25 +56,10 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
+              
 
                 throw;
 
@@ -104,28 +89,12 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
-                throw;
 
+                return false; 
             }
         }
 
@@ -149,27 +118,51 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+                return false; 
             }
         }
+
+        public static ConfirmationActivity GetInfoById(int id)
+        {
+            DataAccessLayer dal = DataAccessLayer.GetConInstance();
+            dal.Open();
+            DataTable dt = dal.SelectData("getConfirmActByid", new[] { new SqlParameter("@_id", id) });
+            DataRow row = dt.Rows[0];
+
+
+            ConfirmationActivity t =
+                new ConfirmationActivity(row["info_msg"].ToString(), int.Parse(row["timeOutInSec"].ToString()))
+                {
+                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.ConfirmationActivity
+                };
+            return t;
+        }
+
+        
+        public bool UpdateActivity()
+        {
+
+            try
+            {
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
+                dal.Open();
+                SqlParameter[] p = new SqlParameter[3];
+                p[0] = new SqlParameter("@_id", Id);
+                p[1] = new SqlParameter("@_timeOutInSec", Timeout);
+                p[2] = new SqlParameter("@_info_msg ", InformationMessage);
+                return dal.MyExcute("updateConfirmActivity", p);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+                return false;
+            }
+
+
+        }
+
     }
 }

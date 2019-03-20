@@ -49,26 +49,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+
+                return null; 
 
             }
         }
@@ -90,53 +75,85 @@
                 p2[2] = new SqlParameter("@_info_msg", InformationMessage);
                 p2[3] = new SqlParameter("@_num_Of_tick", NumOfPrintedTickets);
 
-                if (dal.MyExcute("Add_activity_print", p2))
-                    return true;
-                else
-                    return false;
+                return dal.MyExcute("Add_activity_print", p2);
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw;
+                return false; 
 
             }
         }
 
         /// <summary>
-        /// The delete  Activity
+        ///  delete  Activity
         /// </summary>
         /// <param name="id">The id of button want to delete activity from it <see cref="string"/></param>
         /// <returns>The <see cref="bool"/></returns>
         public static bool DeleteActivity(string id)
         {
 
+            try
+
+            {
+
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
+                dal.Open();
+
+
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@_activity_id", id);
+
+                return dal.MyExcute("deletePrintActivity", p);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+                return false; 
+
+            }
+    }
+
+        public static PrintTicketType GetInfoById(int id)
+        {
             DataAccessLayer dal = DataAccessLayer.GetConInstance();
             dal.Open();
+            DataTable dt = dal.SelectData("getPrintActByid", new[] { new SqlParameter("@_id", id) });
+            DataRow row = dt.Rows[0];
 
 
-            SqlParameter[] p = new SqlParameter[1];
-            p[0] = new SqlParameter("@_activity_id", id);
-
-            return dal.MyExcute("deletePrintActivity", p);
+            PrintTicketType t =
+                new PrintTicketType(row["info_msg"].ToString(), int.Parse(row["num_of_tick"].ToString()))
+                {
+                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.PrintTicketType
+                };
+            return t; 
         }
+
+        public bool UpdateActivity()
+        {
+
+            try
+            {
+                DataAccessLayer dal = DataAccessLayer.GetConInstance();
+                dal.Open();
+                SqlParameter[] p = new SqlParameter[3];
+                p[0] = new SqlParameter("@_id", Id);
+                p[1] = new SqlParameter("@_num_of_tick", NumOfPrintedTickets);
+                p[2] = new SqlParameter("@_info_msg ", InformationMessage);
+                return dal.MyExcute("UpdateprintActivity", p);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+                return false;
+            }
+
+
+        }
+
     }
 }

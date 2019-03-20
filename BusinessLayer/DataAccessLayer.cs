@@ -33,14 +33,10 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : \n\n" + ex.Message);
-                sw.WriteLine("------------------------------------\n\n");
-                sw.WriteLine("stack trace : \n\n" + ex.StackTrace + "\n\n");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for mor info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt");
-                sw.Close();
+               
 
 
             }
@@ -52,12 +48,20 @@
         /// <returns>The <see cref="DataAccessLayer"/></returns>
         public static DataAccessLayer GetConInstance()
         {
-            return _instance ?? (_instance = new DataAccessLayer(
-                       // ReSharper disable once StringLiteralTypo
-                       // ReSharper disable once StringLiteralTypo
-                       // ReSharper disable once StringLiteralTypo
-                       @"Data Source = M-ALMESHERQE\SQLEXPRESS;Initial Catalog=KIOSK screen configurator object oriented;;Integrated Security=True")
-                   );
+            try
+            {
+                return _instance ?? (_instance = new DataAccessLayer(
+                           // ReSharper disable once StringLiteralTypo
+                           // ReSharper disable once StringLiteralTypo
+                           // ReSharper disable once StringLiteralTypo
+                           @"Data Source = M-ALMESHERQE\SQLEXPRESS;Initial Catalog=KIOSK screen configurator object oriented;;Integrated Security=True")
+                       );
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+                return null;
+            }
         }
 
         /// <summary>
@@ -66,13 +70,21 @@
         /// <returns>The <see cref="bool"/></returns>
         public bool Open()
         {
-            if (_sqlConnection.State != ConnectionState.Open)
+            try
             {
-                _sqlConnection.Open();
-                return true;
+                if (_sqlConnection.State != ConnectionState.Open)
+                {
+                    _sqlConnection.Open();
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
                 return false;
+            }
         }
 
         /// <summary>
@@ -81,13 +93,21 @@
         /// <returns>The <see cref="bool"/></returns>
         public bool Close()
         {
-            if (_sqlConnection.State != ConnectionState.Closed)
+            try
             {
-                _sqlConnection.Close();
-                return true;
+                if (_sqlConnection.State != ConnectionState.Closed)
+                {
+                    _sqlConnection.Close();
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+                return false; 
+            }
         }
 
         /// <summary>
@@ -120,27 +140,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw; 
 
+                return null;
 
             }
             finally
@@ -180,27 +184,10 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw; 
-
+                return false; 
             }
             finally
             {
@@ -227,26 +214,9 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
+                return false; 
 
-                sw.Close();
-
-                throw;
 
 
             }
@@ -276,27 +246,8 @@
 
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-
-                sw.Close();
-
-                throw;
-
+                ErrorLogger.ErrorLog(ex);
+                return false;
             }
         }
     }

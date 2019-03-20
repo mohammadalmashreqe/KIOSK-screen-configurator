@@ -27,10 +27,7 @@
         /// </summary>
         private int _order;
 
-        /// <summary>
-        /// Defines the text
-        /// </summary>
-        private string _text;
+      
 
         /// <summary>
         /// Defines the activities
@@ -51,18 +48,21 @@
         /// <summary>
         /// Gets or sets the Text
         /// </summary>
-        public string Text { get => _text; set => _text = value; }
 
         /// <summary>
         /// Gets or sets the ID
         /// </summary>
         public int Id { get => _id; set => _id = value; }
 
-    
+        /// <summary>
+        /// Defines the activities
+        /// </summary>
+        public List<Activity> Activities
+        {
+            get => _activities;
+            set => _activities = value;
+        }
 
-     
-
-      
 
         /// <summary>
         /// The getButtons
@@ -79,26 +79,12 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+               
+               ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
-                throw; 
+                return null;
+
 
             }
             
@@ -123,27 +109,12 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
-                throw; 
+                return false; 
 
 
             }
@@ -157,10 +128,10 @@
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[3];
+                SqlParameter[] p = new SqlParameter[2];
                 p[0] = new SqlParameter("@_name", Name);
-                p[1] = new SqlParameter("@_text", Text);
-                p[2] = new SqlParameter("@_order", Order);
+               
+                p[1] = new SqlParameter("@_order", Order);
                 DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
                 if (dal.MyExcute("AddButton", p))
@@ -170,27 +141,11 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
-                throw; 
+                return false; 
 
             }
         }
@@ -203,40 +158,28 @@
         {
             try
             {
+                int btId = -1;
                 DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
-                SqlParameter[] p5 = new SqlParameter[3];
+                SqlParameter[] p5 = new SqlParameter[2];
                 p5[0] = new SqlParameter("@_name", Name);
-                p5[1] = new SqlParameter("@_text", Text);
-                p5[2] = new SqlParameter("@_order", Order);
+          
+                p5[1] = new SqlParameter("@_order", Order);
                 DataTable dt = dal.SelectData("GetId", p5);
-                int btId = dt.Rows[0].Field<int>(0);
+                if (dt.Rows.Count > 0)
+                {
+                    btId = dt.Rows[0].Field<int>(0);
+                }
 
                 return btId;
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
-                throw;
+                return -1;
             }
 
         }
@@ -251,13 +194,13 @@
             {
                 DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
-                SqlParameter[] p = new SqlParameter[4];
+                SqlParameter[] p = new SqlParameter[3];
                 p[0] = new SqlParameter("@_id", Id);
                 p[1] = new SqlParameter("@_name", Name);
 
-                p[2] = new SqlParameter("@_text", Text);
+        
 
-                p[3] = new SqlParameter("@_order", Order);
+                p[2] = new SqlParameter("@_order", Order);
 
                 return dal.MyExcute("EditButton", p);
 
@@ -266,25 +209,9 @@
             }
             catch (Exception ex)
             {
-                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\LogFile.txt", true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("message : ");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.Message);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine("stack trace :");
-                sw.WriteLine("");
-                sw.WriteLine("");
-                sw.WriteLine(ex.StackTrace);
-                sw.WriteLine("------------------------------------------------------------------------------------");
-                sw.WriteLine("");
-                sw.WriteLine("");
+                ErrorLogger.ErrorLog(ex);
 
                 MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sw.Close();
 
                 return false;
 
