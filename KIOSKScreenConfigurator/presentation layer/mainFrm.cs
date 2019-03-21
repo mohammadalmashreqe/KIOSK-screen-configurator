@@ -36,7 +36,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
 
                 ErrorLogger.ErrorLog((ex));
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -49,26 +49,39 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             try
             {
+
+
+
+                
+                DataTable dt = Button.GetButtons();
+
+                foreach (DataRow t in dt.Rows)
+                {
+                    string[] row = {t["name"].ToString(), t["order"].ToString(), t["id"].ToString()};
+                    ListViewItem lvi= new ListViewItem(row);
+                    listView2.Items.Add(lvi);
+                }
+
+
+                
                
 
-                dataGridView_buttonList.DataSource = null;
 
-                dataGridView_buttonList.DataSource = Button.GetButtons();
 
-                dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                dataGridView_buttonList.Columns["order"].HeaderText = "Order";
 
-                listView1.Items.Clear();
-                if (dataGridView_buttonList.SelectedCells.Count > 0)
-                {
+                        listView1.Items.Clear();
+                if (listView2.SelectedItems.Count > 0)
+                {ListViewItem item = listView2.SelectedItems[0];
 
                     Button temp = new Button
                     {
-                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        Name = item.SubItems[0].Text,
+                    Order = int.Parse(item.SubItems[1].Text),
+                    Id = int.Parse(item.SubItems[2].Text)
+                    
                     };
-                    temp.Id = temp.GetId();
-                    dataGridView_buttonList.Columns[0].Visible = false;
+                    
+                
                     int val = temp.Id;
 
                     foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
@@ -106,7 +119,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -149,14 +162,18 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
                 listView1.Items.Clear();
-                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                if (listView2.SelectedItems.Count > 0)
                 {
+
+                    ListViewItem item = listView2.SelectedItems[0];
                     Button temp = new Button
                     {
-                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        Name = item.SubItems[0].Text,
+                        Order = int.Parse(item.SubItems[1].Text),
+                        Id = int.Parse(item.SubItems[2].Text)
+                   
                     };
-                    temp.Id = temp.GetId();
+                   
 
                     int val = temp.Id;
 
@@ -202,7 +219,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -218,7 +235,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
 
-                DialogResult response = MessageBox.Show("Are you sure delete selected button ?", "Delete Button",
+                DialogResult response = MessageBoxEx.Show(this,"Are you sure delete selected button ?", "Delete Button",
                                      MessageBoxButtons.YesNo,
                                      MessageBoxIcon.Question,
                                      MessageBoxDefaultButton.Button2);
@@ -227,34 +244,44 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
                 {
+                    if(listView2.SelectedItems.Count>0)
+                    { 
+                    ListViewItem item = listView2.SelectedItems[0];
                     Button b1 = new Button
                     {
-                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        Name = item.SubItems[0].Text,
+                        Order = int.Parse(item.SubItems[1].Text),
+                        Id = int.Parse(item.SubItems[2].Text)
                     };
 
 
 
-                    b1.Id = b1.GetId();
+                   
                     if (!b1.DeleteButton())
 
-                        MessageBox.Show("Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBoxEx.Show(this,"Button not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    dataGridView_buttonList.DataSource = null;
-                    dataGridView_buttonList.DataSource = Button.GetButtons();
+                    DataTable dt = Button.GetButtons();
+                    listView2.Items.Clear();
 
-                    dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                    dataGridView_buttonList.Columns["order"].HeaderText = "Order";
-
-                    if (dataGridView_buttonList.SelectedCells.Count > 0)
+                        foreach (DataRow t in dt.Rows)
                     {
+                        string[] row = { t["name"].ToString(), t["order"].ToString(), t["id"].ToString() };
+                        ListViewItem lvi = new ListViewItem(row);
+                        listView2.Items.Add(lvi);
+                    }
+                    
+                    if (listView2.SelectedItems.Count > 0)
+                    {
+                        ListViewItem item1 = listView2.SelectedItems[0];
                         Button temp = new Button
                         {
-                            Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                            Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                            Name = item1.SubItems[0].Text,
+                            Order = int.Parse(item1.SubItems[1].Text),
+                            Id = int.Parse(item1.SubItems[2].Text)
                         };
-                        temp.Id = temp.GetId();
-                        dataGridView_buttonList.Columns["id"].Visible = false;
+
+
 
                         int val = temp.Id;
                         listView1.Items.Clear();
@@ -263,7 +290,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
 
-                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
                             ListViewItem l = new ListViewItem(row);
                             listView1.Items.Add(l);
                         }
@@ -271,7 +298,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
                         {
 
-                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
                             ListViewItem l = new ListViewItem(row);
                             listView1.Items.Add(l);
                         }
@@ -280,20 +307,22 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         {
 
 
-                            string[] row = { x["info_msg"].ToString(), x["type"].ToString() };
+                            string[] row = {x["info_msg"].ToString(), x["type"].ToString()};
                             ListViewItem l = new ListViewItem(row);
                             listView1.Items.Add(l);
                         }
+                    }
+                   
 
 
 
                     }
-
-
-                    if (dataGridView_buttonList.SelectedCells.Count == 0)
-
+                    else
                     {
+                        MessageBoxEx.Show(this,"select item to delete", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
+
+                    
                 }
             }
             catch (Exception ex)
@@ -301,7 +330,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -314,37 +343,44 @@ namespace KIOSKScreenConfigurator.presentation_layer
         /// <param name="e">The e<see cref="EventArgs"/></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            
             try
             {
 
-                ButtonAttributes frm = new ButtonAttributes(null) {Text = "Add Button"};
+                ButtonAttributes frm = new ButtonAttributes(null);
                 frm.ShowDialog();
 
                 // this code will be execute when addButton frm closed .
 
+                listView2.Items.Clear();
+                
+                DataTable dt = Button.GetButtons();
 
-                dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = Button.GetButtons();
+                foreach (DataRow t in dt.Rows)
+                {
+                    string[] row = { t["name"].ToString(), t["order"].ToString(), t["id"].ToString() };
+                    ListViewItem lvi = new ListViewItem(row);
+                    listView2.Items.Add(lvi);
+                }
 
-
-                dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-
-                dataGridView_buttonList.Columns["order"].HeaderText = "Order";
-
-
-                if (dataGridView_buttonList.SelectedCells.Count > 0)
+                if (listView2.SelectedItems.Count > 0)
                 {
                     listView1.Items.Clear();
-
+                    ListViewItem item1 = listView2.SelectedItems[0];
+                  
+                       
+                  
 
                     {
                         Button temp = new Button
                         {
-                            Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                            Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                            Name = item1.SubItems[0].Text,
+                        Order = int.Parse(item1.SubItems[1].Text),
+                        Id = int.Parse(item1.SubItems[2].Text)
+                           
                         };
                         temp.Id = temp.GetId();
-                        dataGridView_buttonList.Columns["id"].Visible = false;
+              
 
                         int val = temp.Id;
                         listView1.Items.Clear();
@@ -385,10 +421,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 }
 
 
-                if (dataGridView_buttonList.SelectedCells.Count == 0)
-
-                {
-                }
+           
 
 
             }
@@ -397,7 +430,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 ErrorLogger.ErrorLog(ex);
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -412,37 +445,39 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             try
             {
-                if (dataGridView_buttonList.CurrentRow != null)
+                if (listView2.SelectedItems.Count>0)
                 {
+                    ListViewItem item = listView2.SelectedItems[0];
+
 
 
                     Button b = new Button
                     {
-                        Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                        Order = int.Parse(dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                        Name = item.SubItems[0].Text,
+                        Order = int.Parse(item.SubItems[1].Text),
+                        Id = int.Parse(item.SubItems[2].Text)
                         
 
 
                     };
-                    b.Id = b.GetId();
+                   
 
-                    ButtonAttributes frm = new ButtonAttributes(b) {Text = "Edit Button"};
+                    ButtonAttributes frm = new ButtonAttributes(b) ;
                     frm.ShowDialog();
+                    listView2.Items.Clear();
 
-                    if (dataGridView_buttonList.SelectedCells.Count > 0)
+                    if (listView2.SelectedItems.Count > 0)
                     {
                         listView1.Items.Clear();
-
+                        item = listView2.SelectedItems[0];
 
                         {
                             Button temp = new Button
                             {
-                                Name = dataGridView_buttonList.CurrentRow.Cells["name"].Value.ToString(),
-                                Order = int.Parse(
-                                    dataGridView_buttonList.CurrentRow.Cells["order"].Value.ToString())
+                                Name = item.SubItems[0].Text,
+                                Order = int.Parse(item.SubItems[1].Text),
+                                Id = int.Parse(item.SubItems[2].Text)
                             };
-                            temp.Id = temp.GetId();
-                            dataGridView_buttonList.Columns["id"].Visible = false;
 
                             int val = temp.Id;
                             listView1.Items.Clear();
@@ -485,7 +520,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 }
                 else
-                    MessageBox.Show("Please select item from list", "Error", MessageBoxButtons.OK,
+                    MessageBoxEx.Show(this,"Please select item from list", "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
 
 
@@ -493,11 +528,14 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
 
-                dataGridView_buttonList.DataSource = null;
-                dataGridView_buttonList.DataSource = Button.GetButtons();
-                dataGridView_buttonList.Columns["id"].Visible = false;
-                dataGridView_buttonList.Columns["name"].HeaderText = "Name";
-                dataGridView_buttonList.Columns["order"].HeaderText = "Order";
+                DataTable dt = Button.GetButtons();
+
+                foreach (DataRow t in dt.Rows)
+                {
+                    string[] row = { t["name"].ToString(), t["order"].ToString(), t["id"].ToString() };
+                    ListViewItem lvi = new ListViewItem(row);
+                    listView2.Items.Add(lvi);
+                }
                 #endregion
             }
             catch (Exception ex)
@@ -505,7 +543,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
@@ -527,7 +565,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
@@ -550,7 +588,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 ErrorLogger.ErrorLog(ex);
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
@@ -571,7 +609,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -591,7 +629,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -618,6 +656,80 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             e.Cancel = true;
             e.NewWidth = listView1.Columns[e.ColumnIndex].Width;
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                listView1.Items.Clear();
+                if (listView2.SelectedItems.Count > 0)
+                {
+
+                    ListViewItem item = listView2.SelectedItems[0];
+                    Button temp = new Button
+                    {
+                        Name = item.SubItems[0].Text,
+                        Order = int.Parse(item.SubItems[1].Text),
+                        Id = int.Parse(item.SubItems[2].Text)
+
+                    };
+
+
+                    int val = temp.Id;
+
+                    foreach (DataRow x in ConfirmationActivity.GetConfirmationActivity(val).Rows)
+                    {
+
+
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                    foreach (DataRow x in PrintTicketType.GetPrintActivity(val).Rows)
+                    {
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                    foreach (DataRow x in RequestIdentification.GetRequestActivity(val).Rows)
+                    {
+
+
+
+                        string[] row = { x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString() };
+                        ListViewItem l = new ListViewItem(row);
+                        listView1.Items.Add(l);
+                    }
+
+                }
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.ErrorLog(ex);
+
+
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+            }
+        }
+
+        private void listView2_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.Cancel = true;
+            e.NewWidth = listView2.Columns[e.ColumnIndex].Width;
         }
     }
 }

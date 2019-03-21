@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox_ID = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -53,19 +52,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox_ID
-            // 
-            this.textBox_ID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ID.Location = new System.Drawing.Point(17, 213);
-            this.textBox_ID.Name = "textBox_ID";
-            this.textBox_ID.Size = new System.Drawing.Size(57, 20);
-            this.textBox_ID.TabIndex = 1;
-            this.textBox_ID.Visible = false;
-            // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(239, 223);
+            this.button1.Location = new System.Drawing.Point(226, 181);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -75,8 +64,7 @@
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(320, 223);
+            this.button2.Location = new System.Drawing.Point(307, 181);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -86,24 +74,20 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBox_Info_msg);
-            this.groupBox1.Controls.Add(this.groupBox_confirm);
             this.groupBox1.Controls.Add(this.groupBox_requestident);
             this.groupBox1.Controls.Add(this.groupBox_printtickType);
+            this.groupBox1.Controls.Add(this.groupBox_confirm);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(383, 195);
+            this.groupBox1.Size = new System.Drawing.Size(370, 163);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(9, 12);
             this.label6.Name = "label6";
@@ -113,8 +97,6 @@
             // 
             // textBox_Info_msg
             // 
-            this.textBox_Info_msg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Info_msg.Location = new System.Drawing.Point(125, 8);
             this.textBox_Info_msg.Name = "textBox_Info_msg";
             this.textBox_Info_msg.Size = new System.Drawing.Size(187, 20);
@@ -122,8 +104,6 @@
             // 
             // groupBox_confirm
             // 
-            this.groupBox_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_confirm.Controls.Add(this.textBox_Timout);
             this.groupBox_confirm.Controls.Add(this.label10);
             this.groupBox_confirm.Controls.Add(this.textBox_time_out);
@@ -135,8 +115,6 @@
             // 
             // textBox_Timout
             // 
-            this.textBox_Timout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Timout.Location = new System.Drawing.Point(120, 28);
             this.textBox_Timout.Name = "textBox_Timout";
             this.textBox_Timout.Size = new System.Drawing.Size(187, 20);
@@ -153,8 +131,6 @@
             // 
             // textBox_time_out
             // 
-            this.textBox_time_out.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_time_out.Location = new System.Drawing.Point(117, -54);
             this.textBox_time_out.Name = "textBox_time_out";
             this.textBox_time_out.Size = new System.Drawing.Size(200, 20);
@@ -162,7 +138,6 @@
             // 
             // groupBox_requestident
             // 
-            this.groupBox_requestident.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_requestident.Controls.Add(this.checkBox1);
             this.groupBox_requestident.Controls.Add(this.label9);
             this.groupBox_requestident.Controls.Add(this.comboBox_idtype);
@@ -175,10 +150,8 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 36);
+            this.checkBox1.Location = new System.Drawing.Point(7, 42);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 15;
@@ -196,8 +169,6 @@
             // 
             // comboBox_idtype
             // 
-            this.comboBox_idtype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_idtype.FormattingEnabled = true;
             this.comboBox_idtype.Items.AddRange(new object[] {
             "Card",
@@ -209,8 +180,6 @@
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(4, 15);
             this.label8.Name = "label8";
@@ -220,8 +189,6 @@
             // 
             // groupBox_printtickType
             // 
-            this.groupBox_printtickType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox_printtickType.Controls.Add(this.numericUpDown1);
             this.groupBox_printtickType.Controls.Add(this.label7);
             this.groupBox_printtickType.Location = new System.Drawing.Point(5, 43);
@@ -233,8 +200,6 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown1.Location = new System.Drawing.Point(120, 25);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             5,
@@ -257,8 +222,6 @@
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(4, 25);
             this.label7.Name = "label7";
@@ -270,12 +233,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 258);
+            this.ClientSize = new System.Drawing.Size(394, 218);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox_ID);
-            this.MinimumSize = new System.Drawing.Size(423, 250);
+            this.MaximumSize = new System.Drawing.Size(410, 257);
+            this.MinimumSize = new System.Drawing.Size(410, 257);
             this.Name = "EditActivity";
             this.Text = "Edit Activity";
             this.Load += new System.EventHandler(this.EditActivity_Load);
@@ -289,12 +252,10 @@
             this.groupBox_printtickType.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox_ID;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;

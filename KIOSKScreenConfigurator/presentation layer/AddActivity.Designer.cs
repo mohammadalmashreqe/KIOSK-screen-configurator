@@ -29,28 +29,28 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_Info_msg = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox_type = new System.Windows.Forms.ComboBox();
+            this.groupBox_confirm = new System.Windows.Forms.GroupBox();
+            this.textBox_Timout = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox_time_out = new System.Windows.Forms.TextBox();
             this.groupBox_requestident = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox_idtype = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox_printtickType = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.groupBox_confirm = new System.Windows.Forms.GroupBox();
-            this.textBox_time_out = new System.Windows.Forms.TextBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox_Info_msg = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox_type = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox_Timout = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox_confirm.SuspendLayout();
             this.groupBox_requestident.SuspendLayout();
             this.groupBox_printtickType.SuspendLayout();
-            this.groupBox_confirm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +72,92 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Information message : ";
+            // 
+            // textBox_Info_msg
+            // 
+            this.textBox_Info_msg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Info_msg.Location = new System.Drawing.Point(125, 55);
+            this.textBox_Info_msg.Name = "textBox_Info_msg";
+            this.textBox_Info_msg.Size = new System.Drawing.Size(304, 20);
+            this.textBox_Info_msg.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Type : ";
+            // 
+            // comboBox_type
+            // 
+            this.comboBox_type.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_type.FormattingEnabled = true;
+            this.comboBox_type.Items.AddRange(new object[] {
+            "Print ticket type",
+            "Request identification",
+            "Confirmation activity"});
+            this.comboBox_type.Location = new System.Drawing.Point(125, 13);
+            this.comboBox_type.Name = "comboBox_type";
+            this.comboBox_type.Size = new System.Drawing.Size(304, 21);
+            this.comboBox_type.TabIndex = 10;
+            this.comboBox_type.SelectedIndexChanged += new System.EventHandler(this.comboBox_type_SelectedIndexChanged);
+            // 
+            // groupBox_confirm
+            // 
+            this.groupBox_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox_confirm.Controls.Add(this.textBox_Timout);
+            this.groupBox_confirm.Controls.Add(this.label10);
+            this.groupBox_confirm.Controls.Add(this.textBox_time_out);
+            this.groupBox_confirm.Location = new System.Drawing.Point(6, 74);
+            this.groupBox_confirm.Name = "groupBox_confirm";
+            this.groupBox_confirm.Size = new System.Drawing.Size(471, 85);
+            this.groupBox_confirm.TabIndex = 14;
+            this.groupBox_confirm.TabStop = false;
+            // 
+            // textBox_Timout
+            // 
+            this.textBox_Timout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Timout.Location = new System.Drawing.Point(119, 18);
+            this.textBox_Timout.Name = "textBox_Timout";
+            this.textBox_Timout.Size = new System.Drawing.Size(304, 20);
+            this.textBox_Timout.TabIndex = 16;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Time out : ";
+            // 
+            // textBox_time_out
+            // 
+            this.textBox_time_out.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_time_out.Location = new System.Drawing.Point(117, -54);
+            this.textBox_time_out.Name = "textBox_time_out";
+            this.textBox_time_out.Size = new System.Drawing.Size(317, 20);
+            this.textBox_time_out.TabIndex = 15;
             // 
             // groupBox_requestident
             // 
@@ -145,39 +231,6 @@
             this.groupBox_printtickType.TabStop = false;
             this.groupBox_printtickType.Text = " ";
             // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 14);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(96, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Number of  tickets:";
-            // 
-            // groupBox_confirm
-            // 
-            this.groupBox_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox_confirm.Controls.Add(this.textBox_Timout);
-            this.groupBox_confirm.Controls.Add(this.label10);
-            this.groupBox_confirm.Controls.Add(this.textBox_time_out);
-            this.groupBox_confirm.Location = new System.Drawing.Point(6, 74);
-            this.groupBox_confirm.Name = "groupBox_confirm";
-            this.groupBox_confirm.Size = new System.Drawing.Size(471, 85);
-            this.groupBox_confirm.TabIndex = 14;
-            this.groupBox_confirm.TabStop = false;
-            // 
-            // textBox_time_out
-            // 
-            this.textBox_time_out.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_time_out.Location = new System.Drawing.Point(117, -54);
-            this.textBox_time_out.Name = "textBox_time_out";
-            this.textBox_time_out.Size = new System.Drawing.Size(317, 20);
-            this.textBox_time_out.TabIndex = 15;
-            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -203,60 +256,16 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // label10
+            // label7
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 13);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "Time out : ";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 59);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Information message : ";
-            // 
-            // textBox_Info_msg
-            // 
-            this.textBox_Info_msg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Info_msg.Location = new System.Drawing.Point(125, 55);
-            this.textBox_Info_msg.Name = "textBox_Info_msg";
-            this.textBox_Info_msg.Size = new System.Drawing.Size(304, 20);
-            this.textBox_Info_msg.TabIndex = 8;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Type : ";
-            // 
-            // comboBox_type
-            // 
-            this.comboBox_type.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_type.FormattingEnabled = true;
-            this.comboBox_type.Items.AddRange(new object[] {
-            "Print ticket type",
-            "Request identification",
-            "Confirmation activity"});
-            this.comboBox_type.Location = new System.Drawing.Point(125, 13);
-            this.comboBox_type.Name = "comboBox_type";
-            this.comboBox_type.Size = new System.Drawing.Size(304, 21);
-            this.comboBox_type.TabIndex = 10;
-            this.comboBox_type.SelectedIndexChanged += new System.EventHandler(this.comboBox_type_SelectedIndexChanged);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Number of  tickets:";
             // 
             // button3
             // 
@@ -267,7 +276,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(86, 27);
             this.button3.TabIndex = 19;
-            this.button3.Text = "Ok";
+            this.button3.Text = "OK";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -284,15 +293,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox_Timout
-            // 
-            this.textBox_Timout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Timout.Location = new System.Drawing.Point(119, 18);
-            this.textBox_Timout.Name = "textBox_Timout";
-            this.textBox_Timout.Size = new System.Drawing.Size(304, 20);
-            this.textBox_Timout.TabIndex = 16;
-            // 
             // AddActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,12 +308,12 @@
             this.Load += new System.EventHandler(this.AddActivity_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox_confirm.ResumeLayout(false);
+            this.groupBox_confirm.PerformLayout();
             this.groupBox_requestident.ResumeLayout(false);
             this.groupBox_requestident.PerformLayout();
             this.groupBox_printtickType.ResumeLayout(false);
             this.groupBox_printtickType.PerformLayout();
-            this.groupBox_confirm.ResumeLayout(false);
-            this.groupBox_confirm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 

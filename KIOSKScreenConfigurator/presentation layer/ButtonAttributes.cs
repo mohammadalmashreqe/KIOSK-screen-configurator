@@ -107,7 +107,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 _b2 = para;
 
-              
+                Text = "Edit Button";
 
                 listView1.Items.Clear();
                 textBox_but_name.Text = _b2.Name;
@@ -120,7 +120,10 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
             }
             else
+            {
                 _b2 = new Button();
+                Text = "Add Button";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -172,7 +175,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         _b2.Name = textBox_but_name.Text;
                         _b2.Order = int.Parse(textBox_but_order.Text);
                         if (_b2.AddButton())
-                            MessageBox.Show("The button has been successfully added ", "Information",
+                            MessageBoxEx.Show(this,"The button has been successfully added ", "Information",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
                      
@@ -206,7 +209,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     _b2.Name = textBox_but_name.Text;
                     _b2.Order = int.Parse(textBox_but_order.Text);
                     if (_b2.UpdateButton())
-                        MessageBox.Show("The button has been successfully updated ", "Information",
+                        MessageBoxEx.Show(this,"The button has been successfully updated ", "Information",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     Program.MyListConfirm.Clear();
@@ -228,7 +231,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             catch (Exception ex)
             {
                 ErrorLogger.ErrorLog(ex);
-                MessageBox.Show(
+                MessageBoxEx.Show(this,
                     "exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
                     "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -273,7 +276,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                         }
                         else
                         {
-                            MessageBox.Show("Can not add activity", "Error", MessageBoxButtons.OK,
+                            MessageBoxEx.Show(this,"Can not add activity", "Error", MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                         }
 
@@ -284,7 +287,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     {
                         if (_isPrint || listView1.Items.Count>=5)
                         {
-                            MessageBox.Show("Can not add activity", "Error", MessageBoxButtons.OK,
+                            MessageBoxEx.Show(this,"Can not add activity", "Error", MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                            
 
@@ -311,13 +314,13 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 }
                 else
 
-                    MessageBox.Show("Can not add more than 5 activities", "Error", MessageBoxButtons.OK,
+                    MessageBoxEx.Show(this,"Can not add more than 5 activities", "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 ErrorLogger.ErrorLog(ex);
-                MessageBox.Show(
+                MessageBoxEx.Show(this,
                     "exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
                     "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -368,7 +371,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 else
                 {
-                    MessageBox.Show("No data selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxEx.Show(this,"No data selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -376,7 +379,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 ErrorLogger.ErrorLog(ex);
 
-                MessageBox.Show(
+                MessageBoxEx.Show(this,
                     "exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
                     "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -478,13 +481,13 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 }
                 else
-                    MessageBox.Show("No data selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxEx.Show(this,"No data selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 ErrorLogger.ErrorLog(ex);
 
-                MessageBox.Show(
+                MessageBoxEx.Show(this,
                     "exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
                     "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -495,6 +498,11 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             e.Cancel = true;
             e.NewWidth = listView1.Columns[e.ColumnIndex].Width;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

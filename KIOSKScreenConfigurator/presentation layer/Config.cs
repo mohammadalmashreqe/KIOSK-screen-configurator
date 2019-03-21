@@ -43,7 +43,7 @@
 
                 if (Myconfig.TestCon(con))
                 {
-                    MessageBox.Show(" Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(this," Test connection succeeded", "succeed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     {
                         Myconfig.DatabaseName = textBox_DBName.Text;
                         Myconfig.ServerName = textBox_server.Text;
@@ -51,7 +51,7 @@
                 }
                 else
                 {
-                    MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxEx.Show(this," Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -60,7 +60,7 @@
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -95,7 +95,7 @@
                 }
                 else
                 {
-                    MessageBox.Show(" Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxEx.Show(this," Invalid connection String  ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -104,7 +104,7 @@
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                
             }
         }
@@ -125,7 +125,7 @@
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
         }

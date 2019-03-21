@@ -8,6 +8,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
     public partial class EditActivity : Form
     {
         private readonly Activity _current;
+        private int ActivityID; 
         public EditActivity( Activity o)
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     ConfirmationActivity x = (ConfirmationActivity) o;
                     textBox_Info_msg.Text = o.InformationMessage;
                     textBox_Timout.Text = x.Timeout.ToString();
-                    textBox_ID.Text = x.Id.ToString();
+                    ActivityID =int.Parse(x.Id.ToString());
 
 
                 }
@@ -37,7 +38,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     textBox_Info_msg.Text = o.InformationMessage;
                     comboBox_idtype.SelectedIndex = x.IdType == IdentificationType.Card ? 0 : 1;
                     checkBox1.Checked = x.IsMandatory;
-                    textBox_ID.Text = x.Id.ToString();
+                    ActivityID = int.Parse(x.Id.ToString());
 
 
                 }
@@ -49,7 +50,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     PrintTicketType x = (PrintTicketType) o;
                     textBox_Info_msg.Text = o.InformationMessage;
                     numericUpDown1.Value = x.NumOfPrintedTickets;
-                    textBox_ID.Text =x.Id.ToString();
+                    ActivityID = int.Parse(x.Id.ToString());
                 }
 
                 
@@ -59,7 +60,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -77,7 +78,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
         {
             try
             {
-                int id = int.Parse(textBox_ID.Text);
+                int id = ActivityID;
 
                 if (_current.Type == ActivityType.PrintTicketType)
                 {
@@ -115,7 +116,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ErrorLogger.ErrorLog(ex);
 
 
-                MessageBox.Show("Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxEx.Show(this,"Exception : " + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "for more info : " + Directory.GetCurrentDirectory() + @"\LogFile.txt", "exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
