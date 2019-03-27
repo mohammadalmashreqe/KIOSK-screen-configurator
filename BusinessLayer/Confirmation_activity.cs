@@ -79,7 +79,7 @@
                 DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
                 p4[0] = new SqlParameter("@_but_id", btId);
-                p4[1] = new SqlParameter("@_type", "Confirmation_activity");
+                p4[1] = new SqlParameter("@_type", "Confirmation activity");
                 p4[2] = new SqlParameter("@_info_msg", InformationMessage);
                 p4[3] = new SqlParameter("@_timeOut", Timeout);
                 if (dal.MyExcute("Add_activity_Confirm", p4))

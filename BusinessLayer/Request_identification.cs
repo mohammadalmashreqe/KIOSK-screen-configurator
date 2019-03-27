@@ -133,7 +133,7 @@
                 SqlParameter[] p3 = new SqlParameter[5];
 
                 p3[0] = new SqlParameter("@_but_id", btId);
-                p3[1] = new SqlParameter("@_type", "Request_identification");
+                p3[1] = new SqlParameter("@_type", "Request identification");
                 p3[2] = new SqlParameter("@_info_msg", InformationMessage);
                 p3[3] = new SqlParameter("@_Identification_type", GetIdentificationType());
 

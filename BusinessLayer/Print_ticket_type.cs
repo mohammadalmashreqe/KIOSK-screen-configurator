@@ -71,7 +71,7 @@
                 DataAccessLayer dal = DataAccessLayer.GetConInstance();
                 dal.Open();
                 p2[0] = new SqlParameter("@_but_id", btId);
-                p2[1] = new SqlParameter("@_type", "print_ticket_type");
+                p2[1] = new SqlParameter("@_type", "Print ticket type");
                 p2[2] = new SqlParameter("@_info_msg", InformationMessage);
                 p2[3] = new SqlParameter("@_num_Of_tick", NumOfPrintedTickets);
 
