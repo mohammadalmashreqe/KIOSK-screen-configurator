@@ -20,7 +20,7 @@
         /// </summary>
         private string _informationMessage;
 
-        private ActivityType _type;
+        private string _type;
         private int _id;
 
         /// <summary>
@@ -43,7 +43,7 @@
             
         }
 
-        public ActivityType Type
+        public string Type
         {
             get => _type;
             set => _type = value;
