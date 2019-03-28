@@ -15,7 +15,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             try
             {
                 _current = o;
-                if (o.Type == ActivityType.ConfirmationActivity)
+                if (o.Type == "Confirmation Activity")
                 {
                     groupBox_confirm.Visible = true;
                     groupBox_printtickType.Visible = false;
@@ -28,7 +28,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
 
                 }
-                else if (o.Type == ActivityType.RequestIdentification)
+                else if (o.Type == "Request Identification")
                 {
                     groupBox_confirm.Visible = false;
                     groupBox_printtickType.Visible = false;
@@ -80,7 +80,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
             {
                 int id = ActivityID;
 
-                if (_current.Type == ActivityType.PrintTicketType)
+                if (_current.Type == "Print Ticket Type")
                 {
                     PrintTicketType x = (PrintTicketType) _current;
 
@@ -92,7 +92,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
 
                 }
 
-                if (_current.Type == ActivityType.ConfirmationActivity)
+                if (_current.Type == "Confirmation Activity")
                 {
                     ConfirmationActivity x = (ConfirmationActivity) _current;
                     x.Timeout = int.Parse(textBox_Timout.Text);
@@ -101,7 +101,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                     x.UpdateActivity();
                 }
 
-                if (_current.Type == ActivityType.RequestIdentification)
+                if (_current.Type == "Request Identification") 
                 {
                     RequestIdentification x = (RequestIdentification) _current;
                     x.InformationMessage = textBox_Info_msg.Text;

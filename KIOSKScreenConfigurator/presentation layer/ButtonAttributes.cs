@@ -55,7 +55,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 ConfirmationActivity t =
                     new ConfirmationActivity(x["info_msg"].ToString(), int.Parse(x["timeOutInSec"].ToString()))
                     {
-                        Type = ActivityType.ConfirmationActivity, Id = int.Parse(x["ID"].ToString())
+                        Type = "Confirmation Activity", Id = int.Parse(x["ID"].ToString())
                     };
 
                 _b2.Activities.Add(t);
@@ -67,7 +67,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 PrintTicketType t = new PrintTicketType(x["info_msg"].ToString(),
                     int.Parse(x["num_of_tick"].ToString()))
                 {
-                    Type = ActivityType.PrintTicketType, Id = int.Parse(x["ID"].ToString())
+                    Type = "Print Ticket Type", Id = int.Parse(x["ID"].ToString())
                 };
                 _b2.Activities.Add(t);
                 string[] row = {x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString()};
@@ -86,7 +86,7 @@ namespace KIOSKScreenConfigurator.presentation_layer
                 RequestIdentification t = new RequestIdentification(x["info_msg"].ToString(), tid,
                     bool.Parse(x["Is_mandatory"].ToString()))
                 {
-                    Type = ActivityType.RequestIdentification, Id = int.Parse(x["ID"].ToString())
+                    Type = "Request Identification", Id = int.Parse(x["ID"].ToString())
                 };
                 _b2.Activities.Add(t);
                 string[] row = {x["info_msg"].ToString(), x["type"].ToString(), x["ID"].ToString()};

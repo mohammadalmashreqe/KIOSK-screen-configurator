@@ -135,7 +135,7 @@
             ConfirmationActivity t =
                 new ConfirmationActivity(row["info_msg"].ToString(), int.Parse(row["timeOutInSec"].ToString()))
                 {
-                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.ConfirmationActivity
+                    Id = int.Parse(row["activity_id"].ToString()), Type = "Confirmation Activity"
                 };
             return t;
         }

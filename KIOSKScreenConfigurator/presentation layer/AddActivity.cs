@@ -91,7 +91,7 @@
                         string m = textBox_Info_msg.Text;
                         int n = (int)numericUpDown1.Value;
                         PrintTicketType a = new PrintTicketType(m, n);
-                        a.Type = ActivityType.PrintTicketType;
+                        a.Type = "Print Ticket Type";
                         if(_id>0)
                        
                         a.AddPrintActivity(_id);
@@ -110,7 +110,7 @@
                         var ismand = checkBox1.Checked;
 
                         RequestIdentification a = new RequestIdentification(m, ty, ismand);
-                        a.Type = ActivityType.RequestIdentification;
+                        a.Type = "Request Identification";
                         if(_id>0)
                          a.AddRequestActivity(_id);
                          else
@@ -126,7 +126,7 @@
                         string m = textBox_Info_msg.Text;
                         int n = int.Parse(textBox_Timout.Text);
                         ConfirmationActivity a = new ConfirmationActivity(m, n);
-                        a.Type = ActivityType.ConfirmationActivity;
+                        a.Type = "Confirmation Activity";
                     if(_id>0)
                         a.AddConfirmationActivity(_id);
                     else

@@ -195,7 +195,7 @@
                 RequestIdentification t = new RequestIdentification(row["info_msg"].ToString(), r,
                     bool.Parse(row["Is_mandatory"].ToString()))
                 {
-                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.RequestIdentification
+                    Id = int.Parse(row["activity_id"].ToString()), Type = "Request Identification"
                 };
                 return t;
             }

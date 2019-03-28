@@ -129,7 +129,7 @@
             PrintTicketType t =
                 new PrintTicketType(row["info_msg"].ToString(), int.Parse(row["num_of_tick"].ToString()))
                 {
-                    Id = int.Parse(row["activity_id"].ToString()), Type = ActivityType.PrintTicketType
+                    Id = int.Parse(row["activity_id"].ToString()), Type = "Print Ticket Type"
                 };
             return t; 
         }
